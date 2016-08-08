@@ -11,7 +11,7 @@ return [
         'en' => 'English'
     ],
     'search_form' => false,
-    'menu_manager' => Mikelmi\Admin\Services\Menu::class,
+    'menu_manager' => \Mikelmi\MksAdmin\Contracts\MenuManagerContract::class,
     'menu' => [
         ['title'=>'Home', 'url'=>'#/home', 'hash'=>'dashboard', 'icon'=>'home'],
     ],
