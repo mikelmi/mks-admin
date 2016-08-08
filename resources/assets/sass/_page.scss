@@ -1,0 +1,48 @@
+#page {
+  margin-left: $left-width;
+  @include trans-width();
+
+  .navbar-fixed-top {
+    left: $left-width;
+    border-bottom: 1px solid $card-border-color;
+    @include trans-width();
+    @include bottom-shadow();
+  }
+
+  .left-closed & {
+    margin-left: $left-width-sm;
+
+    .navbar-fixed-top {
+      left: $left-width-sm;
+    }
+  }
+}
+
+.page-content {
+  padding-top: $grid-gutter-width / 2;
+}
+
+.page-header {
+  & + .page-content {
+    margin-top: 54px;
+  }
+
+  .navbar-text {
+    display: inline-block;
+    padding-top:    .425rem;
+    padding-bottom: .425rem;
+
+    + .navbar-text {
+      margin-left: 1rem;
+    }
+  }
+
+  .breadcrumb {
+    float: left;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-top: .425rem;
+    padding-bottom: .425rem;
+    background: transparent;
+  }
+}

@@ -1,0 +1,200 @@
+$sidebar-caption-height: $navbar-height + 1px;
+$sidebar-footer-height: $sidebar-caption-height - 10px;
+
+@mixin sidebar-link() {
+  a {
+    color: $brand-light;
+    text-decoration: none;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: $left-width;
+  background: $brand-primary;
+  color: #FFFFFF;
+  height: 100%;
+  overflow-y: auto;
+  @include trans-width();
+
+  .left-closed & {
+    width: $left-width-sm;
+  }
+}
+
+.sidebar-wrapper {
+  position: relative;
+  min-height: 100%;
+
+  .caption {
+    height: $sidebar-caption-height;
+    line-height: $sidebar-caption-height;
+    background-color: $brand-primary-dark;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $left-width;
+    @include trans-width();
+    @include sidebar-link();
+
+    .title {
+      padding: 0 15px;
+    }
+
+    .tools {
+      > a {
+        display: inline-block;
+        padding: 0 15px;
+
+        &:hover {
+          background-color: $brand-primary;
+        }
+
+        .left-closed & {
+          display: block;
+          text-align: center;
+        }
+      }
+
+      .left-closed & {
+        float: none !important;
+      }
+    }
+
+    .left-closed & {
+      width: $left-width-sm;
+    }
+  }
+
+  .sidebar-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: $left-width;
+    background-color: $brand-primary-dark;
+    height: $sidebar-footer-height;
+    line-height: $sidebar-footer-height;
+    @include trans-width();
+
+    > a, > .dropup > a {
+      padding: 0 15px;
+      color: $brand-light;
+      text-decoration: none;
+      outline: none;
+      display: inline-block;
+
+      &:hover {
+        background-color: $brand-primary;
+      }
+
+      .left-closed & {
+        display: block;
+        float: none;
+        padding: 0;
+        text-align: center;
+      }
+    }
+
+    .left-closed & {
+      width: $left-width-sm;
+    }
+  }
+
+  .sidebar-menu {
+    padding-top: $sidebar-caption-height;
+    padding-bottom: $sidebar-footer-height;
+    @include sidebar-link();
+
+    >li {
+
+      >a {
+        padding: 12px 5px 12px 15px;
+        display: block;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid $brand-primary-light;
+
+        &:hover {
+          text-decoration: none;
+          background-color: $brand-primary-light;
+        }
+
+        .expand {
+          padding: 5px 10px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $brand-primary-lighten;
+          }
+
+          .left-closed & {
+            display: none;
+          }
+        }
+      }
+
+      >ul {
+        display: none;
+        background-color: $brand-primary-lighten;
+
+        a:hover, li.active > a {
+          text-decoration: underline;
+        }
+      }
+
+      &.active {
+
+        >a {
+          text-decoration: none;
+          background-color: $brand-primary-light;
+        }
+      }
+
+      &.expanded {
+
+        >ul {
+          display:block;
+
+          .left-closed & {
+            display: none;
+          }
+        }
+
+        > a {
+          background-color: $brand-primary-lighten;
+          .expand::before {
+            content: "\f107";
+          }
+        }
+      }
+    }
+  }
+}
+
+.lc-show {
+  display: none !important;
+}
+
+.left-closed {
+
+  .lc-show {
+    display: block !important;
+
+    &.inline {
+      display: inline !important;
+    }
+  }
+
+  .lc-hide {
+    display: none !important;
+  }
+}
