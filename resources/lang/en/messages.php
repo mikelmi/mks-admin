@@ -9,4 +9,8 @@ return [
     'Edit' => 'Edit',
     'Save' => 'Save',
     'Delete' => 'Delete',
+    'View Site' => 'View Site',
+    'Language' => 'Language',
+    'My Profile' => 'My Profile',
+    'Toggle menu' => 'Toggle Menu',
 ];

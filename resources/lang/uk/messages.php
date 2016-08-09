@@ -8,4 +8,8 @@ return [
     'Edit' => 'Редагувати',
     'Save' => 'Зберегти',
     'Delete' => 'Видалити',
+    'View Site' => 'View Site',
+    'Language' => 'Мова',
+    'My Profile' => 'Мій профайл',
+    'Toggle menu' => 'Показати/Приховати меню',
 ];

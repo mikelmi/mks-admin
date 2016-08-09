@@ -4,8 +4,8 @@
         <div class="caption">
             <span class="lc-hide inline title">{{trans('admin::messages.title')}}</span>
             <div class="pull-right tools">
-                <a href="#" class="lc-hide"><i class="fa fa-external-link"></i></a>
-                <a href="javascript:void(0)" ng-click="app.leftClosed=!app.leftClosed"><i class="fa fa-exchange"></i></a>
+                <a href="#" class="lc-hide" title="{{trans('admin::messages.View Site')}}" aria-label="{{trans('admin::messages.View Site')}}"><i class="fa fa-external-link"></i></a>
+                <a href="javascript:void(0)" ng-click="app.leftClosed=!app.leftClosed" title="{{trans('admin::messages.Toggle menu')}}" alia-label="{{trans('admin::messages.Toggle menu')}}"><i class="fa fa-exchange"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -32,7 +32,7 @@
         <div class="sidebar-footer">
             @if ($locales)
                 <span class="dropup lc-hide">
-                    <a href="#" class="dropdown-toggle" id="localesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="dropdown-toggle" id="localesDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{trans('admin::messages.Language')}}">
                         <img src="{{asset('vendor/mikelmi/mks-admin/img/lang/'.$locale.'.gif')}}" alt="{{$locale}}" />
                     </a>
                     <div class="dropdown-menu" aria-labelledby="localesDropdown">
