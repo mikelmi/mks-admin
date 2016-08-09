@@ -12,4 +12,7 @@ return [
     'Language' => 'Мова',
     'My Profile' => 'Мій профайл',
     'Toggle menu' => 'Показати/Приховати меню',
+    'Delete Selected' => 'Видалити відмічені',
+    'Save and Close' => 'Зберегти і закрити',
+    'Save and New' => 'Зберегти і додати новий',
 ];

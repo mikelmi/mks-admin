@@ -13,4 +13,7 @@ return [
     'Language' => 'Language',
     'My Profile' => 'My Profile',
     'Toggle menu' => 'Toggle Menu',
+    'Delete Selected' => 'Delete Selected',
+    'Save and Close' => 'Save and Close',
+    'Save and New' => 'Save and New',
 ];
