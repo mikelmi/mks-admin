@@ -24,6 +24,10 @@ class NavComposer
         }
 
         $locale = app()->getLocale();
+        if (!$locale) {
+			$locale = config('admin.locale');
+		}
+		
         $locales = config('admin.locales', []);
         $localeTitle = $locale ? array_get($locales, $locale, 'English') : 'English';
 
