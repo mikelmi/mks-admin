@@ -40,6 +40,7 @@ class LayoutComposer
     public function compose(View $view)
     {
         $view->with('scripts', $this->scripts);
+        $view->with('styles', $this->styles);
         $view->with('appModules', json_encode(config('admin.appModules', [])));
     }
 }
