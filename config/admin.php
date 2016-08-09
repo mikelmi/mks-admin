@@ -13,7 +13,8 @@ return [
     'search_form' => false,
     'menu_manager' => \Mikelmi\MksAdmin\Contracts\MenuManagerContract::class,
     'menu' => [
-        ['title'=>'Home', 'url'=>'#/home', 'hash'=>'dashboard', 'icon'=>'home'],
+        ['title'=>'Home', 'url'=>'#/home', 'hash'=>'home', 'icon'=>'home'],
     ],
-    'scripts' => []
+    'scripts' => [],
+    'appModules' => []
 ];

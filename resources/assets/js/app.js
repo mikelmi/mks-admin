@@ -1,12 +1,18 @@
 (function(){
 
-    var app = angular.module('admin', [
+    var modules = [
         'ngCookies',
         'ngSanitize',
         'ngRoute',
         'ngToast',
         'layout'
-    ]);
+    ];
+
+    if (typeof window.appModules == 'object' && window.appModules.length) {
+        modules = modules.concat(window.appModules);
+    }
+
+    var app = angular.module('admin', modules);
 
     //Service for building correct urls
     app.provider('Url', [function() {

@@ -2,7 +2,6 @@ var elixir = require('laravel-elixir');
 
 var path = {
     node: 'node_modules/',
-    node_css: '../../../node_modules/',
     node_js: '../../../node_modules/'
 };
 

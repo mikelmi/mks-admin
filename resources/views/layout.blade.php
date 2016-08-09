@@ -22,6 +22,10 @@
 
 <toast></toast>
 
+<script>
+    window.appModules = {!! $appModules !!};
+</script>
+
 <script src="{{ asset('vendor/mikelmi/mks-admin/js/admin.js') }}"></script>
 @foreach($scripts as $src)
     <script src="{{ $src }}"></script>

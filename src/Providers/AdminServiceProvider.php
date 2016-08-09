@@ -32,7 +32,7 @@ class AdminServiceProvider extends ServiceProvider
             ->middleware('admin.locale', SetAdminLocale::class);
 
         $this->app->singleton(MenuManagerContract::class, function(Application $app) {
-            $menuManager = $app['config']->get('admin::menu_manager', Menu::class);
+            $menuManager = $app['config']->get('admin.menu_manager', Menu::class);
 
             return new $menuManager($app['config']->get('admin.menu', []));
         });
