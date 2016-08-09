@@ -16,5 +16,6 @@ return [
         ['title'=>'Home', 'url'=>'#/home', 'hash'=>'home', 'icon'=>'home'],
     ],
     'scripts' => [],
+    'styles' => [],
     'appModules' => []
 ];

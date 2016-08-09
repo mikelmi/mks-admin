@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" href="{{ asset('vendor/mikelmi/mks-admin/css/admin.css') }}">
 
+    @foreach($styles as $src)
+        <link rel="stylesheet" href="{{ $src }}">
+    @endforeach
+
     <base href="{{route('admin')}}">
 </head>
 
