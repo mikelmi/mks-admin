@@ -51,7 +51,7 @@
                     $timeout(function () {
                         ngToast.create({
                             className: messageType,
-                            content: message,
+                            content: decodeURIComponent(message),
                             dismissButton: true
                         });
                     });
