@@ -6,7 +6,8 @@
         'ngRoute',
         'ngToast',
         'layout',
-        'page'
+        'page',
+        'select2'
     ];
 
     if (typeof window.appModules == 'object' && window.appModules.length) {

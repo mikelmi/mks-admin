@@ -37,6 +37,7 @@ elixir(function(mix) {
         path.node_js + 'ng-toast/dist/ngToast.js',
         path.node_js + 'jquery-form/jquery.form.js',
         path.node_js + 'pace-js/pace.js',
+        path.node_js + 'select2/dist/js/select2.js',
         'general/*.js',
         '*.js'
     ], 'public/js/admin.js');
