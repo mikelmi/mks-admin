@@ -8,8 +8,13 @@ var path = {
 elixir(function(mix) {
 
     //css
-    mix.sass('admin.scss');
     mix.sass('auth.scss');
+    mix.sass('admin.scss', 'resources/assets/css');
+
+    mix.styles([
+        '*.css',
+        path.node_js + 'pace-js/themes/blue/pace-theme-flash.css'
+    ], 'public/css/admin.css');
 
     //auth js
     mix.scripts([
@@ -30,6 +35,8 @@ elixir(function(mix) {
         path.node_js + 'angular-cookies/angular-cookies.js',
         path.node_js + 'angular-route/angular-route.js',
         path.node_js + 'ng-toast/dist/ngToast.js',
+        path.node_js + 'jquery-form/jquery.form.js',
+        path.node_js + 'pace-js/pace.js',
         'general/*.js',
         '*.js'
     ], 'public/js/admin.js');

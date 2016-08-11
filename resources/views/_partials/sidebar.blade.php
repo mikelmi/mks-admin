@@ -2,16 +2,17 @@
     <div class="sidebar-wrapper">
 
         <div class="caption">
-            <span class="lc-hide inline title">{{trans('admin::messages.title')}}</span>
+            <span class="lc-hide inline title">Admin</span>
             <div class="pull-right tools">
-                <a href="#" class="lc-hide" title="{{trans('admin::messages.View Site')}}" aria-label="{{trans('admin::messages.View Site')}}"><i class="fa fa-external-link"></i></a>
+                <a href="{{ $siteUrl }}" target="_blank" class="lc-hide" title="{{trans('admin::messages.View Site')}}" aria-label="{{trans('admin::messages.View Site')}}"><i class="fa fa-external-link"></i></a>
+                <a href="#" class="lc-hide" title="{{trans('admin::messages.Refresh')}}" ng-click="app.refresh($event)"><i class="fa fa-refresh"></i></a>
                 <a href="javascript:void(0)" ng-click="app.leftClosed=!app.leftClosed" title="{{trans('admin::messages.Toggle menu')}}" alia-label="{{trans('admin::messages.Toggle menu')}}"><i class="fa fa-exchange"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
 
         <ul class="nav sidebar-menu" role="navigation" ng-controller="MenuCtrl as menu">
-            <li ng-repeat="item in menu.items" ng-class="{'expanded': item.expanded}">
+            <li ng-repeat="item in menu.items" ng-class="{'expanded': item.expanded, 'active': app.isCurrentPath(item.hash)}">
                 <a href="{[{ item.url }]}">
                     <i ng-if="item.icon" class="fa fa-{[{ item.icon }]}" title="{[{ item.title }]}"></i>
                     <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{[{ item.title }]}">{[{ item.firstChar }]}</div>
@@ -19,7 +20,7 @@
                     <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide" ng-click="menu.toggle(item, $event)"></i>
                 </a>
                 <ul ng-if="item.children">
-                    <li ng-repeat="subItem in item.children">
+                    <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(item.hash)}">
                         <a href="{[{ subItem.url }]}">
                             <i ng-if="subItem.icon" class="fa fa-{[{ subItem.icon }]}"></i>
                             <span>{[{ subItem.title }]}</span>

@@ -2,16 +2,30 @@
 
     var layout = angular.module('layout', []);
 
-    layout.controller('AppCtrl', [function() {
+    layout.controller('AppCtrl', ['Page', function(Page) {
         this.leftClosed = window.innerWidth < 768;
+
+        this.refresh = function(e) {
+            if (e) {
+                e.preventDefault();
+            }
+
+            Page.reload();
+
+            return false;
+        };
+
+        this.isCurrentPath = function(path) {
+            return Page.isCurrentPath(path);
+        };
     }]);
 
-    layout.controller('MenuCtrl', ['$http', 'Url', function($http, Url) {
+    layout.controller('MenuCtrl', ['$http', 'UrlBuilder', function($http, UrlBuilder) {
         this.items = [];
 
         var self = this;
 
-        $http.get(Url.get('menu')).then(function(r) {
+        $http.get(UrlBuilder.get('menu')).then(function(r) {
             angular.forEach(r.data, function(item) {
                 if (item.title && item.title.length) {
                     item.firstChar = item.title.charAt(0).toUpperCase();
@@ -37,10 +51,6 @@
 
             return false;
         };
-    }]);
-
-    layout.controller('PageCtrl', [function() {
-
     }]);
 
     //prevent location change after click on anchor elements

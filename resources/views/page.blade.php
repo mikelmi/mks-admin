@@ -6,8 +6,11 @@
                 <span class="navbar-brand">@yield('title')</span>
                 <span class="navbar-text text-muted">@yield('sub-title')</span>
             @show
-            <div class="btn-group pull-right">
+            <div class="pull-right tools">
                 @yield('tools')
+            </div>
+            <div class="pull-right hidden-xs-down">
+                @yield('right')
             </div>
         </nav>
     </header>

@@ -5,7 +5,8 @@
         'ngSanitize',
         'ngRoute',
         'ngToast',
-        'layout'
+        'layout',
+        'page'
     ];
 
     if (typeof window.appModules == 'object' && window.appModules.length) {
@@ -15,7 +16,7 @@
     var app = angular.module('admin', modules);
 
     //Service for building correct urls
-    app.provider('Url', [function() {
+    app.provider('UrlBuilder', [function() {
         var baseUrl = (jQuery('base').prop('href')) . replace(/\/$/g, '');
 
         function getUrl(path) {
@@ -30,6 +31,14 @@
             return baseUrl + '/' + path.replace(/\/$/g, '');
         };
 
+        function getPath(url) {
+            if (/^#.+/.test(url) || !baseUrl) {
+                return url;
+            }
+
+            return url.replace(baseUrl, '#');
+        };
+
         return {
             setBaseUrl: function(base) {
                 baseUrl = base;
@@ -40,7 +49,8 @@
             $get: function() {
                 return {
                     base: baseUrl,
-                    get: getUrl
+                    get: getUrl,
+                    path: getPath
                 }
             }
         };
@@ -55,35 +65,20 @@
             },
 
             responseError: function(response) {
-                var message = response.status + '. ' + response.statusText;
                 var url = response.config.url;
 
                 $rootScope.errorUrl = url;
-
-                if (response.config.method == "GET") {
-                    var href = /^https?\:\/\/.+/.test(url) ? url : '#' + url;
-                    url = '<a href="'+href+'">' + url + '</a>';
-                }
-
-                message = '<strong>' + message + '</strong><p>' + url + '</p>';
-
-                ngToast.create({
-                    className: 'danger',
-                    content: message,
-                    dismissOnTimeout: false,
-                    dismissOnClick: false,
-                    dismissButton: true
-                });
-
                 $rootScope.errorStatus = response.status;
+
+                $rootScope.$emit('response-error', [response, url]);
 
                 return $q.reject(response);
             }
         };
     }]);
 
-    app.config(["$interpolateProvider", "$httpProvider", "$routeProvider", 'UrlProvider',
-        function ($interpolateProvider, $httpProvider, $routeProvider, UrlProvider) {
+    app.config(["$interpolateProvider", "$httpProvider", "$routeProvider", 'UrlBuilderProvider',
+        function ($interpolateProvider, $httpProvider, $routeProvider, UrlBuilderProvider) {
             $interpolateProvider.startSymbol('{[{');
             $interpolateProvider.endSymbol('}]}');
 
@@ -98,16 +93,17 @@
                     return '<div class="page-content"><div class="card shd"><div class="card-block">An Error Occurred</div></div></div>';
                 }
             }).when('/:path*', {
-                templateUrl: UrlProvider.getByRoute,
-                controller: 'PageCtrl'
+                templateUrl: UrlBuilderProvider.getByRoute,
+                controller: 'PageCtrl',
+                controllerAs: 'page'
             }).otherwise({
                 redirectTo: '/home'
             });
         }
     ]);
 
-    app.run(['$rootScope', '$location', '$templateCache', '$cookies',
-        function ($rootScope, $location, $templateCache, $cookies) {
+    app.run(['$rootScope', '$location', '$templateCache', '$cookies', 'Page',
+        function ($rootScope, $location, $templateCache, $cookies, Page) {
             jQuery.ajaxSetup({
                 headers: {
                     'X-XSRF-TOKEN': $cookies.get('XSRF-TOKEN'),
@@ -116,6 +112,7 @@
             });
 
             $rootScope.$on('$routeChangeStart', function(event, next, current) {
+                Page.setLoading(true);
                 //prevent route template caching
                 if (typeof(current) !== 'undefined' && typeof current.loadedTemplateUrl == 'string'){
                     $templateCache.remove(current.loadedTemplateUrl);
@@ -123,15 +120,18 @@
             });
 
             $rootScope.$on('$routeChangeError', function (event) {
-                if (event.targetScope && event.targetScope.errorStatus && event.targetScope.errorStatus == 404) {
-                    $location.path('/404');
-                } else {
-                    $location.path('/error');
-                }
+                Page.setLoading(false);
+                $rootScope.routeError = event.targetScope ? (event.targetScope.errorStatus||500) : 500;
             });
 
             $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
-                $rootScope.currentPath = $location.path();
+                Page.setLoading(false);
+                $rootScope.routeError = false;
+                Page.updateCurrentPath();
+            });
+
+            $rootScope.$on('response-error', function(e, data) {
+                Page.processResponseHeaders(data[0], data[1]);
             });
         }]);
 

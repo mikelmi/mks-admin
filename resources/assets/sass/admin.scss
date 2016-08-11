@@ -1,6 +1,16 @@
 @import "base";
 @import "../../../node_modules/ng-toast/src/styles/sass/ngToast";
 
+html, body {
+  height: 100%;
+  position: relative;
+  min-height: 100%;
+}
+
+.full-height {
+  min-height: 100%;
+}
+
 $left-width: 250px;
 $left-width-sm: 50px;
 

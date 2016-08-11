@@ -20,14 +20,22 @@
 
 @include('admin::_partials.sidebar')
 
-<section ng-view id="page" class="container-fluid" autoscroll="true">
-
+<section id="page" ng-hide="routeError" ng-class="{'page-loading': pageLoading}" class="full-height">
+    <div class="loader"></div>
+    <div ng-view class="container-fluid" autoscroll="true"></div>
 </section>
 
 <toast></toast>
 
 <script>
     window.appModules = {!! $appModules !!};
+
+    paceOptions = {
+        ajax: {
+            trackMethods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH']
+        }
+    }
+
 </script>
 
 <script src="{{ asset('vendor/mikelmi/mks-admin/js/admin.js') }}"></script>

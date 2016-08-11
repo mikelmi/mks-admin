@@ -15,3 +15,7 @@
 .shd {
   @include box-shadow();
 }
+
+.alert {
+  font-size: 0.8rem;
+}

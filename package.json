@@ -15,6 +15,8 @@
     "angular-sanitize": "^1.5.8",
     "bootstrap": "^4.0.0-alpha.3",
     "font-awesome": "^4.6.3",
-    "ng-toast": "^2.0.0"
+    "jquery-form": "^3.50.0",
+    "ng-toast": "^2.0.0",
+    "pace-js": "^1.0.2"
   }
 }
