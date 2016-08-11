@@ -27,7 +27,7 @@ class AdminMiddleware
         }
 
         if (!$response->headers->has('X-Flash-Message') && ($message = $request->session()->get('flash-message'))) {
-            $response->headers->set('X-Flash-Message', $message['message']);
+            $response->headers->set('X-Flash-Message', urlencode($message['message']));
             $response->headers->set('X-Flash-Message-Type', $message['type']);
         }
 
