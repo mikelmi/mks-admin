@@ -60,6 +60,29 @@
   color: $check-input-color;
 }
 
+.st-sortable {
+  cursor: pointer;
+
+  &.st-sort-ascent, &.st-sort-descent {
+    &:before {
+      font: normal normal normal 14px/1 FontAwesome;
+      padding-right: 4px;
+      color: #B8B8B8;
+    }
+  }
+
+  &.st-sort-ascent:before{
+    content: "\f0de";
+  }
+  &.st-sort-descent:before{
+    content: "\f0dd";
+  }
+}
+
+.st-chk {
+  cursor: pointer;
+}
+
 .page-loading {
   position: relative;
 
