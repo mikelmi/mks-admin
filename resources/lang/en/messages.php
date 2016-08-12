@@ -16,4 +16,11 @@ return [
     'Delete Selected' => 'Delete Selected',
     'Save and Close' => 'Save and Close',
     'Save and New' => 'Save and New',
+    'Created at' => 'Created at',
+    'Updated at' => 'Updated at',
+    'Status' => 'Status',
+    'Activate' => 'Activate',
+    'Deactivate' => 'Deactivate',
+    'Active' => 'Active',
+    'Inactive' => 'Inactive',
 ];

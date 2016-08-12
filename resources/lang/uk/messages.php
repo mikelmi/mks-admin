@@ -15,4 +15,11 @@ return [
     'Delete Selected' => 'Видалити відмічені',
     'Save and Close' => 'Зберегти і закрити',
     'Save and New' => 'Зберегти і додати новий',
+    'Created at' => 'Дата створення',
+    'Status' => 'Статус',
+    'Updated at' => 'Дата змін',
+    'Activate' => 'Активувати',
+    'Deactivate' => 'Деактивувати',
+    'Active' => 'Активний',
+    'Inactive' => 'Неактивний',
 ];
