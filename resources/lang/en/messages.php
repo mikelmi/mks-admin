@@ -26,4 +26,6 @@ return [
     'Trash' => 'Trash',
     'Move to trash' => 'Move to trash',
     'Restore' => 'Restore',
+    'In Trash' => 'In Trash',
+    'Save and Restore' => 'Save And Restore',
 ];
