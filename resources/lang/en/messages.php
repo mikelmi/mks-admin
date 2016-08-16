@@ -23,4 +23,7 @@ return [
     'Deactivate' => 'Deactivate',
     'Active' => 'Active',
     'Inactive' => 'Inactive',
+    'Trash' => 'Trash',
+    'Move to trash' => 'Move to trash',
+    'Restore' => 'Restore',
 ];
