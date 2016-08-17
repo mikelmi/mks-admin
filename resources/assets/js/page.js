@@ -57,6 +57,23 @@
                     });
                 }
 
+                var model_data = xhr.headers('X-Model-Data');
+                if (model_data) {
+                    try {
+                        model_data = angular.fromJson(model_data);
+                        $timeout(function () {
+                            var scope = angular.element('[ng-view]').scope();
+                            if (scope) {
+                                if (typeof scope.page != 'undefined') {
+                                    scope.page.model = model_data;
+                                } else {
+                                    scope.model = model_data;
+                                }
+                            }
+                        });
+                    } catch (err) {}
+                }
+
                 if (status == 301 || status == 302 || status == 401 || status == 402) {
                     url = xhr[getHeader].call(xhr, 'X-Redirect-Url');
                     if (!url) {

@@ -65,6 +65,12 @@
                 return config;
             },
 
+            response: function(response) {
+                $rootScope.$emit('response-success', [response, response.config.url]);
+
+                return response;
+            },
+
             responseError: function(response) {
                 var url = response.config.url;
 
@@ -129,6 +135,10 @@
                 Page.setLoading(false);
                 $rootScope.routeError = false;
                 Page.updateCurrentPath();
+            });
+
+            $rootScope.$on('response-success', function(e, data) {
+                Page.processResponseHeaders(data[0], data[1]);
             });
 
             $rootScope.$on('response-error', function(e, data) {
