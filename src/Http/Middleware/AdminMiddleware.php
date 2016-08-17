@@ -13,7 +13,7 @@ class AdminMiddleware
         $response = null;
 
         if (\Gate::denies('admin.access')) {
-            if ($request->ajax()) {
+            if ($request->ajax() || $request->wantsJson()) {
                 $response = response('Unauthorized.', 401, ['X-Redirect-Url' => route('admin.login')]);
             } elseif (\Auth::guard($guard)->check()) {
                 $response = view('admin::auth.denied');
@@ -26,9 +26,12 @@ class AdminMiddleware
             $response = $next($request);
         }
 
-        if (!$response->headers->has('X-Flash-Message') && ($message = $request->session()->get('flash-message'))) {
-            $response->headers->set('X-Flash-Message', urlencode($message['message']));
-            $response->headers->set('X-Flash-Message-Type', $message['type']);
+        if ($request->ajax() || $request->wantsJson()) {
+            if (!$response->headers->has('X-Flash-Message') && ($message = $request->session()->get('flash-message'))) {
+                $response->headers->set('X-Flash-Message', urlencode($message['message']));
+                $response->headers->set('X-Flash-Message-Type', $message['type']);
+                $request->session()->forget('flash-message');
+            }
         }
 
         return $response;
