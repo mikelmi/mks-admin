@@ -57,7 +57,7 @@
                     });
                 }
 
-                var model_data = xhr.headers('X-Model-Data');
+                var model_data = xhr[getHeader].call(xhr, 'X-Model-Data');
                 if (model_data) {
                     try {
                         model_data = angular.fromJson(model_data);
