@@ -16,11 +16,10 @@ Route::group(
 
         // Password Reset Routes...
         if (config('admin.reset_enable')) {
-            $router->get('password/reset/{token?}',
-                ['as' => 'admin.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
-            $router->post('password/email',
-                ['as' => 'admin.reset.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-            $router->post('password/reset', ['as' => 'admin.reset.post', 'uses' => 'Auth\PasswordController@reset']);
+            $router->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('admin.forgot');
+            $router->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('admin.reset.email');
+            $router->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('admin.reset');
+            $router->post('password/reset', 'Auth\ResetPasswordController@reset')->name('admin.reset.post');
         }
 
         $router->get('/', ['as' => 'admin', 'uses' => 'IndexController@index']);

@@ -40,7 +40,7 @@
                 </div>
                 @if ($reset_enable)
                     <div class="col-sm-6 text-sm-right">
-                        <a href="{{ route('admin.reset') }}">{{trans('admin::auth.Forgot Password')}}</a>
+                        <a href="{{ route('admin.forgot') }}">{{trans('admin::auth.Forgot Password')}}</a>
                     </div>
                 @endif
             </div>

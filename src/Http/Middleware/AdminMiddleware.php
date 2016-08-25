@@ -16,7 +16,7 @@ class AdminMiddleware
             if ($request->ajax() || $request->wantsJson()) {
                 $response = response('Unauthorized.', 401, ['X-Redirect-Url' => route('admin.login')]);
             } elseif (\Auth::guard($guard)->check()) {
-                $response = view('admin::auth.denied');
+                $response = response(view('admin::auth.denied'));
             } else {
                 $response = redirect()->guest(route('admin.login'));
             }

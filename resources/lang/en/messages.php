@@ -2,6 +2,7 @@
 
 return [
     'title' => 'AdminPanel',
+    'Hello' => 'Hello',
     'Search' => 'Search',
     'Cancel' => 'Cancel',
     'Add' => 'Add',
@@ -28,4 +29,5 @@ return [
     'Restore' => 'Restore',
     'In Trash' => 'In Trash',
     'Save and Restore' => 'Save And Restore',
+    'action_text' => 'If you’re having trouble clicking the ":actionText" button, copy and paste the URL below into your web browser',
 ];

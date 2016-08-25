@@ -6,8 +6,9 @@ namespace Mikelmi\MksAdmin\Http\Controllers\Auth;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Lang;
 
@@ -15,8 +16,9 @@ class AuthController extends Controller
 {
     use AuthorizesRequests,
         ValidatesRequests,
-        AuthenticatesUsers,
-        ThrottlesLogins;
+        AuthenticatesUsers {
+            logout as baseLogout;
+        }
 
     public function __construct()
     {
@@ -52,5 +54,14 @@ class AuthController extends Controller
         return Lang::has('admin::auth.throttle')
             ? Lang::get('admin::auth.throttle', ['seconds' => $seconds])
             : 'Too many login attempts. Please try again in '.$seconds.' seconds.';
+    }
+
+    public function logout(Request $request)
+    {
+        /** @var RedirectResponse $response */
+        $response = $this->baseLogout($request);
+        $response->setTargetUrl(route('admin'));
+        
+        return $response;
     }
 }
