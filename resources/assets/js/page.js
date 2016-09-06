@@ -161,6 +161,13 @@
                 var ctrl = scope.page || scope;
                 var opt = {
                     cache: false,
+                    beforeSerialize: function () {
+                        if (typeof CKEDITOR != 'undefined') {
+                            for (var instance in CKEDITOR.instances) {
+                                CKEDITOR.instances[instance].updateElement();
+                            }
+                        }
+                    },
                     beforeSend: function(xhr) {
                         var xhr_old = form.data('jqxhr');
                         if (xhr_old) {
