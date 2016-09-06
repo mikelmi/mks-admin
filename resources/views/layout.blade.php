@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="admin">
+<html lang="{{ app()->getLocale() or 'en' }}" ng-app="admin">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
