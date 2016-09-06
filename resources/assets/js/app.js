@@ -16,6 +16,20 @@
 
     var app = angular.module('admin', modules);
 
+    app.factory('AppConfig', [function() {
+        this.lang = angular.element('html').prop('lang') || 'en';
+
+        this.getLang = function (defaultValue) {
+            return this.lang || defaultValue;
+        };
+
+        this.setLang = function (lang) {
+            this.lang = lang;
+        };
+
+        return this;
+    }]);
+
     //Service for building correct urls
     app.provider('UrlBuilder', [function() {
         var baseUrl = (jQuery('base').prop('href')) . replace(/\/$/g, '');
