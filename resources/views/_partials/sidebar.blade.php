@@ -2,7 +2,7 @@
     <div class="sidebar-wrapper">
 
         <div class="caption">
-            <span class="lc-hide inline title">Admin</span>
+            {!! config('admin.home_button', '<a class="lc-hide inline title" href="#/home">Admin</a>') !!}
             <div class="pull-right tools">
                 <a href="{{ $siteUrl }}" target="_blank" class="lc-hide" title="{{trans('admin::messages.View Site')}}" aria-label="{{trans('admin::messages.View Site')}}"><i class="fa fa-external-link"></i></a>
                 <a href="#" class="lc-hide" title="{{trans('admin::messages.Refresh')}}" ng-click="app.refresh($event)"><i class="fa fa-refresh"></i></a>
