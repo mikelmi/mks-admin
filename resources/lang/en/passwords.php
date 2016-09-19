@@ -1,14 +1,15 @@
 <?php
 
 return [
-    'password' => 'Пароль має містити мінімум 6 символів і співпадати з полем підтвердження.',
-    'reset' => 'Ваш пароль відновлено!',
-    'sent' => 'Лист з посиланням для відновлення паролю відправлено на ваш e-mail!',
-    'token' => 'Невірний код.',
-    'user' => 'Користувача з таким e-mail не знайдено.',
-    'subject' => 'Відновлення паролю',
-    'mail_body' => 'Перейдіть по наступному посиланню, щоб відновити Ваш пароль',
-    'Confirm' => 'Підтвердити пароль',
+    'password' => 'Passwords must be at least six characters and match the confirmation.',
+    'reset' => 'Your password has been reset!',
+    'sent' => 'We have e-mailed your password reset link!',
+    'token' => 'This password reset token is invalid.',
+    'user' => "We can't find a user with that e-mail address.",
+
+    'subject' => 'Reset Password',
+    'mail_body' => 'You are receiving this email because we received a password reset request for your account.',
+    'Confirm' => 'Confirm password',
     'mail_text' => 'You are receiving this email because we received a password reset request for your account. Click the button below to reset your password:',
     'mail_note' => 'If you did not request a password reset, no further action is required.',
 ];
