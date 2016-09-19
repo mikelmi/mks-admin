@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="{{ $src }}">
     @endforeach
 
+    <link rel="icon" href="{{ asset('vendor/mikelmi/mks-admin/favicon.ico') }}">
+
     <base href="{{route('admin')}}">
 </head>
 

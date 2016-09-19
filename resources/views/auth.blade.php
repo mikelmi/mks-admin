@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="{{ asset('vendor/mikelmi/mks-admin/css/auth.css') }}">
     @endif
 
+    <link rel="icon" href="{{ asset('vendor/mikelmi/mks-admin/favicon.ico') }}">
+
     <base href="{{route('admin')}}">
 </head>
 
