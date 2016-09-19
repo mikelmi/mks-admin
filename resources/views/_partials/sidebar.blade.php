@@ -20,7 +20,7 @@
                     <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide" ng-click="menu.toggle(item, $event)"></i>
                 </a>
                 <ul ng-if="item.children">
-                    <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(item.hash)}">
+                    <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(subItem.hash)}">
                         <a href="{[{ subItem.url }]}">
                             <i ng-if="subItem.icon" class="fa fa-{[{ subItem.icon }]}"></i>
                             <span>{[{ subItem.title }]}</span>
