@@ -9,6 +9,20 @@
   }
 }
 
+.row-form-label, .col-form-label {
+  color: #888888;
+
+  &.active {
+    color: #3367D6;
+  }
+}
+
+.row-form-label {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .form-control, .select2-container--bootstrap .select2-selection {
   border: none;
   -webkit-border-radius: 0;

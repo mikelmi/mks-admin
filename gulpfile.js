@@ -12,9 +12,18 @@ elixir(function(mix) {
     mix.sass('admin.scss', 'resources/assets/css');
 
     mix.styles([
-        '*.css',
+        'admin.css',
         path.node_js + 'pace-js/themes/blue/pace-theme-flash.css'
     ], 'public/css/admin.css');
+
+    //materialized css
+    mix.sass('auth-m.scss');
+
+    mix.sass('admin-m.scss', 'resources/assets/css');
+    mix.styles([
+        'admin-m.css',
+        path.node_js + 'pace-js/themes/blue/pace-theme-flash.css'
+    ], 'public/css/admin-m.css');
 
     //auth js
     mix.scripts([

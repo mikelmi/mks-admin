@@ -7,7 +7,11 @@
 
     <title>@section('page-title'){{trans('admin::messages.title')}}@show</title>
 
-    <link rel="stylesheet" href="{{ asset('vendor/mikelmi/mks-admin/css/admin.css') }}">
+    @if(config('admin.materialized'))
+        <link rel="stylesheet" href="{{ asset('vendor/mikelmi/mks-admin/css/admin-m.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('vendor/mikelmi/mks-admin/css/admin.css') }}">
+    @endif
 
     @foreach($styles as $src)
         <link rel="stylesheet" href="{{ $src }}">
@@ -29,6 +33,7 @@
 
 <script>
     window.appModules = {!! $appModules !!};
+    window.materialized = {{ config('admin.materialized') ? 1 : 0 }};
 
     paceOptions = {
         ajax: {

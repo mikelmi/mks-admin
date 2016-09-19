@@ -67,4 +67,36 @@
         };
     }]);
 
+    if (!window.materialized) {
+        //apply custom checkboxes and radios
+        layout.directive('formCheckInput', [function () {
+            return {
+                restrict: 'C',
+                link: function (scope, elem, attr) {
+                    var label = elem.parent('label');
+
+                    label.addClass('custom-control ' + (elem.is(':radio') ? 'custom-radio' : 'custom-checkbox'));
+
+                    elem.addClass('custom-control-input')
+                        .after('<span class="custom-control-indicator"></span>');
+                }
+            }
+        }]);
+    } else {
+        //set active label on focus
+        layout.directive('formControl', [function () {
+            return {
+                restrict: 'C',
+                link: function (scope, elem, attr) {
+                    var label = elem.closest('.form-group').children('label');
+                    elem.on('focus', function(){
+                        label.addClass('active');
+                    }).on('blur', function() {
+                        label.removeClass('active');
+                    });
+                }
+            }
+        }]);
+    }
+
 })(window.angular);

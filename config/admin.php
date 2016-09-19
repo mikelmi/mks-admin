@@ -2,6 +2,7 @@
 
 return [
     'url' => env('ADMIN_URL', 'admin'),
+    'materialized' => false,
     'site_url' => env('SITE_URL'),
     'username' => 'email',
     'reset_enable' => false,

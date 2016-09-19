@@ -6,7 +6,19 @@
 
 @import "mixins";
 
-@import "form";
+@import "select2-bootstrap";
+.select2-container--bootstrap {
+  .select2-selection--multiple {
+    .select2-selection__choice, .select2-search--inline {
+      margin-top: 0.4rem;
+    }
+    .select2-search--inline {
+      .select2-search__field {
+        height: auto;
+      }
+    }
+  }
+}
 
 .bg-white {
   background-color: #FFFFFF;
@@ -18,4 +30,10 @@
 
 .alert {
   font-size: 0.8rem;
+}
+
+label.required {
+  &:after {
+    content:"*";
+  }
 }
