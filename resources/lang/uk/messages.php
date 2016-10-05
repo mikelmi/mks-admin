@@ -10,7 +10,7 @@ return [
     'Edit' => 'Редагувати',
     'Save' => 'Зберегти',
     'Delete' => 'Видалити',
-    'View Site' => 'View Site',
+    'View Site' => 'Відкрити сайт',
     'Language' => 'Мова',
     'My Profile' => 'Мій профайл',
     'Toggle menu' => 'Показати/Приховати меню',
