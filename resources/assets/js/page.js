@@ -74,7 +74,7 @@
                     } catch (err) {}
                 }
 
-                if (status == 301 || status == 302 || status == 401 || status == 402) {
+                if (status == 301 || status == 302 || status == 401 || status == 402 || status == 403) {
                     url = xhr[getHeader].call(xhr, 'X-Redirect-Url');
                     if (!url) {
                         path = xhr[getHeader].call(xhr, 'X-Redirect-Path');
