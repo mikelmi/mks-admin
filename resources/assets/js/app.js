@@ -133,6 +133,12 @@
             });
 
             $rootScope.$on('$routeChangeStart', function(event, next, current) {
+                //hide all modals when location changes
+                //$('.modal.in').modal('hide');
+                $('.modal.in').removeClass('in').hide();
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+
                 Page.setLoading(true);
                 //prevent route template caching
                 if (typeof(current) !== 'undefined' && typeof current.loadedTemplateUrl == 'string'){
