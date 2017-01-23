@@ -14,7 +14,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetAdminPassword extends ResetPassword
 {
-    public function toMail()
+    public function toMail($notifiable)
     {
         return (new MailMessage())
             ->view('admin::email')
