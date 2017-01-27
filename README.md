@@ -3,7 +3,7 @@ Build on AngularJS 1.5, Bootstrap 4
 
 ### Requirements
 
-* Laravel 5.2
+* Laravel 5.4
 
 ### Installation
 
