@@ -7,7 +7,7 @@
 
 @section('content')
 
-    <div class="card shd card-inverse card-danger text-xs-center">
+    <div class="card shd card-inverse card-danger text-center">
         <div class="card-block p-x-3">
             <div class="card-title">
                 <i class="fa fa-lock fa-3x"></i>

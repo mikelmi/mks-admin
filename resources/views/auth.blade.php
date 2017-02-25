@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>@section('page-title'){{trans('admin::messages.title')}}@show</title>
 
@@ -20,8 +19,8 @@
 
 <body class="container-fluid{{config('admin.materialized') ? ' materialized' : ''}}">
 
-<div class="row flex-items-xs-center full-height">
-    <div class="column flex-xs-middle col-md-6 col-lg-5 col-xl-4">
+<div class="row justify-content-md-center full-height">
+    <div class="col-md-6 col-lg-5 col-xl-4 col-md-auto align-self-center">
         @yield('content')
     </div>
 </div>

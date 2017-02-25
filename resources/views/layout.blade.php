@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}" ng-app="admin">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>@section('page-title'){{trans('admin::messages.title')}}@show</title>
 

@@ -4,19 +4,15 @@
 namespace Mikelmi\MksAdmin\Http\Controllers\Auth;
 
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Lang;
+use Mikelmi\MksAdmin\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-    use AuthorizesRequests,
-        ValidatesRequests,
-        AuthenticatesUsers {
+    use AuthenticatesUsers {
             logout as baseLogout;
         }
 

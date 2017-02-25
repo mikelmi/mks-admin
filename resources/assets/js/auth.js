@@ -1,3 +1,5 @@
+require('./base');
+
 $(document).ready(function() {
     //apply custom checkboxes and radios
     if (!$('body').hasClass('materialized')) {

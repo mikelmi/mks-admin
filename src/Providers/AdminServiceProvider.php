@@ -27,9 +27,10 @@ class AdminServiceProvider extends ServiceProvider
     {
         /** @var Router $router */
         $router = $this->app['router'];
+
         $router->aliasMiddleware('admin', AdminMiddleware::class)
-            ->aliasMiddleware('admin.guest', RedirectIfAuthenticated::class)
-            ->aliasMiddleware('admin.locale', SetAdminLocale::class);
+                ->aliasMiddleware('admin.guest', RedirectIfAuthenticated::class)
+                ->aliasMiddleware('admin.locale', SetAdminLocale::class);
 
         $this->app->singleton(MenuManagerContract::class, function(Application $app) {
             $menuManager = $app['config']->get('admin.menu_manager', Menu::class);

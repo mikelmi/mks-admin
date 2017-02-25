@@ -1,10 +1,11 @@
 {
     "name": "mikelmi/mks-admin",
-    "description": "Simple Admin Panel for Laravel",
+    "description": "Starter Admin Panel for Laravel",
+    "keywords": ["laravel", "angular", "admin"],
     "license": "MIT",
     "require": {
         "php": ">=7.0",
-        "laravel/framework": "5.4.*"
+        "laravel/framework": ">=5.4.*"
     },
     "authors": [
         {

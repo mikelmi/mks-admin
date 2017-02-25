@@ -1,3 +1,14 @@
+require('./base');
+require('angular');
+require('angular-sanitize');
+require('angular-cookies');
+require('angular-route');
+require('ng-toast');
+
+require('./layout');
+require('./page');
+require('./select2');
+
 (function(){
 
     var modules = [

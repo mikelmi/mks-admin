@@ -1,24 +1,26 @@
 {
   "name": "mks-admin",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node ../../../node_modules/cross-env/bin/cross-env.js NODE_ENV=development ../../../node_modules/webpack/bin/webpack.js --progress --hide-modules",
+    "production": "node ../../../node_modules/cross-env/bin/cross-env.js NODE_ENV=production ../../../node_modules/webpack/bin/webpack.js --progress --hide-modules"
   },
   "author": "mikelmi84@gmail.com",
-  "license": "ISC",
+  "private": true,
   "dependencies": {
-    "angular": "^1.5.8",
-    "angular-cookies": "^1.5.8",
-    "angular-route": "^1.5.8",
-    "angular-sanitize": "^1.5.8",
-    "bootstrap": "^4.0.0-alpha.3",
-    "font-awesome": "^4.6.3",
-    "jquery-form": "^3.50.0",
+    "jquery": "^3.1.1",
+    "angular": "^1.6.2",
+    "angular-cookies": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "angular-sanitize": "^1.6.2",
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0",
+    "jquery-form": "^4.0.1",
     "ng-toast": "^2.0.0",
     "pace-js": "^1.0.2",
     "select2": "^4.0.3",
-    "select2-bootstrap-theme": "0.1.0-beta.8"
+    "select2-bootstrap-theme": "0.1.0-beta.9"
   }
 }
