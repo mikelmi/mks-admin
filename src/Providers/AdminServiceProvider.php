@@ -4,9 +4,12 @@
 namespace Mikelmi\MksAdmin\Providers;
 
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Mikelmi\MksAdmin\Contracts\AdminableUserInterface;
 use Mikelmi\MksAdmin\Contracts\MenuManagerContract;
 use Mikelmi\MksAdmin\Http\Middleware\AdminMiddleware;
 use Mikelmi\MksAdmin\Http\Middleware\RedirectIfAuthenticated;
@@ -63,5 +66,13 @@ class AdminServiceProvider extends ServiceProvider
         view()->composer(
             'admin::layout', LayoutComposer::class
         );
+
+        Gate::before(function(Authenticatable $user, $ability) {
+            if ($user instanceof AdminableUserInterface && $user->isSuperAdmin()) {
+                return true;
+            }
+
+            return null;
+        });
     }
 }

@@ -9,21 +9,17 @@ namespace Mikelmi\MksAdmin\Traits;
 
 
 use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable;
 use Mikelmi\MksAdmin\Notifications\ResetAdminPassword;
 
 trait AdminableUser
 {
-    public function isAdmin()
-    {
-        return false;
-    }
-
     public function sendPasswordResetNotification($token)
     {
-        if (!$this->isAdmin()) {
-            $this->notify(new ResetPassword($token));
-        } else {
+        if ($this instanceof Authorizable && $this->can('admin.access')) {
             $this->notify(new ResetAdminPassword($token));
+        } else {
+            $this->notify(new ResetPassword($token));
         }
     }
 }

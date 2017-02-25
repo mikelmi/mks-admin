@@ -17,3 +17,41 @@ $ composer require mikelmi/mks-admin
 $ php artisan vendor:publish --provider="Mikelmi\MksAdmin\Providers\AdminServiceProvider"
 ```
 * Edit config/admin.php
+
+### Configure User
+For accessing the admin panel User should have 'admin.access' ability (you can define it by `Gate::define()`).
+See https://laravel.com/docs/master/authorization#gates for details
+
+##### [Optional] Define SuperAdmin ability
+Implement AdminableUserInterface by your User model
+
+```php
+// app/User.php
+<?php
+//...
+use Mikelmi\MksAdmin\Contracts\AdminableUserInterface;
+
+class User extends Authenticatable implements AdminableUserInterface {
+    //...
+    
+    public function isSuperAdmin(): bool
+    {
+        //TODO: return true if user is SuperAdmin
+        return false;
+    }
+}
+
+```
+
+##### [Optional] Enable Password Reset for admins
+1. Enable it in `config/admin.php` file:
+
+```php
+<?php
+
+return [
+    //...
+    'reset_enable' => true,
+```
+
+2. Add `Mikelmi\MksAdmin\Traits\AdminableUser` Trait to your User model
