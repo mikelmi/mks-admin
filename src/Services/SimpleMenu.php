@@ -6,7 +6,7 @@ namespace Mikelmi\MksAdmin\Services;
 
 use Mikelmi\MksAdmin\Contracts\MenuManagerContract;
 
-class Menu implements MenuManagerContract
+class SimpleMenu implements MenuManagerContract
 {
     protected $items;
 

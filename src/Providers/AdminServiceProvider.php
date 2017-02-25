@@ -17,6 +17,7 @@ use Mikelmi\MksAdmin\Http\Middleware\SetAdminLocale;
 use Mikelmi\MksAdmin\Http\ViewComposers\LayoutComposer;
 use Mikelmi\MksAdmin\Http\ViewComposers\NavComposer;
 use Mikelmi\MksAdmin\Services\Menu;
+use Mikelmi\MksAdmin\Services\SimpleMenu;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -36,7 +37,7 @@ class AdminServiceProvider extends ServiceProvider
                 ->aliasMiddleware('admin.locale', SetAdminLocale::class);
 
         $this->app->singleton(MenuManagerContract::class, function(Application $app) {
-            $menuManager = $app['config']->get('admin.menu_manager', Menu::class);
+            $menuManager = $app['config']->get('admin.menu_manager', SimpleMenu::class);
 
             return new $menuManager($app['config']->get('admin.menu', []));
         });

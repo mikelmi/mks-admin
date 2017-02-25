@@ -48,4 +48,4 @@ mix.js(path.js + '/admin.js', 'public/js');
 mix.copy(path.node + '/font-awesome/fonts', 'public/fonts');
 
 //copy images
-mix.copy(path.assets + '/img', 'public/img');
+mix.copy(path.assets + '/img', 'public/img', false);
