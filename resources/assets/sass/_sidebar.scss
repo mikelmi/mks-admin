@@ -47,6 +47,11 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
     @include trans-width();
     @include sidebar-link();
 
+    .font-sm & {
+      height: 48px;
+      line-height: 48px;
+    }
+
     .title {
       padding: 0 15px;
     }

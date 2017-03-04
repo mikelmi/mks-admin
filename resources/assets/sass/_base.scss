@@ -1,5 +1,9 @@
 @import "vars";
 
+.font-sm {
+  font-size: 14px;
+}
+
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../../../node_modules/tether/src/css/tether";
 @import "../../../node_modules/font-awesome/scss/font-awesome";
@@ -26,6 +30,10 @@
 
 .shd {
   @include box-shadow2();
+
+  &.card {
+    margin-bottom: 10px;
+  }
 }
 
 .alert {
@@ -38,6 +46,7 @@ label.required {
   }
 }
 
+/** input placeholders **/
 .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #bbbbbb !important;
 }
@@ -53,4 +62,12 @@ label.required {
 
 .text-sm {
   font-size: 0.9rem;
+}
+
+.bg-light {
+  background-color: #f7f7f7;
+}
+
+.btn {
+  cursor: pointer;
 }

@@ -16,7 +16,6 @@ use Mikelmi\MksAdmin\Http\Middleware\RedirectIfAuthenticated;
 use Mikelmi\MksAdmin\Http\Middleware\SetAdminLocale;
 use Mikelmi\MksAdmin\Http\ViewComposers\LayoutComposer;
 use Mikelmi\MksAdmin\Http\ViewComposers\NavComposer;
-use Mikelmi\MksAdmin\Services\Menu;
 use Mikelmi\MksAdmin\Services\SimpleMenu;
 
 class AdminServiceProvider extends ServiceProvider
@@ -41,10 +40,14 @@ class AdminServiceProvider extends ServiceProvider
 
             return new $menuManager($app['config']->get('admin.menu', []));
         });
+
+        $this->app->register(RouteServiceProvider::class);
     }
 
     public function boot()
     {
+        require __DIR__ . '/../helpers.php';
+
         $this->publishes([
             __DIR__.'/../../config/admin.php' => config_path('admin.php'),
         ], 'config');

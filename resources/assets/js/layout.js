@@ -99,4 +99,13 @@
         }]);
     }
 
+    $(document).ready(function() {
+        $(window).on('resize resized', function() {
+            var $header = $('.page-header > .navbar');
+            if ($header && $header.length) {
+                $('.page-content').css('padding-top', $header.outerHeight() + 15);
+            }
+        }).trigger('resized');
+    });
+
 })(window.angular);

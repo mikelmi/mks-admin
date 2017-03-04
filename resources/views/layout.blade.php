@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" ng-app="admin">
+<html lang="{{ app()->getLocale() }}" ng-app="admin" class="font-sm">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -27,7 +27,7 @@
 
 <section id="page" ng-hide="routeError" ng-class="{'page-loading': pageLoading}" class="full-height">
     <div class="loader"></div>
-    <div ng-view class="container-fluid" autoscroll="true"></div>
+    <div ng-view autoscroll="true"></div>
 </section>
 
 <toast></toast>

@@ -55,7 +55,7 @@ require('./select2');
             }
 
             return baseUrl + '/' + path.replace(/\/$/g, '');
-        };
+        }
 
         function getPath(url) {
             if (/^#.+/.test(url) || !baseUrl) {
@@ -63,7 +63,7 @@ require('./select2');
             }
 
             return url.replace(baseUrl, '#');
-        };
+        }
 
         return {
             setBaseUrl: function(base) {
@@ -109,12 +109,16 @@ require('./select2');
         };
     }]);
 
-    app.config(["$interpolateProvider", "$httpProvider", "$routeProvider", 'UrlBuilderProvider',
-        function ($interpolateProvider, $httpProvider, $routeProvider, UrlBuilderProvider) {
-            $interpolateProvider.startSymbol('{[{');
-            $interpolateProvider.endSymbol('}]}');
+    app.config(["$locationProvider", "$httpProvider", "$routeProvider", "$templateRequestProvider", 'UrlBuilderProvider',
+        function ($locationProvider, $httpProvider, $routeProvider, $templateRequestProvider, UrlBuilderProvider) {
 
+            $locationProvider.html5Mode(false).hashPrefix('');
             $httpProvider.interceptors.push('adminHttpInterceptor');
+            $templateRequestProvider.httpOptions({
+                'headers': {
+                    'Accept': 'text/html, text/plain, */*'
+                }
+            });
 
             $routeProvider.when('/404', {
                 template: function () {

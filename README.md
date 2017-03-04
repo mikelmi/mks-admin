@@ -66,3 +66,6 @@ By default the menu items are built by `\Mikelmi\MksAdmin\Services\SimpleMenu` c
 ],
 ```
 But you can change the default menu manager class by your own which should implements `Mikelmi\MksAdmin\Contracts\MenuManagerContract`
+
+### Controllers
+1. Define admin routes in routes/admin.php

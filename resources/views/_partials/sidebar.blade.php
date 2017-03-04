@@ -11,24 +11,32 @@
             <div class="clearfix"></div>
         </div>
 
-        <ul class="nav sidebar-menu" role="navigation" ng-controller="MenuCtrl as menu">
-            <li ng-repeat="item in menu.items" ng-class="{'expanded': item.expanded, 'active': app.isCurrentPath(item.hash)}">
-                <a href="{[{ item.url }]}">
-                    <i ng-if="item.icon" class="fa fa-{[{ item.icon }]}" title="{[{ item.title }]}"></i>
-                    <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{[{ item.title }]}">{[{ item.firstChar }]}</div>
-                    <span class="lc-hide">{[{ item.title }]}</span>
-                    <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide" ng-click="menu.toggle(item, $event)"></i>
-                </a>
-                <ul ng-if="item.children">
-                    <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(subItem.hash)}">
-                        <a href="{[{ subItem.url }]}">
-                            <i ng-if="subItem.icon" class="fa fa-{[{ subItem.icon }]}"></i>
-                            <span>{[{ subItem.title }]}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        @verbatim
+            <ul class="nav flex-column sidebar-menu" role="navigation" ng-controller="MenuCtrl as menu">
+                <li ng-repeat="item in menu.items" ng-class="{'expanded': item.expanded, 'active': app.isCurrentPath(item.hash)}">
+                    <a ng-if="item.url" href="{{ item.url }}">
+                        <i ng-if="item.icon" class="fa fa-{{ item.icon }}" title="{{ item.title }}"></i>
+                        <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{{ item.title }}">{{ item.firstChar }}</div>
+                        <span class="lc-hide">{{ item.title }}</span>
+                        <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide" ng-click="menu.toggle(item, $event)"></i>
+                    </a>
+                    <a ng-if="!item.url && item.children" href="{{ item.url }}" ng-click="menu.toggle(item, $event)">
+                        <i ng-if="item.icon" class="fa fa-{{ item.icon }}" title="{{ item.title }}"></i>
+                        <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{{ item.title }}">{{ item.firstChar }}</div>
+                        <span class="lc-hide">{{ item.title }}</span>
+                        <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide"></i>
+                    </a>
+                    <ul ng-if="item.children">
+                        <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(subItem.hash)}">
+                            <a href="{{ subItem.url }}">
+                                <i ng-if="subItem.icon" class="fa fa-{{ subItem.icon }}"></i>
+                                <span>{{ subItem.title }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        @endverbatim
 
         <div class="sidebar-footer">
             @if ($locales)
