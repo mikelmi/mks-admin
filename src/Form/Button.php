@@ -23,7 +23,7 @@ class Button
     /**
      * @var null|string
      */
-    protected $type;
+    protected $btnType;
 
     /**
      * @var null|string
@@ -52,17 +52,26 @@ class Button
 
     /**
      * ToolButton constructor.
-     * @param string $url
+     * @param string|null $url
      * @param string|null $title
-     * @param string|null $type
+     * @param string|null $btnType
      * @param string|null $icon
      */
-    public function __construct(string $url, string $title = null, string $type = null, string $icon = null)
+    public function __construct(string $url = '', string $title = null, string $btnType = null, string $icon = null)
     {
         $this->url = $url;
-        $this->title = $title;
-        $this->type = $type;
-        $this->icon = $icon;
+
+        if ($title !== null) {
+            $this->title = $title;
+        }
+
+        if ($btnType !== null) {
+            $this->btnType = $btnType;
+        }
+
+        if ($icon !== null) {
+            $this->icon = $icon;
+        }
     }
 
     /**
@@ -100,17 +109,17 @@ class Button
     /**
      * @return null|string
      */
-    public function getType()
+    public function getBtnType()
     {
-        return $this->type;
+        return $this->btnType;
     }
 
     /**
-     * @param null|string $type
+     * @param null|string $btnType
      */
-    public function setType($type)
+    public function setBtnType($btnType)
     {
-        $this->type = $type;
+        $this->btnType = $btnType;
     }
 
     /**
@@ -150,7 +159,7 @@ class Button
      */
     protected function getClass(): string
     {
-        $result = 'btn btn-' . ($this->type ?: 'secondary');
+        $result = 'btn btn-' . ($this->getBtnType() ?: 'secondary');
 
         if ($this->size) {
             $result .= ' btn-' . $this->size;
@@ -166,12 +175,12 @@ class Button
     {
         $result = [
             'class' => $this->getClass(),
-            'title' => $this->title,
+            'title' => $this->getTitle(),
             'data-url' => $this->url
         ];
 
-        if ($this->onClick) {
-            $result['ng-click'] = $this->onClick;
+        if ($this->getOnClick()) {
+            $result['ng-click'] = $this->getOnClick();
         }
 
         return $result;
@@ -182,7 +191,9 @@ class Button
      */
     protected function iconHtml(): string
     {
-        return $this->icon ? '<i class="fa fa-' . $this->icon .'"></i>' : '';
+        $icon = $this->getIcon();
+
+        return $icon ? '<i class="fa fa-' . $icon .'"></i>' : '';
     }
 
     /**
@@ -245,7 +256,7 @@ class Button
             '<button %s>%s %s</button>',
             html_attr($attr),
             $this->iconHtml(),
-            $this->showTitle || !$this->icon ? $this->title : ''
+            $this->showTitle || !$this->getIcon() ? $this->getTitle() : ''
             );
     }
 }

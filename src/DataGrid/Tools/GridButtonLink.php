@@ -10,11 +10,13 @@ namespace Mikelmi\MksAdmin\DataGrid\Tools;
 
 class GridButtonLink extends GridButton
 {
+    protected $showTitle = true;
+
     public function defaultAttributes(): array
     {
         return [
             'class' => $this->getClass(),
-            'title' => $this->title,
+            'title' => $this->getTitle(),
             'href' => $this->url,
         ];
     }
@@ -27,7 +29,7 @@ class GridButtonLink extends GridButton
             '<a %s>%s %s</a>',
             html_attr($attr),
             $this->iconHtml(),
-            $this->showTitle || !$this->icon ? $this->title : ''
+            $this->showTitle || !$this->getIcon() ? $this->getTitle() : ''
         );
     }
 }

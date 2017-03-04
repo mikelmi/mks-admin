@@ -12,6 +12,8 @@ use Mikelmi\MksAdmin\Form\Button;
 
 class GridButton extends Button
 {
+    protected $showTitle = false;
+
     protected function defaultAttributes(): array
     {
         $result = parent::defaultAttributes();

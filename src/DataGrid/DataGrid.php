@@ -10,7 +10,10 @@ namespace Mikelmi\MksAdmin\DataGrid;
 
 use Mikelmi\MksAdmin\DataGrid\Columns\Column;
 use Mikelmi\MksAdmin\DataGrid\Columns\ColumnSelect;
-use Mikelmi\MksAdmin\DataGrid\Tools\GridButtonAdd;
+use Mikelmi\MksAdmin\DataGrid\Tools\GridButton;
+use Mikelmi\MksAdmin\DataGrid\Tools\GridButtonActivate;
+use Mikelmi\MksAdmin\DataGrid\Tools\GridButtonCreate;
+use Mikelmi\MksAdmin\DataGrid\Tools\GridButtonDeactivate;
 use Mikelmi\MksAdmin\DataGrid\Tools\GridButtonDelete;
 
 class DataGrid
@@ -31,14 +34,9 @@ class DataGrid
     private $tools;
 
     /**
-     * @var GridButtonAdd|null
+     * @var \Illuminate\Support\Collection
      */
-    private $addButton;
-
-    /**
-     * @var GridButtonDelete|null
-     */
-    private $deleteButton;
+    private $links;
 
     /**
      * @var bool
@@ -75,6 +73,7 @@ class DataGrid
     {
         $this->url = $url;
         $this->title = $title;
+        $this->links = collect();
         $this->tools = collect();
         $this->columns = collect();
         $this->setSelectable($selectable);
@@ -126,14 +125,48 @@ class DataGrid
         return $this->tools;
     }
 
-    public function renderAddButton()
+    /**
+     * @param array $tools
+     * @return $this
+     */
+    public function setTools(array $tools)
     {
-        return $this->addButton ? $this->addButton->render() : '';
+        foreach ($tools as $tool)
+        {
+            if ($tool instanceof GridButton) {
+                $this->tools->push($tool);
+            } elseif(is_array($tool)) {
+                $this->tools->push(GridButtonFactory::make($tool));
+            }
+        }
+
+        return $this;
     }
 
-    public function renderDeleteButton()
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getLinks(): \Illuminate\Support\Collection
     {
-        return $this->deleteButton ? $this->deleteButton->render() : '';
+        return $this->links;
+    }
+
+    /**
+     * @param array $links
+     * @return $this
+     */
+    public function setLinks(array $links)
+    {
+        foreach ($links as $link)
+        {
+            if ($link instanceof GridButton) {
+                $this->links->push($link);
+            } elseif(is_array($link)) {
+                $this->$links->push(GridButtonFactory::make($link));
+            }
+        }
+
+        return $this;
     }
 
     /**
@@ -141,11 +174,9 @@ class DataGrid
      * @param string|null $title
      * @return $this
      */
-    public function setAddButton(string $url, string $title = null)
+    public function addCreateLink(string $url, string $title = null)
     {
-        $this->addButton = new GridButtonAdd($url, $title);
-
-        return $this;
+        return $this->addLinkButton(new GridButtonCreate($url, $title));
     }
 
     /**
@@ -154,15 +185,26 @@ class DataGrid
      * @param string|null $confirm
      * @return $this;
      */
-    public function setDeleteButton(string $url, string $title = null, string $confirm = null)
+    public function addDeleteButton(string $url, string $title = null, string $confirm = null)
     {
-        $this->deleteButton = new GridButtonDelete($url);
+        $button = new GridButtonDelete($url, $title);
 
         if ($confirm) {
-            $this->deleteButton->setConfirm($confirm);
+            $button->setConfirm($confirm);
         }
 
-        return $this;
+        return $this->addToolButton($button);
+    }
+
+    /**
+     * @param $activateUrl
+     * @param $deactivateUrl
+     * @return $this
+     */
+    public function addToggleButton($activateUrl, $deactivateUrl)
+    {
+        return $this->addToolButton(new GridButtonActivate($activateUrl))
+                    ->addToolButton(new GridButtonDeactivate($deactivateUrl));
     }
 
     /**
@@ -281,6 +323,28 @@ class DataGrid
     {
         //TODO: check if grid has searchable columns
         return true;
+    }
+
+    /**
+     * @param GridButton $button
+     * @return $this
+     */
+    public function addToolButton(GridButton $button)
+    {
+        $this->tools->push($button);
+
+        return $this;
+    }
+
+    /**
+     * @param GridButton $button
+     * @return $this
+     */
+    public function addLinkButton(GridButton $button)
+    {
+        $this->links->push($button);
+
+        return $this;
     }
 
     public function response($view = null, array $data = [])

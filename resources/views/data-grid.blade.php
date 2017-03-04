@@ -15,9 +15,13 @@
 @endsection
 
 @section('tools')
-    {!! $grid->renderAddButton() !!}
+    @foreach($grid->getLinks() as $link)
+        {!! $link->render() !!}
+    @endforeach
     <div class="btn btn-group">
-        {!! $grid->renderDeleteButton() !!}
+        @foreach($grid->getTools() as $button)
+            {!! $button->render() !!}
+        @endforeach
     </div>
 @endsection
 

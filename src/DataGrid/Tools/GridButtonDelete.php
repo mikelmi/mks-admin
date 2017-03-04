@@ -13,34 +13,27 @@ class GridButtonDelete extends GridButton
     /**
      * @var string
      */
-    private $confirm;
+    protected $confirm;
+
+    protected $btnType = 'outline-danger';
+
+    protected $icon = 'remove';
 
     /**
      * @var bool
      */
     protected $showTitle = false;
 
-    public function __construct($url, $title = null, $type = null, $icon = null)
+    /**
+     * @return string
+     */
+    public function getConfirm(): string
     {
-        parent::__construct($url, $title, $type, $icon);
-
-        if ($this->title === null) {
-            $this->title = trans('admin::messages.Delete Selected');
-        }
-
-        if ($this->type === null) {
-            $this->type = 'danger';
-        }
-
-        if ($this->icon === null) {
-            $this->icon = 'remove';
-        }
-
         if ($this->confirm === null) {
             $this->confirm = trans('admin::messages.Delete?');
         }
 
-        $this->onClick = sprintf("grid.removeSelected('%s', '%s')", $this->url, $this->confirm);
+        return $this->confirm;
     }
 
     /**
@@ -49,5 +42,23 @@ class GridButtonDelete extends GridButton
     public function setConfirm(string $confirm)
     {
         $this->confirm = $confirm;
+    }
+
+    public function getTitle(): string
+    {
+        if ($this->title === null) {
+            $this->title = trans('admin::messages.Delete Selected');
+        }
+
+        return $this->title;
+    }
+
+    public function getOnClick(): string
+    {
+        if ($this->onClick === null) {
+            $this->onClick = sprintf("grid.removeSelected('%s', '%s')", $this->url, $this->getConfirm());
+        }
+
+        return $this->onClick;
     }
 }
