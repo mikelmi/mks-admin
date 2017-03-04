@@ -14,28 +14,13 @@ use Illuminate\Http\Request;
 
 trait ToggleRequests
 {
-    private function checkModelClass()
-    {
-        if (!property_exists($this, 'modelClass')) {
-            abort(500, 'Property modelClass does not exists');
-        }
-    }
-
     /**
      * @param Model|mixed $model
      * @return \Illuminate\Http\JsonResponse
      */
     public function toggle($model)
     {
-        $this->checkModelClass();
-
-        if (!$model instanceof Model) {
-            $model = call_user_func([$this->modelClass, 'find'], $model);
-        }
-
-        if (!$model->exists) {
-            throw new ModelNotFoundException(get_class($model));
-        }
+        $model = ModelTraitHelper::getModel($this, $model);
 
         $field = $this->toggleField ?? 'status';
 
@@ -51,7 +36,7 @@ trait ToggleRequests
 
     public function toggleBatch(Request $request, $status)
     {
-        $this->checkModelClass();
+        ModelTraitHelper::checkModelClass($this);
 
         $id = $request->get('id', []);
 
