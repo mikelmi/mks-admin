@@ -10,11 +10,11 @@ namespace Mikelmi\MksAdmin\DataGrid\Tools;
 
 class GridButtonDeactivate extends GridButtonUpdate
 {
-    protected $btnType = 'outline-warning';
+    protected $btnType = 'warning';
 
     protected $icon = 'minus';
 
-    public function getTitle(): string
+    public function getTitle()
     {
         if ($this->title === null) {
             $this->title = trans('admin::messages.Deactivate');

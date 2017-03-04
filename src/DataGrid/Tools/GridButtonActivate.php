@@ -10,11 +10,11 @@ namespace Mikelmi\MksAdmin\DataGrid\Tools;
 
 class GridButtonActivate extends GridButtonUpdate
 {
-    protected $btnType = 'outline-success';
+    protected $btnType = 'success';
 
     protected $icon = 'check';
 
-    public function getTitle(): string
+    public function getTitle()
     {
         if ($this->title === null) {
             $this->title = trans('admin::messages.Activate');

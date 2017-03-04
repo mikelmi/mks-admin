@@ -145,7 +145,7 @@ class ColumnStatus extends Column
         if ($this->url) {
             $attr = array_merge([
                 'class' => 'btn btn-sm',
-                'ng-class' => sprintf('{\'btn-outline-success\':row.%s,\'btn-outline-warning\':!row.%1$s}', $this->key),
+                'ng-class' => sprintf('{\'btn-success\':row.%s,\'btn-warning\':!row.%1$s}', $this->key),
                 'ng-click' => "grid.updateRow(row, '" . $this->url . "/'+row.id)",
                 'title' => $this->actionTitle ?: (trans('admin::messages.Activate').'/'.trans('admin::messages.Deactivate')),
             ], $this->buttonAttributes);

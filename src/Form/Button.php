@@ -84,26 +84,32 @@ class Button
 
     /**
      * @param string $url
+     * @return $this
      */
     public function setUrl(string $url)
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle()
     {
         return $this->title;
     }
 
     /**
      * @param string $title
+     * @return $this
      */
     public function setTitle(string $title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -115,11 +121,14 @@ class Button
     }
 
     /**
-     * @param null|string $btnType
+     * @param $btnType
+     * @return $this
      */
     public function setBtnType($btnType)
     {
         $this->btnType = $btnType;
+
+        return $this;
     }
 
     /**
@@ -131,11 +140,14 @@ class Button
     }
 
     /**
-     * @param null|string $icon
+     * @param $icon
+     * @return $this
      */
     public function setIcon($icon)
     {
         $this->icon = $icon;
+
+        return $this;
     }
 
     /**
@@ -148,10 +160,13 @@ class Button
 
     /**
      * @param array $attributes
+     * @return $this
      */
     public function setAttributes(array $attributes)
     {
         $this->attributes = $attributes;
+
+        return $this;
     }
 
     /**
@@ -206,10 +221,13 @@ class Button
 
     /**
      * @param bool $showTitle
+     * @return $this
      */
     public function setShowTitle(bool $showTitle)
     {
         $this->showTitle = $showTitle;
+
+        return $this;
     }
 
     /**
@@ -222,10 +240,13 @@ class Button
 
     /**
      * @param string $onClick
+     * @return $this
      */
     public function setOnClick(string $onClick)
     {
         $this->onClick = $onClick;
+
+        return $this;
     }
 
     /**
@@ -237,11 +258,14 @@ class Button
     }
 
     /**
-     * @param string $size (sm or lg)
+     * @param string $size
+     * @return $this
      */
     public function setSize(string $size)
     {
         $this->size = $size;
+
+        return $this;
     }
 
 

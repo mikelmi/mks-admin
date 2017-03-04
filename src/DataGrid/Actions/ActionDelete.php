@@ -1,28 +1,23 @@
 <?php
 /**
  * Author: mike
- * Date: 02.03.17
- * Time: 17:33
+ * Date: 04.03.17
+ * Time: 22:07
  */
 
-namespace Mikelmi\MksAdmin\DataGrid\Tools;
+namespace Mikelmi\MksAdmin\DataGrid\Actions;
 
 
-class GridButtonDelete extends GridButton
+class ActionDelete extends Action
 {
+    protected $icon = 'remove';
+
+    protected $btnType = 'outline-danger';
+
     /**
      * @var string
      */
     protected $confirm;
-
-    protected $btnType = 'danger';
-
-    protected $icon = 'remove';
-
-    /**
-     * @var bool
-     */
-    protected $showTitle = false;
 
     /**
      * @return string
@@ -38,19 +33,18 @@ class GridButtonDelete extends GridButton
 
     /**
      * @param string $confirm
-     * @return $this
+     * @return ActionDelete
      */
-    public function setConfirm(string $confirm)
+    public function setConfirm(string $confirm): ActionDelete
     {
         $this->confirm = $confirm;
-
         return $this;
     }
 
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Delete Selected');
+            $this->title = trans('admin::messages.Delete');
         }
 
         return $this->title;
@@ -59,7 +53,7 @@ class GridButtonDelete extends GridButton
     public function getOnClick(): string
     {
         if ($this->onClick === null) {
-            $this->onClick = sprintf("grid.removeSelected('%s', '%s')", $this->url, $this->getConfirm());
+            $this->onClick = sprintf("grid.removeRow(row, '%s/'+row.id, '%s')", $this->url, $this->getConfirm());
         }
 
         return $this->onClick;
