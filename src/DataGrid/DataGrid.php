@@ -170,23 +170,33 @@ class DataGrid
     }
 
     /**
-     * @param string $url
+     * @param string|array $url
      * @param string|null $title
      * @return $this
      */
-    public function addCreateLink(string $url, string $title = null)
+    public function setCreateLink($url, string $title = null)
     {
+        if (is_array($url) && count($url) > 0) {
+            $title = $url[1];
+            $url = $url[0];
+        }
+
         return $this->addLinkButton(new GridButtonCreate($url, $title));
     }
 
     /**
-     * @param string $url
+     * @param string|array $url
      * @param string|null $title
      * @param string|null $confirm
      * @return $this;
      */
-    public function addDeleteButton(string $url, string $title = null, string $confirm = null)
+    public function setDeleteButton($url, string $title = null, string $confirm = null)
     {
+        if (is_array($url) && count($url) > 0) {
+            $title = $url[1];
+            $url = $url[0];
+        }
+
         $button = new GridButtonDelete($url, $title);
 
         if ($confirm) {
@@ -198,11 +208,16 @@ class DataGrid
 
     /**
      * @param $activateUrl
-     * @param $deactivateUrl
+     * @param $deactivateUrl = null
      * @return $this
      */
-    public function addToggleButton($activateUrl, $deactivateUrl)
+    public function setToggleButton($activateUrl, $deactivateUrl = null)
     {
+        if (is_array($activateUrl) && count($activateUrl) > 0) {
+            $deactivateUrl = $activateUrl[1];
+            $activateUrl = $activateUrl[0];
+        }
+
         return $this->addToolButton(new GridButtonActivate($activateUrl))
                     ->addToolButton(new GridButtonDeactivate($deactivateUrl));
     }
