@@ -8,6 +8,7 @@
 namespace Mikelmi\MksAdmin\DataGrid\Columns;
 
 
+use Mikelmi\MksAdmin\DataGrid\ActionFactory;
 use Mikelmi\MksAdmin\DataGrid\Actions\Action;
 
 class ColumnActions extends Column
@@ -39,6 +40,24 @@ class ColumnActions extends Column
     public function addAction(Action $action)
     {
         $this->actions->push($action);
+        return $this;
+    }
+
+    /**
+     * @param array $actions
+     * @return $this
+     */
+    public function setActions(array $actions)
+    {
+        foreach ($actions as $action)
+        {
+            if ($action instanceof Action) {
+                $this->actions->push($action);
+            } elseif(is_array($action)) {
+                $this->actions->push(ActionFactory::make($action));
+            }
+        }
+
         return $this;
     }
 

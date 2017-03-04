@@ -124,3 +124,16 @@
     margin-right: 0;
   }
 }
+
+.card-block-table {
+  &>.table-grid {
+    thead th, tbody td {
+      &:first-child {
+        padding-left: 1rem;
+      }
+      &:last-child {
+        padding-right: 1rem;
+      }
+    }
+  }
+}
