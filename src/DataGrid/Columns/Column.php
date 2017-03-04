@@ -31,6 +31,11 @@ class Column
     protected $searchable;
 
     /**
+     * @var string
+     */
+    protected $searchType = 'search';
+
+    /**
      * @var array
      */
     protected $cellAttributes = [];
@@ -169,6 +174,24 @@ class Column
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getSearchType(): string
+    {
+        return $this->searchType;
+    }
+
+    /**
+     * @param string $searchType
+     * @return Column
+     */
+    public function setSearchType(string $searchType): Column
+    {
+        $this->searchType = $searchType;
+        return $this;
+    }
+
     public function renderHead()
     {
         $attr = [];
@@ -197,7 +220,7 @@ class Column
             $attr = [
                 'st-search' => $this->key,
                 'class' => 'form-control form-control-sm form-block',
-                'type' => 'search',
+                'type' => $this->getSearchType(),
                 'placeholder' => $this->title,
             ];
 
