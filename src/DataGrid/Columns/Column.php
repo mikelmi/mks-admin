@@ -41,11 +41,6 @@ class Column
     protected $headAttributes = [];
 
     /**
-     * @var array
-     */
-    protected $rowAttributes = [];
-
-    /**
      * Column constructor.
      * @param string $key
      * @param string $title
@@ -173,27 +168,6 @@ class Column
 
         return $this;
     }
-
-    /**
-     * @return array
-     */
-    public function getRowAttributes(): array
-    {
-        return $this->rowAttributes;
-    }
-
-    /**
-     * @param array $rowAttributes
-     * @return Column
-     */
-    public function setRowAttributes(array $rowAttributes)
-    {
-        $this->rowAttributes = $rowAttributes;
-
-        return $this;
-    }
-
-
 
     public function renderHead()
     {

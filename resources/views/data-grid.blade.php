@@ -44,7 +44,7 @@
                 </thead>
 
                 <tbody>
-                    <tr ng-repeat="row in grid.rows">
+                    <tr ng-repeat="row in grid.rows" {!! html_attr($grid->getRowAttributes()) !!}>
                         @foreach($grid->getColumns() as $column)
                             {!! $column->renderCell() !!}
                         @endforeach

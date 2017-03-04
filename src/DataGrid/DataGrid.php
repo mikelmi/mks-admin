@@ -61,6 +61,11 @@ class DataGrid
     private $perPage = 10;
 
     /**
+     * @var array
+     */
+    private $rowAttributes = [];
+
+    /**
      * DataGrid constructor.
      * @param string $url
      * @param string|null $title
@@ -239,6 +244,24 @@ class DataGrid
 
         $this->selectable = $selectable;
 
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRowAttributes(): array
+    {
+        return $this->rowAttributes;
+    }
+
+    /**
+     * @param array $rowAttributes
+     * @return DataGrid
+     */
+    public function setRowAttributes(array $rowAttributes): DataGrid
+    {
+        $this->rowAttributes = $rowAttributes;
         return $this;
     }
 

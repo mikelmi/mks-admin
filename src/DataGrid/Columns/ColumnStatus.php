@@ -28,6 +28,11 @@ class ColumnStatus extends Column
     protected $headAttributes = ['class' => 'text-center'];
 
     /**
+     * @var array
+     */
+    protected $buttonAttributes = [];
+
+    /**
      * @param array $options
      * @return $this
      */
@@ -91,6 +96,24 @@ class ColumnStatus extends Column
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getButtonAttributes(): array
+    {
+        return $this->buttonAttributes;
+    }
+
+    /**
+     * @param array $buttonAttributes
+     * @return ColumnStatus
+     */
+    public function setButtonAttributes(array $buttonAttributes): ColumnStatus
+    {
+        $this->buttonAttributes = $buttonAttributes;
+        return $this;
+    }
+
     public function renderSearch(): string
     {
         $input = '';
@@ -120,12 +143,12 @@ class ColumnStatus extends Column
         $icon = sprintf('<i class="fa" ng-class="{\'fa-check\':row.%s,\'fa-minus\':!row.%1$s}"></i>', $this->key);
 
         if ($this->url) {
-            $attr = [
+            $attr = array_merge([
                 'class' => 'btn btn-sm',
                 'ng-class' => sprintf('{\'btn-success\':row.%s,\'btn-warning\':!row.%1$s}', $this->key),
                 'ng-click' => "grid.updateRow(row, '" . $this->url . "/'+row.id)",
                 'title' => $this->actionTitle ?: (trans('admin::messages.Activate').'/'.trans('admin::messages.Deactivate')),
-            ];
+            ], $this->buttonAttributes);
 
             return sprintf('<button %s>%s</button>', html_attr($attr), $icon);
         }
