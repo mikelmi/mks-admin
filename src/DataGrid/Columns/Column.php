@@ -18,7 +18,7 @@ class Column
     /**
      * @var string
      */
-    protected $title;
+    protected $title = '';
 
     /**
      * @var bool
@@ -52,12 +52,18 @@ class Column
      * @param bool $sortable
      * @param bool $searchable
      */
-    public function __construct(string $key, string $title, bool $sortable = false, bool $searchable = false)
+    public function __construct(string $key, string $title = null, bool $sortable = false, bool $searchable = false)
     {
         $this->key = $key;
         $this->title = $title;
         $this->sortable = $sortable;
         $this->searchable = $searchable;
+
+        if ($title !== null) {
+            $this->title = $title;
+        } elseif (!$this->title) {
+            $this->title = ucwords($this->key);
+        }
     }
 
     /**

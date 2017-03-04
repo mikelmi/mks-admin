@@ -162,7 +162,7 @@ class DataGrid
             if ($link instanceof GridButton) {
                 $this->links->push($link);
             } elseif(is_array($link)) {
-                $this->$links->push(GridButtonFactory::make($link));
+                $this->links->push(GridButtonFactory::make($link));
             }
         }
 
@@ -243,6 +243,24 @@ class DataGrid
     public function getColumns()
     {
         return $this->columns;
+    }
+
+    /**
+     * @param array $columns
+     * @return $this
+     */
+    public function setColumns(array $columns)
+    {
+        foreach ($columns as $column)
+        {
+            if ($column instanceof Column) {
+                $this->columns->push($column);
+            } elseif(is_array($column)) {
+                $this->columns->push(ColumnFactory::make($column));
+            }
+        }
+
+        return $this;
     }
 
     /**

@@ -2,23 +2,23 @@
 /**
  * Author: mike
  * Date: 04.03.17
- * Time: 23:14
+ * Time: 23:21
  */
 
 namespace Mikelmi\MksAdmin\DataGrid;
 
 
-use Mikelmi\MksAdmin\DataGrid\Actions\Action;
+use Mikelmi\MksAdmin\DataGrid\Columns\Column;
 
-class ActionFactory
+class ColumnFactory
 {
     /**
      * @param array $options
-     * @return Action
+     * @return Column
      */
     public static function make(array $options)
     {
-        $class = Action::class;
+        $class = Column::class;
 
         $type = $options['type'] ?? '';
 
@@ -30,9 +30,9 @@ class ActionFactory
             }
         }
 
-        $action = new $class();
+        $column = new $class($options['key'] ?? '');
 
-        unset($options['type']);
+        unset($options['type'], $options['key']);
 
         foreach ($options as $key => $value) {
             if (!is_string($key)) {
@@ -41,11 +41,11 @@ class ActionFactory
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($action, $method)) {
-                $action->$method($value);
+            if (method_exists($column, $method)) {
+                $column->$method($value);
             }
         }
 
-        return $action;
+        return $column;
     }
 }

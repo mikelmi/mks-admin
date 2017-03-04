@@ -18,7 +18,7 @@ class ColumnActions extends Column
      */
     private $actions;
 
-    public function __construct($key, $title, $sortable = false, $searchable = false)
+    public function __construct($key, $title = null, $sortable = false, $searchable = false)
     {
         parent::__construct($key, $title, $sortable, $searchable);
 

@@ -123,6 +123,12 @@
   .custom-control {
     margin-right: 0;
   }
+
+  thead {
+    .custom-control {
+      top: 0.4rem;
+    }
+  }
 }
 
 .card-block-table {
