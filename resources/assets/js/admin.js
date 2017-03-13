@@ -4,6 +4,7 @@ require('angular-sanitize');
 require('angular-cookies');
 require('angular-route');
 require('ng-toast');
+require('jquery-form');
 
 require('./layout');
 require('./page');

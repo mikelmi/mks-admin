@@ -1,3 +1,2 @@
-//require('jquery');
-global.Tether = require('tether');
+global.$ = global.jQuery = require('jquery');
 require('bootstrap');
