@@ -32,4 +32,7 @@ return [
     'action_text' => 'If you’re having trouble clicking the ":actionText" button, copy and paste the URL below into your web browser',
     'Refresh' => 'Refresh',
     'selected_count' => 'Selected',
+    'Yes' => 'Yes',
+    'No' => 'No',
+    'Saved' => 'Saved',
 ];
