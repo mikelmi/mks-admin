@@ -18,21 +18,21 @@ class ActionFactory
      */
     public static function make(array $options)
     {
-        $class = Action::class;
+        $baseClass = Action::class;
 
-        $type = $options['type'] ?? '';
+        $type = array_pull($options, 'type');
 
         if ($type) {
-            $class .= ucfirst($type);
+            $class = config('admin::datagrid.actions.'.$type, $baseClass . ucfirst($type));
 
             if (!class_exists($class)) {
                 throw new \InvalidArgumentException('Class ' . $class . ' not found');
             }
+        } else {
+            $class = $baseClass;
         }
 
         $action = new $class();
-
-        unset($options['type']);
 
         foreach ($options as $key => $value) {
             if (!is_string($key)) {
