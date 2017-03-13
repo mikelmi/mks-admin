@@ -345,8 +345,14 @@ class DataGrid
      */
     public function hasSortableColumns(): bool
     {
-        //TODO: check if grid has sortable columns
-        return true;
+        /** @var Column $column */
+        foreach ($this->columns as $column) {
+            if ($column->isSortable()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -354,8 +360,14 @@ class DataGrid
      */
     public function hasSearchableColumns(): bool
     {
-        //TODO: check if grid has searchable columns
-        return true;
+        /** @var Column $column */
+        foreach ($this->columns as $column) {
+            if ($column->isSearchable()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -380,6 +392,11 @@ class DataGrid
         return $this;
     }
 
+    /**
+     * @param null $view
+     * @param array $data
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function response($view = null, array $data = [])
     {
         return view($view ?: 'admin::data-grid', ['grid' => $this], $data);

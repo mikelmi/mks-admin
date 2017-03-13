@@ -18,21 +18,21 @@ class ColumnFactory
      */
     public static function make(array $options)
     {
-        $class = Column::class;
+        $baseClass = Column::class;
 
-        $type = $options['type'] ?? '';
+        $type = array_pull($options, 'type');
 
         if ($type) {
-            $class .= ucfirst($type);
+            $class = config('admin::datagrid.columns.'.$type, $baseClass . ucfirst($type));
 
             if (!class_exists($class)) {
                 throw new \InvalidArgumentException('Class ' . $class . ' not found');
             }
+        } else {
+            $class = $baseClass;
         }
 
-        $column = new $class($options['key'] ?? '');
-
-        unset($options['type'], $options['key']);
+        $column = new $class(array_pull($options, 'key', ''));
 
         foreach ($options as $key => $value) {
             if (!is_string($key)) {
