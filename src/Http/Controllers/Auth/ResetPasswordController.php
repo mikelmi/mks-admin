@@ -39,7 +39,7 @@ class ResetPasswordController extends Controller
     protected function sendResetResponse($response)
     {
         return redirect($this->redirectPath())
-            ->with('status', trans('admin::'.$response));
+            ->with('status', __('admin::'.$response));
     }
 
     /**
@@ -53,6 +53,6 @@ class ResetPasswordController extends Controller
     {
         return redirect()->back()
             ->withInput($request->only('email'))
-            ->withErrors(['email' => trans('admin::'.$response)]);
+            ->withErrors(['email' => __('admin::'.$response)]);
     }
 }

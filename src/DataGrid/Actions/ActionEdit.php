@@ -17,7 +17,7 @@ class ActionEdit extends ActionLink
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Edit');
+            $this->title = __('admin::messages.Edit');
         }
 
         return $this->title;

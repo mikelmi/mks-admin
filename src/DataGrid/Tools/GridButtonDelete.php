@@ -30,7 +30,7 @@ class GridButtonDelete extends GridButton
     public function getConfirm(): string
     {
         if ($this->confirm === null) {
-            $this->confirm = trans('admin::messages.Delete?');
+            $this->confirm = __('admin::messages.confirm_delete_selected');
         }
 
         return $this->confirm;
@@ -50,7 +50,7 @@ class GridButtonDelete extends GridButton
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Delete Selected');
+            $this->title = __('admin::messages.Delete Selected');
         }
 
         return $this->title;

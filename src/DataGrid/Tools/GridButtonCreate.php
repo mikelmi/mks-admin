@@ -17,7 +17,7 @@ class GridButtonCreate extends GridButtonLink
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Add');
+            $this->title = __('admin::messages.Add');
         }
 
         return $this->title;

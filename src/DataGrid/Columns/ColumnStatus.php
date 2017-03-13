@@ -50,8 +50,8 @@ class ColumnStatus extends Column
     {
         if (!$this->options) {
             $this->options = [
-                '1' => trans('admin::messages.Active'),
-                '0' => trans('admin::messages.Inactive'),
+                '1' => __('admin::messages.Active'),
+                '0' => __('admin::messages.Inactive'),
             ];
         }
 
@@ -147,7 +147,7 @@ class ColumnStatus extends Column
                 'class' => 'btn btn-sm',
                 'ng-class' => sprintf('{\'btn-success\':row.%s,\'btn-warning\':!row.%1$s}', $this->key),
                 'ng-click' => "grid.updateRow(row, '" . $this->url . "/'+row.id)",
-                'title' => $this->actionTitle ?: (trans('admin::messages.Activate').'/'.trans('admin::messages.Deactivate')),
+                'title' => $this->actionTitle ?: (__('admin::messages.Activate').'/'.__('admin::messages.Deactivate')),
             ], $this->buttonAttributes);
 
             return sprintf('<button %s>%s</button>', html_attr($attr), $icon);

@@ -17,7 +17,7 @@ class GridButtonDeactivate extends GridButtonUpdate
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Deactivate');
+            $this->title = __('admin::messages.Deactivate');
         }
 
         return $this->title;

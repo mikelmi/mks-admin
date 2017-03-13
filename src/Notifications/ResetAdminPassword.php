@@ -18,9 +18,9 @@ class ResetAdminPassword extends ResetPassword
     {
         return (new MailMessage())
             ->view('admin::email')
-            ->subject(trans('admin::passwords.subject'))
-            ->line(trans('admin::passwords.mail_text'))
-            ->action(trans('admin::auth.Reset Password'), route('admin.reset', $this->token))
-            ->line(trans('admin::passwords.mail_note'));
+            ->subject(__('admin::passwords.subject'))
+            ->line(__('admin::passwords.mail_text'))
+            ->action(__('admin::auth.Reset Password'), route('admin.reset', $this->token))
+            ->line(__('admin::passwords.mail_note'));
     }
 }

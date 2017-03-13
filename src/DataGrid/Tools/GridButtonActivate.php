@@ -17,7 +17,7 @@ class GridButtonActivate extends GridButtonUpdate
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Activate');
+            $this->title = __('admin::messages.Activate');
         }
 
         return $this->title;

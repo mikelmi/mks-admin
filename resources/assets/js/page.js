@@ -18,7 +18,8 @@
                 $route.reload();
             };
 
-            this.goTo = function(url) {
+            this.goTo = function(path) {
+                let url = path.replace(/^#/, '');
                 if (url == $route.current.loadedTemplateUrl || url == $location.url()) {
                     this.reload();
                     return;
@@ -198,6 +199,44 @@
                     }
                 };
                 form.ajaxForm(opt);
+            }
+        }
+    }]);
+
+    app.directive("mksAction", ['Page','$http', function(Page, $http) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attr) {
+                element.on('click', function(e) {
+                    e.preventDefault();
+                    var url = element.data('url') || attr['href'],
+                        confirmation = element.data('confirm');
+
+                    if (!url) {
+                        return false;
+                    }
+
+                    if (confirmation && !confirm(confirmation)) {
+                        return false;
+                    }
+
+                    Page.setLoading(true, true);
+
+                    $http({
+                        url: url,
+                        method: element.data('method')||'post'
+                    }).then(function () {
+                        let backUrl = element.data('backUrl');
+
+                        if (backUrl) {
+                            Page.goTo(backUrl);
+                        } else if (element.data('reload')) {
+                            Page.reload();
+                        }
+                    }).finally(function() {
+                        Page.setLoading(false, true);
+                    });
+                });
             }
         }
     }]);

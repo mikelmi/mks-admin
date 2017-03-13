@@ -25,7 +25,7 @@ class ActionDelete extends Action
     public function getConfirm(): string
     {
         if ($this->confirm === null) {
-            $this->confirm = trans('admin::messages.Delete?');
+            $this->confirm = __('admin::messages.confirm_delete');
         }
 
         return $this->confirm;
@@ -44,7 +44,7 @@ class ActionDelete extends Action
     public function getTitle()
     {
         if ($this->title === null) {
-            $this->title = trans('admin::messages.Delete');
+            $this->title = __('admin::messages.Delete');
         }
 
         return $this->title;

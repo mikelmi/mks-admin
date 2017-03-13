@@ -35,9 +35,19 @@
             </div>
         @endif
     </div>
-    <div class="btn-group">
+    @if($form->getDeleteUrl())
+        <button type="button" class="btn btn-danger" mks-action
+                data-url="{{$form->getDeleteUrl()}}"
+                data-back-url="{{$form->getBackUrl()}}"
+                title="@lang('admin::messages.Delete')"
+                data-confirm="@lang('admin::messages.confirm_delete')"
+            >
+            <i class="fa fa-remove"></i>
+        </button>
+    @endif
+    @if($form->getBackUrl())
         <a class="btn btn-secondary" href="{{$form->getBackUrl()}}">@lang('admin::messages.Cancel')</a>
-    </div>
+    @endif
 @endsection
 
 @section('content')

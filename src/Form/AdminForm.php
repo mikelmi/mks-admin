@@ -79,9 +79,9 @@ class AdminForm
     {
         if (!$this->title) {
             switch ($this->mode) {
-                case self::MODE_CREATE: $this->title = trans('admin::messages.Create');
+                case self::MODE_CREATE: $this->title = __('admin::messages.Create');
                     break;
-                case self::MODE_EDIT: $this->title = trans('admin::messages.Edit');
+                case self::MODE_EDIT: $this->title = __('admin::messages.Edit');
                     break;
             }
         }

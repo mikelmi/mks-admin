@@ -74,7 +74,7 @@ class Toggle extends Field
     public function getOnTitle(): string
     {
         if (!$this->onTitle) {
-            $this->onTitle = trans('admin::messages.Yes');
+            $this->onTitle = __('admin::messages.Yes');
         }
 
         return $this->onTitle;
@@ -96,7 +96,7 @@ class Toggle extends Field
     public function getOffTitle(): string
     {
         if (!$this->offTitle) {
-            $this->offTitle = trans('admin::messages.No');
+            $this->offTitle = __('admin::messages.No');
         }
 
         return $this->offTitle;
