@@ -8,7 +8,7 @@ require('jquery-form');
 
 require('./layout');
 require('./page');
-require('./select2');
+require('./mks-select');
 
 (function(){
 

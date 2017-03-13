@@ -363,7 +363,7 @@ abstract class Field
     public function applySetters(array $options = [])
     {
         foreach ($options as $key => $value) {
-            if (!is_string($key) || strtolower($key) === 'options') {
+            if (!is_string($key)) {
                 continue;
             }
 

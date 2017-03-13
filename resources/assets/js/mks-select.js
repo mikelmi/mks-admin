@@ -1,3 +1,5 @@
+require('select2');
+
 (function(){
 
     var app = angular.module('select2', []);
