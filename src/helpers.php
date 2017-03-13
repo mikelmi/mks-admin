@@ -16,6 +16,12 @@ if (!function_exists('html_attr')) {
         return array_reduce(
             array_keys($attributes),
             function ($result, $key) use ($attributes) {
+                if ($attributes[$key] === false) {
+                    return $result . ' ';
+                }
+                if ($attributes[$key] === true) {
+                    return $result . ' ' . $key;
+                }
                 return $result . ' ' . $key . '="' . e($attributes[$key]) . '"';
             },
             ''
