@@ -28,6 +28,16 @@ class Select extends Field
     protected $disabledValues = [];
 
     /**
+     * @var bool
+     */
+    protected $allowEmpty = false;
+
+    /**
+     * @var string
+     */
+    protected $emptyTitle = ' ';
+
+    /**
      * @return bool
      */
     public function isMultiple(): bool
@@ -88,6 +98,8 @@ class Select extends Field
     {
         $result = '<select ' . html_attr($this->getAttributes()) . '>';
 
+        $result .= $this->renderEmptyOption();
+
         foreach ($this->options as $value => $option) {
             $result .= $this->renderOption($value, $option);
         }
@@ -139,7 +151,19 @@ class Select extends Field
         return '<option ' . html_attr($attr) . '>' . $option . '</option>';
     }
 
-    public function getDefaultAttributes(): array
+    /**
+     * @return string
+     */
+    protected function renderEmptyOption(): string
+    {
+        if ($this->allowEmpty) {
+            return $this->renderOption('', $this->emptyTitle);
+        }
+
+        return '';
+    }
+
+    protected function getDefaultAttributes(): array
     {
         $result = parent::getDefaultAttributes();
 
@@ -147,8 +171,42 @@ class Select extends Field
             $result['multiple'] = true;
         }
 
-        $result['mks-select'] = true;
-
         return $result;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAllowEmpty(): bool
+    {
+        return $this->allowEmpty;
+    }
+
+    /**
+     * @param bool $allowEmpty
+     * @return Select
+     */
+    public function setAllowEmpty(bool $allowEmpty): Select
+    {
+        $this->allowEmpty = $allowEmpty;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmptyTitle(): string
+    {
+        return $this->emptyTitle;
+    }
+
+    /**
+     * @param string $emptyTitle
+     * @return Select
+     */
+    public function setEmptyTitle(string $emptyTitle): Select
+    {
+        $this->emptyTitle = $emptyTitle;
+        return $this;
     }
 }

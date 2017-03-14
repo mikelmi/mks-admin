@@ -66,6 +66,11 @@ abstract class Field implements FieldInterface
     protected $class = 'form-control';
 
     /**
+     * @var string
+     */
+    protected $placeholder = '';
+
+    /**
      * Field constructor.
      * @param string|null $name
      * @param mixed|null $value
@@ -316,7 +321,26 @@ abstract class Field implements FieldInterface
             'disabled' => $this->isDisabled(),
             'readonly' => $this->isReadOnly(),
             'class' => $this->getClass(),
+            'placeholder' => $this->getPlaceholder(),
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaceholder(): string
+    {
+        return $this->placeholder;
+    }
+
+    /**
+     * @param string $placeholder
+     * @return FieldInterface
+     */
+    public function setPlaceholder(string $placeholder): FieldInterface
+    {
+        $this->placeholder = $placeholder;
+        return $this;
     }
 
     /**

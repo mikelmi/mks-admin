@@ -361,7 +361,7 @@ $clear-selection-color: $dropdown-arrow-color !default;
     \*------------------------------------*/
 
     .select2-selection--single {
-        height: $input-height;
+        height: $input-height + 0.25rem;
         line-height: $line-height-base;
         padding: $input-padding-y ($input-padding-x + $caret-width-r*3) $input-padding-y $input-padding-x;
 
@@ -409,7 +409,7 @@ $clear-selection-color: $dropdown-arrow-color !default;
     \*------------------------------------*/
 
     .select2-selection--multiple {
-        min-height: $input-height;
+        min-height: $input-height + 0.25rem;
         padding: 0;
         height: auto;
 
