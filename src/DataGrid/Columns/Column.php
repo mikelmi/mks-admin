@@ -8,7 +8,9 @@
 namespace Mikelmi\MksAdmin\DataGrid\Columns;
 
 
-class Column
+use Mikelmi\MksAdmin\DataGrid\ColumnInterface;
+
+class Column implements ColumnInterface
 {
     /**
      * @var string
@@ -76,9 +78,9 @@ class Column
 
     /**
      * @param string $key
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setKey(string $key)
+    public function setKey(string $key): ColumnInterface
     {
         $this->key = $key;
 
@@ -95,9 +97,9 @@ class Column
 
     /**
      * @param string $title
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): ColumnInterface
     {
         $this->title = $title;
 
@@ -114,9 +116,9 @@ class Column
 
     /**
      * @param bool $sortable
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setSortable(bool $sortable)
+    public function setSortable(bool $sortable): ColumnInterface
     {
         $this->sortable = $sortable;
 
@@ -133,9 +135,9 @@ class Column
 
     /**
      * @param bool $searchable
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setSearchable(bool $searchable)
+    public function setSearchable(bool $searchable): ColumnInterface
     {
         $this->searchable = $searchable;
 
@@ -152,9 +154,9 @@ class Column
 
     /**
      * @param array $cellAttributes
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setCellAttributes(array $cellAttributes)
+    public function setCellAttributes(array $cellAttributes): ColumnInterface
     {
         $this->cellAttributes = $cellAttributes;
 
@@ -171,9 +173,9 @@ class Column
 
     /**
      * @param array $headAttributes
-     * @return $this
+     * @return ColumnInterface
      */
-    public function setHeadAttributes(array $headAttributes)
+    public function setHeadAttributes(array $headAttributes): ColumnInterface
     {
         $this->headAttributes = $headAttributes;
 
@@ -190,15 +192,18 @@ class Column
 
     /**
      * @param string $searchType
-     * @return Column
+     * @return ColumnInterface
      */
-    public function setSearchType(string $searchType): Column
+    public function setSearchType(string $searchType): ColumnInterface
     {
         $this->searchType = $searchType;
         return $this;
     }
 
-    public function renderHead()
+    /**
+     * @return string
+     */
+    public function renderHead(): string
     {
         $attr = [];
 
@@ -218,6 +223,9 @@ class Column
         return sprintf('<th%s>%s</th>', html_attr($attr), $this->title);
     }
 
+    /**
+     * @return string
+     */
     public function renderSearch(): string
     {
         $input = '';
@@ -236,11 +244,17 @@ class Column
         return sprintf('<th>%s</th>', $input);
     }
 
+    /**
+     * @return string
+     */
     protected function cell(): string
     {
         return '{{row.'. $this->key .'}}';
     }
 
+    /**
+     * @return string
+     */
     public function renderCell(): string
     {
         return sprintf('<td%s>%s</td>', html_attr($this->cellAttributes), $this->cell());

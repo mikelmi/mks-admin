@@ -8,9 +8,10 @@
 namespace Mikelmi\MksAdmin\DataGrid\Actions;
 
 
+use Mikelmi\MksAdmin\DataGrid\ActionInterface;
 use Mikelmi\MksAdmin\Form\Button;
 
-class Action extends Button
+class Action extends Button implements ActionInterface
 {
     protected $showTitle = false;
 

@@ -14,6 +14,9 @@ class GridButtonCreate extends GridButtonLink
 
     protected $btnType = 'primary';
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {

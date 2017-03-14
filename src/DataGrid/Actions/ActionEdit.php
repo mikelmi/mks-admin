@@ -14,6 +14,9 @@ class ActionEdit extends ActionLink
 
     protected $btnType = 'outline-primary';
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {

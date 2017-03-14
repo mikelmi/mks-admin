@@ -18,5 +18,14 @@ return [
     ],
     'scripts' => [],
     'styles' => [],
-    'appModules' => []
+    'appModules' => [],
+
+    'factory' => [
+        'classes' => [],
+    ],
+
+    'form' => [
+        'buttons' => [],
+        'layout' => 'row',
+    ]
 ];

@@ -12,6 +12,9 @@ class GridButtonLink extends GridButton
 {
     protected $showTitle = true;
 
+    /**
+     * @return array
+     */
     public function defaultAttributes(): array
     {
         return [
@@ -21,6 +24,9 @@ class GridButtonLink extends GridButton
         ];
     }
 
+    /**
+     * @return string
+     */
     public function render(): string
     {
         $attr = array_merge($this->defaultAttributes(), $this->getAttributes());

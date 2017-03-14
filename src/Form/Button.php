@@ -8,7 +8,7 @@
 namespace Mikelmi\MksAdmin\Form;
 
 
-class Button
+class Button implements ButtonInterface
 {
     /**
      * @var string
@@ -84,9 +84,9 @@ class Button
 
     /**
      * @param string $url
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setUrl(string $url)
+    public function setUrl(string $url): ButtonInterface
     {
         $this->url = $url;
 
@@ -103,9 +103,9 @@ class Button
 
     /**
      * @param string $title
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): ButtonInterface
     {
         $this->title = $title;
 
@@ -122,9 +122,9 @@ class Button
 
     /**
      * @param $btnType
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setBtnType($btnType)
+    public function setBtnType($btnType): ButtonInterface
     {
         $this->btnType = $btnType;
 
@@ -141,9 +141,9 @@ class Button
 
     /**
      * @param $icon
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setIcon($icon)
+    public function setIcon($icon): ButtonInterface
     {
         $this->icon = $icon;
 
@@ -160,9 +160,9 @@ class Button
 
     /**
      * @param array $attributes
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setAttributes(array $attributes)
+    public function setAttributes(array $attributes): ButtonInterface
     {
         $this->attributes = $attributes;
 
@@ -221,9 +221,9 @@ class Button
 
     /**
      * @param bool $showTitle
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setShowTitle(bool $showTitle)
+    public function setShowTitle(bool $showTitle): ButtonInterface
     {
         $this->showTitle = $showTitle;
 
@@ -240,9 +240,9 @@ class Button
 
     /**
      * @param string $onClick
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setOnClick(string $onClick)
+    public function setOnClick(string $onClick): ButtonInterface
     {
         $this->onClick = $onClick;
 
@@ -259,9 +259,9 @@ class Button
 
     /**
      * @param string $size
-     * @return $this
+     * @return ButtonInterface
      */
-    public function setSize(string $size)
+    public function setSize(string $size): ButtonInterface
     {
         $this->size = $size;
 
@@ -282,5 +282,15 @@ class Button
             $this->iconHtml(),
             $this->showTitle || !$this->getIcon() ? $this->getTitle() : ''
             );
+    }
+
+    /**
+     * @param string $key
+     * @param $value
+     * @return ButtonInterface
+     */
+    public function setAttribute(string $key, $value): ButtonInterface
+    {
+        $this->attributes[$key] = $value;
     }
 }

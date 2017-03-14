@@ -14,7 +14,10 @@ class ColumnSelect extends Column
 
     protected $headAttributes = ['class' => 'text-center'];
 
-    public function renderHead()
+    /**
+     * @return string
+     */
+    public function renderHead(): string
     {
         $attr = array_merge([
             'mst-select-all-rows' => 'grid.rows',
@@ -24,11 +27,17 @@ class ColumnSelect extends Column
         return sprintf('<th%s></th>', html_attr($attr));
     }
 
+    /**
+     * @return string
+     */
     public function renderSearch(): string
     {
         return '<th> </th>';
     }
 
+    /**
+     * @return string
+     */
     public function renderCell(): string
     {
         $attr = array_merge([

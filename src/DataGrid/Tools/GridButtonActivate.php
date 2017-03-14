@@ -14,6 +14,9 @@ class GridButtonActivate extends GridButtonUpdate
 
     protected $icon = 'check';
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {

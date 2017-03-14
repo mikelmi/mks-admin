@@ -137,7 +137,7 @@ class AdminModelForm extends AdminForm
      * @param string $name
      * @param null $label
      * @param null $type
-     * @return Field
+     * @return FieldInterface
      */
     public function addModelField(string $name, $label = null, $type = null) {
 
@@ -145,7 +145,7 @@ class AdminModelForm extends AdminForm
             $type = $this->castToType($name);
         }
 
-        $field = Field::make($type);
+        $field = FieldFactory::make($type);
         $field->setName($name);
         if ($label) {
             $field->setLabel($label);
@@ -164,7 +164,7 @@ class AdminModelForm extends AdminForm
         {
             if (is_array($field) && ($name = array_pull($field, 'name'))) {
                 $modelField = $this->addModelField($name, array_pull($field, 'label', ''), array_pull($field, 'type'));
-                $modelField->applySetters($field);
+                FieldFactory::applySetters($modelField, $field);
                 continue;
             }
 

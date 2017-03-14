@@ -41,6 +41,9 @@ class ActionDelete extends Action
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {
@@ -50,6 +53,9 @@ class ActionDelete extends Action
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
     public function getOnClick(): string
     {
         if ($this->onClick === null) {

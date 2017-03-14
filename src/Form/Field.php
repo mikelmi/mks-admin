@@ -8,7 +8,7 @@
 namespace Mikelmi\MksAdmin\Form;
 
 
-abstract class Field
+abstract class Field implements FieldInterface
 {
     /**
      * @var string
@@ -96,9 +96,9 @@ abstract class Field
 
     /**
      * @param string $name
-     * @return Field
+     * @return FieldInterface
      */
-    public function setName(string $name): Field
+    public function setName(string $name): FieldInterface
     {
         $this->name = $name;
 
@@ -119,9 +119,9 @@ abstract class Field
 
     /**
      * @param string $label
-     * @return Field
+     * @return FieldInterface
      */
-    public function setLabel(string $label): Field
+    public function setLabel(string $label): FieldInterface
     {
         $this->label = $label;
         return $this;
@@ -137,9 +137,9 @@ abstract class Field
 
     /**
      * @param bool $required
-     * @return Field
+     * @return FieldInterface
      */
-    public function setRequired(bool $required): Field
+    public function setRequired(bool $required): FieldInterface
     {
         $this->required = $required;
         return $this;
@@ -155,9 +155,9 @@ abstract class Field
 
     /**
      * @param bool $readOnly
-     * @return Field
+     * @return FieldInterface
      */
-    public function setReadOnly(bool $readOnly): Field
+    public function setReadOnly(bool $readOnly): FieldInterface
     {
         $this->readOnly = $readOnly;
         return $this;
@@ -173,9 +173,9 @@ abstract class Field
 
     /**
      * @param bool $disabled
-     * @return Field
+     * @return FieldInterface
      */
-    public function setDisabled(bool $disabled): Field
+    public function setDisabled(bool $disabled): FieldInterface
     {
         $this->disabled = $disabled;
         return $this;
@@ -191,9 +191,9 @@ abstract class Field
 
     /**
      * @param array $attributes
-     * @return Field
+     * @return FieldInterface
      */
-    public function setAttributes(array $attributes): Field
+    public function setAttributes(array $attributes): FieldInterface
     {
         $this->attributes = $attributes;
         return $this;
@@ -202,9 +202,9 @@ abstract class Field
     /**
      * @param string $key
      * @param null $value
-     * @return Field
+     * @return FieldInterface
      */
-    public function setAttribute(string $key, $value = null): Field
+    public function setAttribute(string $key, $value = null): FieldInterface
     {
         $this->attributes[$key] = $value;
         return $this;
@@ -220,9 +220,9 @@ abstract class Field
 
     /**
      * @param string $layout
-     * @return Field
+     * @return FieldInterface
      */
-    public function setLayout(string $layout): Field
+    public function setLayout(string $layout): FieldInterface
     {
         $this->layout = $layout;
         return $this;
@@ -238,9 +238,9 @@ abstract class Field
 
     /**
      * @param string $template
-     * @return Field
+     * @return FieldInterface
      */
-    public function setTemplate(string $template): Field
+    public function setTemplate(string $template): FieldInterface
     {
         $this->template = $template;
         return $this;
@@ -260,9 +260,9 @@ abstract class Field
 
     /**
      * @param string $id
-     * @return Field
+     * @return FieldInterface
      */
-    public function setId(string $id): Field
+    public function setId(string $id): FieldInterface
     {
         $this->id = $id;
         return $this;
@@ -278,9 +278,9 @@ abstract class Field
 
     /**
      * @param string $class
-     * @return Field
+     * @return FieldInterface
      */
-    public function setClass(string $class): Field
+    public function setClass(string $class): FieldInterface
     {
         $this->class = $class;
         return $this;
@@ -296,9 +296,9 @@ abstract class Field
 
     /**
      * @param mixed $value
-     * @return Field
+     * @return FieldInterface
      */
-    public function setValue($value): Field
+    public function setValue($value): FieldInterface
     {
         $this->value = $value;
         return $this;
@@ -334,52 +334,6 @@ abstract class Field
     }
 
     /**
-     * @param $type
-     * @param array $options
-     * @return Field
-     */
-    public static function make($type, array $options = [])
-    {
-        $class = config('admin.form.fields.' . $type);
-
-        if (!$class) {
-            $class = __NAMESPACE__ . '\\Field\\' . ucfirst($type);
-        }
-
-        if (!class_exists($class)) {
-            throw new \InvalidArgumentException('Class ' . $class . ' not found');
-        }
-
-        $field = new $class;
-        $field->applySetters($options);
-
-        return $field;
-    }
-
-    /**
-     * @param array $options
-     * @return $this
-     */
-    public function applySetters(array $options = [])
-    {
-        foreach ($options as $key => $value) {
-            if (!is_string($key)) {
-                continue;
-            }
-
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            } elseif (!is_array($value)) {
-                $this->setAttribute($key, $value);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @param $name
      * @return null
      */
@@ -393,7 +347,6 @@ abstract class Field
 
         return null;
     }
-
 
     /**
      * @return string

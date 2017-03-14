@@ -10,6 +10,9 @@ namespace Mikelmi\MksAdmin\DataGrid\Actions;
 
 class ActionLink extends Action
 {
+    /**
+     * @return array
+     */
     public function defaultAttributes(): array
     {
         return [
@@ -19,6 +22,9 @@ class ActionLink extends Action
         ];
     }
 
+    /**
+     * @return string
+     */
     public function render(): string
     {
         $attr = array_merge($this->defaultAttributes(), $this->getAttributes());

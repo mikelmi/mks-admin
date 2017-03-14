@@ -9,43 +9,31 @@ namespace Mikelmi\MksAdmin\DataGrid;
 
 
 use Mikelmi\MksAdmin\DataGrid\Tools\GridButton;
+use Mikelmi\MksAdmin\Form\ButtonFactory;
 
-class GridButtonFactory
+/**
+ * Class GridButtonFactory
+ * @package Mikelmi\MksAdmin\DataGrid
+ *
+ * @method static make(array $options): GridButtonInterface
+ */
+class GridButtonFactory extends ButtonFactory
 {
+    protected static $configKey = 'admin::datagrid.buttons';
+
     /**
-     * @param array $options
-     * @return GridButton
+     * @return string
      */
-    public static function make(array $options)
+    protected static function baseClass(): string
     {
-        $baseClass = GridButton::class;
+        return GridButton::class;
+    }
 
-        $type = array_pull($options, 'type');
-
-        if ($type) {
-            $class = config('admin::datagrid.buttons.'.$type, $baseClass . ucfirst($type));
-
-            if (!class_exists($class)) {
-                throw new \InvalidArgumentException('Class ' . $class . ' not found');
-            }
-        } else {
-            $class = $baseClass;
-        }
-
-        $button = new $class();
-
-        foreach ($options as $key => $value) {
-            if (!is_string($key)) {
-                continue;
-            }
-
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($button, $method)) {
-                $button->$method($value);
-            }
-        }
-
-        return $button;
+    /**
+     * @return string
+     */
+    protected static function classInterface(): string
+    {
+        return GridButtonInterface::class;
     }
 }

@@ -295,22 +295,22 @@ class AdminForm
     }
 
     /**
-     * @param Field|array $field
+     * @param FieldInterface|array $field
      * @param array $options
      * @return AdminForm
      */
     public function addField($field, array $options = []): AdminForm
     {
-        if (!$field instanceof Field) {
+        if (!$field instanceof FieldInterface) {
             if (!is_array($field)) {
                 throw new \InvalidArgumentException("$field should be an array or instance of Field");
             }
 
             $type = array_pull($field, 'type');
-            $this->fields->push(Field::make($type, $options));
+            $this->fields->push(FieldFactory::make($type, $options));
         } else {
             if ($options) {
-                $field->applySetters($options);
+                FieldFactory::applySetters($field, $options);
             }
 
             $this->fields->push($field);

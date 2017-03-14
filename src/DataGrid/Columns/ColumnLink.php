@@ -33,6 +33,9 @@ class ColumnLink extends Column
         return $this;
     }
 
+    /**
+     * @return string
+     */
     protected function cell(): string
     {
         return sprintf('<a href="%s">{{row.%s}}</a>', $this->url, $this->key);

@@ -133,7 +133,7 @@ class DataGrid
     {
         foreach ($tools as $tool)
         {
-            if ($tool instanceof GridButton) {
+            if ($tool instanceof GridButtonInterface) {
                 $this->tools->push($tool);
             } elseif(is_array($tool)) {
                 $this->tools->push(GridButtonFactory::make($tool));
@@ -159,7 +159,7 @@ class DataGrid
     {
         foreach ($links as $link)
         {
-            if ($link instanceof GridButton) {
+            if ($link instanceof GridButtonInterface) {
                 $this->links->push($link);
             } elseif(is_array($link)) {
                 $this->links->push(GridButtonFactory::make($link));
@@ -382,10 +382,10 @@ class DataGrid
     }
 
     /**
-     * @param GridButton $button
+     * @param GridButtonInterface $button
      * @return $this
      */
-    public function addLinkButton(GridButton $button)
+    public function addLinkButton(GridButtonInterface $button)
     {
         $this->links->push($button);
 

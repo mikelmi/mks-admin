@@ -83,8 +83,9 @@ class ColumnImage extends Column
         return $this;
     }
 
-
-
+    /**
+     * @return string
+     */
     protected function cell(): string
     {
         $styles = '';

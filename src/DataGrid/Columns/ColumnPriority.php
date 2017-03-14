@@ -19,9 +19,9 @@ class ColumnPriority extends Column
     protected $url;
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getUrl()
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -30,12 +30,15 @@ class ColumnPriority extends Column
      * @param mixed $url
      * @return ColumnPriority
      */
-    public function setUrl($url)
+    public function setUrl($url): ColumnPriority
     {
         $this->url = $url;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     protected function cell(): string
     {
         return sprintf(

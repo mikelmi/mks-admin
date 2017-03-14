@@ -8,9 +8,10 @@
 namespace Mikelmi\MksAdmin\DataGrid\Tools;
 
 
+use Mikelmi\MksAdmin\DataGrid\GridButtonInterface;
 use Mikelmi\MksAdmin\Form\Button;
 
-class GridButton extends Button
+class GridButton extends Button implements GridButtonInterface
 {
     protected $showTitle = false;
 

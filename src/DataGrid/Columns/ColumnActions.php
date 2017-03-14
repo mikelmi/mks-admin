@@ -45,9 +45,9 @@ class ColumnActions extends Column
 
     /**
      * @param array $actions
-     * @return $this
+     * @return ColumnActions
      */
-    public function setActions(array $actions)
+    public function setActions(array $actions): ColumnActions
     {
         foreach ($actions as $action)
         {
@@ -61,7 +61,10 @@ class ColumnActions extends Column
         return $this;
     }
 
-    public function renderHead()
+    /**
+     * @return string
+     */
+    public function renderHead(): string
     {
         $attr = [
             'class' => 'st-actions'
@@ -70,11 +73,17 @@ class ColumnActions extends Column
         return sprintf('<th%s> </th>', html_attr($attr));
     }
 
+    /**
+     * @return string
+     */
     public function renderSearch(): string
     {
         return '<th> </th>';
     }
 
+    /**
+     * @return string
+     */
     protected function cell(): string
     {
         $result = '<div class="btn-group btn-group-sm">';

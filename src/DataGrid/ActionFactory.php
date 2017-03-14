@@ -9,43 +9,29 @@ namespace Mikelmi\MksAdmin\DataGrid;
 
 
 use Mikelmi\MksAdmin\DataGrid\Actions\Action;
+use Mikelmi\MksAdmin\Services\ClassFactory;
 
-class ActionFactory
+/**
+ * Class ActionFactory
+ * @package Mikelmi\MksAdmin\DataGrid
+ *
+ * @method static make(array $options): ActionInterface
+ */
+class ActionFactory extends ClassFactory
 {
     /**
-     * @param array $options
-     * @return Action
+     * @return string
      */
-    public static function make(array $options)
+    protected static function baseClass(): string
     {
-        $baseClass = Action::class;
+        return Action::class;
+    }
 
-        $type = array_pull($options, 'type');
-
-        if ($type) {
-            $class = config('admin::datagrid.actions.'.$type, $baseClass . ucfirst($type));
-
-            if (!class_exists($class)) {
-                throw new \InvalidArgumentException('Class ' . $class . ' not found');
-            }
-        } else {
-            $class = $baseClass;
-        }
-
-        $action = new $class();
-
-        foreach ($options as $key => $value) {
-            if (!is_string($key)) {
-                continue;
-            }
-
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($action, $method)) {
-                $action->$method($value);
-            }
-        }
-
-        return $action;
+    /**
+     * @return string
+     */
+    protected static function classInterface(): string
+    {
+        return ActionInterface::class;
     }
 }

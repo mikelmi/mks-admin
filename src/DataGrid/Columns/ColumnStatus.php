@@ -34,9 +34,9 @@ class ColumnStatus extends Column
 
     /**
      * @param array $options
-     * @return $this
+     * @return ColumnStatus
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): ColumnStatus
     {
         $this->options = $options;
 
@@ -68,9 +68,9 @@ class ColumnStatus extends Column
 
     /**
      * @param string $url
-     * @return $this
+     * @return ColumnStatus
      */
-    public function setUrl(string $url)
+    public function setUrl(string $url): ColumnStatus
     {
         $this->url = $url;
 
@@ -87,9 +87,9 @@ class ColumnStatus extends Column
 
     /**
      * @param string $actionTitle
-     * @return $this
+     * @return ColumnStatus
      */
-    public function setActionTitle(string $actionTitle)
+    public function setActionTitle(string $actionTitle): ColumnStatus
     {
         $this->actionTitle = $actionTitle;
 
@@ -114,6 +114,9 @@ class ColumnStatus extends Column
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function renderSearch(): string
     {
         $input = '';
@@ -138,6 +141,9 @@ class ColumnStatus extends Column
         return sprintf('<th>%s</th>', $input);
     }
 
+    /**
+     * @return string
+     */
     public function cell(): string
     {
         $icon = sprintf('<i class="fa" ng-class="{\'fa-check\':row.%s,\'fa-minus\':!row.%1$s}"></i>', $this->key);

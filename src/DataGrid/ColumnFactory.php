@@ -9,43 +9,28 @@ namespace Mikelmi\MksAdmin\DataGrid;
 
 
 use Mikelmi\MksAdmin\DataGrid\Columns\Column;
+use Mikelmi\MksAdmin\Services\ClassFactory;
 
-class ColumnFactory
+/**
+ * Class ColumnFactory
+ * @package Mikelmi\MksAdmin\DataGrid
+ *
+ * @method static make(array $options): ColumnInterface
+ */
+class ColumnFactory extends ClassFactory
 {
-    /**
-     * @param array $options
-     * @return Column
-     */
-    public static function make(array $options)
+    protected static function baseClass(): string
     {
-        $baseClass = Column::class;
+        return Column::class;
+    }
 
-        $type = array_pull($options, 'type');
+    protected static function classInterface(): string
+    {
+        return ColumnInterface::class;
+    }
 
-        if ($type) {
-            $class = config('admin::datagrid.columns.'.$type, $baseClass . ucfirst($type));
-
-            if (!class_exists($class)) {
-                throw new \InvalidArgumentException('Class ' . $class . ' not found');
-            }
-        } else {
-            $class = $baseClass;
-        }
-
-        $column = new $class(array_pull($options, 'key', ''));
-
-        foreach ($options as $key => $value) {
-            if (!is_string($key)) {
-                continue;
-            }
-
-            $method = 'set' . ucfirst($key);
-
-            if (method_exists($column, $method)) {
-                $column->$method($value);
-            }
-        }
-
-        return $column;
+    protected static function instance(string $class, array $options)
+    {
+        return new $class(array_pull($options, 'key', ''));
     }
 }

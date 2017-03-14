@@ -10,6 +10,9 @@ namespace Mikelmi\MksAdmin\DataGrid\Tools;
 
 class GridButtonUpdate extends GridButton
 {
+    /**
+     * @return string
+     */
     public function getOnClick(): string
     {
         if ($this->onClick === null) {

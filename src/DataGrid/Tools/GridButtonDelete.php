@@ -38,15 +38,18 @@ class GridButtonDelete extends GridButton
 
     /**
      * @param string $confirm
-     * @return $this
+     * @return GridButtonDelete
      */
-    public function setConfirm(string $confirm)
+    public function setConfirm(string $confirm): GridButtonDelete
     {
         $this->confirm = $confirm;
 
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {
@@ -56,6 +59,9 @@ class GridButtonDelete extends GridButton
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
     public function getOnClick(): string
     {
         if ($this->onClick === null) {

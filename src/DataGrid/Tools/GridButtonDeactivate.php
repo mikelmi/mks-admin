@@ -14,6 +14,9 @@ class GridButtonDeactivate extends GridButtonUpdate
 
     protected $icon = 'minus';
 
+    /**
+     * @return null|string
+     */
     public function getTitle()
     {
         if ($this->title === null) {
