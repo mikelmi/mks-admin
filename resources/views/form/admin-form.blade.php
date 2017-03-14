@@ -52,12 +52,36 @@
 
 @section('content')
     <div class="card shd">
-
-        {!! $form->open(['class' => 'card-block p-a-3']) !!}
+        {!! $form->open() !!}
         {{ csrf_field() }}
-        @foreach($form->getFields() as $field)
-            {!! $field->render() !!}
-        @endforeach
+
+        @if ($form->hasGroups())
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                    @foreach($form->getGroups() as $group)
+                        {!! $group->navLink() !!}
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <div class="card-block p-a-3">
+            @foreach($form->getFields() as $field)
+                {!! $field->render() !!}
+            @endforeach
+
+            @if ($form->hasGroups())
+                <div class="tab-content">
+                    @foreach($form->getGroups() as $group)
+                        <div{!! html_attr($group->paneAttributes()) !!}>
+                            @foreach($group->getFields() as $field)
+                                {!! $field->render() !!}
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
         {!! $form->close() !!}
 
     </div>

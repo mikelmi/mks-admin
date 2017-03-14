@@ -54,14 +54,19 @@ class AdminForm
     private $breadcrumbs;
 
     /**
-     * @var Collection
-     */
-    private $fields;
-
-    /**
      * @var array
      */
     private $options = [];
+
+    /**
+     * @var Collection
+     */
+    protected $groups;
+
+    /**
+     * @var FormGroup
+     */
+    protected $mainGroup;
 
     /**
      * AdminForm constructor.
@@ -69,7 +74,9 @@ class AdminForm
     public function __construct()
     {
         $this->breadcrumbs = collect();
-        $this->fields = collect();
+        $this->groups = collect();
+
+        $this->mainGroup = new FormGroup('-default-');
     }
 
     /**
@@ -237,7 +244,7 @@ class AdminForm
      */
     public function getFields(): Collection
     {
-        return $this->fields;
+        return $this->mainGroup->getFields();
     }
 
     /**
@@ -289,8 +296,6 @@ class AdminForm
      */
     public function close(): string
     {
-        $this->fields = collect();
-
         return '</form>';
     }
 
@@ -301,20 +306,13 @@ class AdminForm
      */
     public function addField($field, array $options = []): AdminForm
     {
-        if (!$field instanceof FieldInterface) {
-            if (!is_array($field)) {
-                throw new \InvalidArgumentException("$field should be an array or instance of Field");
-            }
-
-            $type = array_pull($field, 'type');
-            $this->fields->push(FieldFactory::make($type, $options));
+        if (is_array($field)) {
+            $group = array_get(array_merge($field, $options), 'group');
         } else {
-            if ($options) {
-                FieldFactory::applySetters($field, $options);
-            }
-
-            $this->fields->push($field);
+            $group = array_pull($options, 'group');
         }
+
+        $this->group($group)->addField($field, $options);
 
         return $this;
     }
@@ -394,5 +392,110 @@ class AdminForm
     public static function setLayout(string $layout)
     {
         self::$layout = $layout;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getGroups(): Collection
+    {
+        static $setActiveGroup;
+
+        if (!isset($setActiveGroup)) {
+            if ($this->hasGroups()) {
+                $activate = true;
+
+                foreach ($this->groups as $group) {
+                    if ($group->isActive()) {
+                        $activate = false;
+                        break;
+                    }
+                }
+
+                if ($activate) {
+                    $this->groups->first()->setActive(true);
+                }
+            }
+            $setActiveGroup = true;
+        }
+
+        return $this->groups;
+    }
+
+    /**
+     * @param array $groups
+     * @return AdminForm
+     */
+    public function setGroups(array $groups): AdminForm
+    {
+        foreach ($groups as $group) {
+            $this->addGroup($group);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array|string|FormGroup $data
+     * @param array $options
+     * @return AdminForm
+     */
+    public function addGroup($data, array $options = []): AdminForm
+    {
+        $group = FormGroupFactory::make($data, $options, false);
+
+        if (is_array($data)) {
+            $fields = array_get(array_merge($data, $options), 'fields');
+        } else {
+            $fields = array_get($options, 'fields');
+        }
+
+        if ($fields) {
+            $this->setGroupFields($group, $fields);
+        }
+
+        $this->groups->put($group->getId(), $group);
+
+        return $this;
+    }
+
+    /**
+     * @param FormGroup $group
+     * @param array $fields
+     * @return $this
+     */
+    protected function setGroupFields(FormGroup $group, array $fields = [])
+    {
+        foreach ($fields as $field) {
+            $this->addField($field);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function hasGroup($id): bool
+    {
+        return $this->groups->has($id);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasGroups(): bool
+    {
+        return $this->groups->isNotEmpty();
+    }
+
+    /**
+     * @param $id
+     * @return FormGroup
+     */
+    public function group($id): FormGroup
+    {
+        return $this->groups->get($id, $this->mainGroup);
     }
 }

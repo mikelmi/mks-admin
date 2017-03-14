@@ -58,7 +58,11 @@ class AdminModelForm extends AdminForm
 
         $idKey = $this->model->getKeyName();
         if ($idKey) {
-            $this->casts['id'] = 'staticText';
+            $this->casts[$idKey] = 'staticText';
+        }
+
+        if ($this->model->getKey()) {
+            $this->setMode(self::MODE_EDIT);
         }
 
         return $this;
@@ -133,14 +137,8 @@ class AdminModelForm extends AdminForm
         }
     }
 
-    /**
-     * @param string $name
-     * @param null $label
-     * @param null $type
-     * @return FieldInterface
-     */
-    public function addModelField(string $name, $label = null, $type = null) {
-
+    protected function makeModelField(string $name, $label = null, $type = null): FieldInterface
+    {
         if (!$type) {
             $type = $this->castToType($name);
         }
@@ -153,6 +151,18 @@ class AdminModelForm extends AdminForm
 
         $field->setValue($this->model->getAttribute($name));
 
+        return $field;
+    }
+
+    /**
+     * @param string $name
+     * @param null $label
+     * @param null $type
+     * @return FieldInterface
+     */
+    public function addModelField(string $name, $label = null, $type = null): FieldInterface
+    {
+        $field = $this->makeModelField($name, $label, $type);
         $this->addField($field);
 
         return $field;
@@ -169,6 +179,23 @@ class AdminModelForm extends AdminForm
             }
 
             $this->addField($field);
+        }
+
+        return $this;
+    }
+
+    protected function setGroupFields(FormGroup $group, array $fields = [])
+    {
+        foreach($fields as $field)
+        {
+            if (is_array($field) && ($name = array_pull($field, 'name'))) {
+                $modelField = $this->makeModelField($name, array_pull($field, 'label', ''), array_pull($field, 'type'));
+                FieldFactory::applySetters($modelField, $field);
+                $group->addField($modelField);
+                continue;
+            }
+
+            $group->addField($field);
         }
 
         return $this;
