@@ -94,9 +94,8 @@
   -webkit-appearance: none;
   appearance: none;
   cursor: pointer;
-  margin-top: 6px;
   margin-right: 4px;
-  vertical-align: top;
+  vertical-align: middle;
   position: relative !important;
   outline: none;
 }
@@ -248,6 +247,10 @@ input[type=checkbox].form-check-input {
         height: auto;
       }
     }
+  }
+
+  .select2-selection__clear {
+    margin-right: 2rem;
   }
 }
 

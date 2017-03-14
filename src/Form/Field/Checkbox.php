@@ -52,10 +52,16 @@ class Checkbox extends Text
 
     public function render(): string
     {
-        return '<div class="form-check">
-          <label class="form-check-label">
-            ' . $this->renderInput() . ' ' . $this->getLabel() . '
-          </label>
-        </div>';
+        $template = $this->template;
+
+        if (!$template) {
+            $template = 'admin::form.field.checkbox-' . ($this->getLayout() ?: 'default');
+        }
+
+        if (!view()->exists($template)) {
+            return parent::render();
+        }
+
+        return view($template, ['field' => $this]);
     }
 }
