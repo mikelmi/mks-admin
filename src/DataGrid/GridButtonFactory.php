@@ -19,7 +19,7 @@ use Mikelmi\MksAdmin\Form\ButtonFactory;
  */
 class GridButtonFactory extends ButtonFactory
 {
-    protected static $configKey = 'admin::datagrid.buttons';
+    protected static $configKey = 'admin.datagrid.buttons';
 
     /**
      * @return string

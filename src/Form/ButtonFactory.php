@@ -18,7 +18,7 @@ use Mikelmi\MksAdmin\Services\ClassFactory;
  */
 class ButtonFactory extends ClassFactory
 {
-    protected static $configKey = 'admin::form.buttons';
+    protected static $configKey = 'admin.form.buttons';
 
     /**
      * @return string

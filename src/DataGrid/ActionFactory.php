@@ -19,6 +19,8 @@ use Mikelmi\MksAdmin\Services\ClassFactory;
  */
 class ActionFactory extends ClassFactory
 {
+    protected static $configKey = 'admin.datagrid.actions';
+
     /**
      * @return string
      */

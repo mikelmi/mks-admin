@@ -14,7 +14,7 @@ abstract class ClassFactory
 
     abstract protected static function classInterface(): string;
 
-    protected static $configKey = 'admin::factory.classes';
+    protected static $configKey = 'admin.factory.classes';
 
     /**
      * @param array $options

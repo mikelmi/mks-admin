@@ -382,7 +382,7 @@ class AdminForm
     public static function getLayout(): string
     {
         if (!isset(self::$layout)) {
-            self::$layout = config('admin::form.layout', 'default');
+            self::$layout = config('admin.form.layout', 'default');
         }
 
         return self::$layout;
