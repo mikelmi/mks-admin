@@ -22,6 +22,10 @@
       }
     }
   }
+
+  .form-group & {
+    width: auto !important;
+  }
 }
 
 .bg-white {

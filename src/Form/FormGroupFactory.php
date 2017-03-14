@@ -50,7 +50,7 @@ class FormGroupFactory
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($group, $method)) {
+            if (is_callable([$group, $method])) {
                 $group->$method($value);
             }
         }

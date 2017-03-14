@@ -365,7 +365,7 @@ abstract class Field implements FieldInterface
     {
         $method = 'get' . ucfirst($name);
 
-        if (method_exists($this, $method)) {
+        if (is_callable([$this, $method])) {
             return $this->$method();
         }
 

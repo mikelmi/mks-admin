@@ -50,7 +50,7 @@ abstract class ClassFactory
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($instance, $method)) {
+            if (is_callable([$instance, $method])) {
                 $instance->$method($value);
             }
         }

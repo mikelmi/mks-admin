@@ -366,7 +366,7 @@ class AdminForm
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($this, $method)) {
+            if (is_callable([$this, $method])) {
                 $this->$method($value);
             }
         }

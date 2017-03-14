@@ -56,7 +56,7 @@ trait DataGridRequests
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($dataGrid, $method)) {
+            if (is_callable([$dataGrid, $method])) {
                 $dataGrid->$method($option);
             }
         }

@@ -63,7 +63,7 @@ class FieldFactory
 
             $method = 'set' . ucfirst($key);
 
-            if (method_exists($field, $method)) {
+            if (is_callable([$field, $method])) {
                 $field->$method($value);
             } elseif (!is_array($value)) {
                 $field->setAttribute($key, $value);
