@@ -147,4 +147,15 @@ interface FieldInterface
      * @return string
      */
     public function renderInput(): string;
+
+    /**
+     * @return string
+     */
+    public function getNameSce(): string;
+
+    /**
+     * @param string $nameSce
+     * @return FieldInterface
+     */
+    public function setNameSce(string $nameSce): FieldInterface;
 }

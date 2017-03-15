@@ -71,6 +71,11 @@ abstract class Field implements FieldInterface
     protected $placeholder = '';
 
     /**
+     * @var string
+     */
+    protected $nameSce;
+
+    /**
      * Field constructor.
      * @param string|null $name
      * @param mixed|null $value
@@ -108,7 +113,7 @@ abstract class Field implements FieldInterface
         $this->name = $name;
 
         if ($name && !$this->label) {
-            $this->label = ucwords($this->name);
+            $this->label = ucwords($this->getNameSce());
         }
 
         return $this;
@@ -370,6 +375,28 @@ abstract class Field implements FieldInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNameSce(): string
+    {
+        if (is_null($this->nameSce)) {
+            $this->nameSce = preg_replace('/\[.*\]$/', '', $this->getName());
+        }
+
+        return $this->nameSce;
+    }
+
+    /**
+     * @param string $nameSce
+     * @return FieldInterface
+     */
+    public function setNameSce(string $nameSce): FieldInterface
+    {
+        $this->nameSce = $nameSce;
+        return $this;
     }
 
     /**
