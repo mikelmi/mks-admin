@@ -33,7 +33,7 @@ class ActionLink extends Action
             '<a %s>%s %s</a>',
             html_attr($attr),
             $this->iconHtml(),
-            $this->showTitle || !$this->getIcon() ? $this->getTitle() : ''
+            $this->showTitle || !$this->getIcon() ? e($this->getTitle()) : ''
         );
     }
 }

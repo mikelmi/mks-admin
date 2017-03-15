@@ -46,7 +46,7 @@ class ButtonLink extends Button
             '<a %s>%s %s</a>',
             html_attr($attr),
             $this->iconHtml(),
-            $title
+            e($title)
         );
     }
 }

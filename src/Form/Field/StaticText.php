@@ -17,6 +17,6 @@ class StaticText extends Field
      */
     public function renderInput(): string
     {
-        return '<p class="form-control-static">'.$this->value.'</p>';
+        return '<p class="form-control-static">'.e($this->value).'</p>';
     }
 }

@@ -130,7 +130,7 @@ class Select extends Field
     protected function renderOption($value, $option): string
     {
         if (is_array($option)) {
-            $result = '<optgroup label="'.$value.'">';
+            $result = '<optgroup label="' . e($value) . '">';
             foreach ($option as $key => $opt) {
                 $result .= $this->renderOption($key, $opt);
             }
@@ -148,7 +148,7 @@ class Select extends Field
             $attr['disabled'] = true;
         }
 
-        return '<option ' . html_attr($attr) . '>' . $option . '</option>';
+        return '<option ' . html_attr($attr) . '>' . e($option) . '</option>';
     }
 
     /**

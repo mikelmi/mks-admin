@@ -220,7 +220,7 @@ class Column implements ColumnInterface
             $attr['class'] = $class . ' ' . array_get($attr, 'class');
         }
 
-        return sprintf('<th%s>%s</th>', html_attr($attr), $this->title);
+        return sprintf('<th%s>%s</th>', html_attr($attr), e($this->title));
     }
 
     /**

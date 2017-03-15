@@ -132,7 +132,7 @@ class ColumnStatus extends Column
             $input .= '<option value=""></option>';
 
             foreach($this->getOptions() as $key => $label) {
-                $input .= '<option value="' . $key . '">' . $label . '</option>';
+                $input .= '<option value="' . e($key) . '">' . e($label) . '</option>';
             }
 
             $input .= '</select>';

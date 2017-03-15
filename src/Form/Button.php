@@ -280,7 +280,7 @@ class Button implements ButtonInterface
             '<button %s>%s %s</button>',
             html_attr($attr),
             $this->iconHtml(),
-            $this->showTitle || !$this->getIcon() ? $this->getTitle() : ''
+            $this->showTitle || !$this->getIcon() ? e($this->getTitle()) : ''
             );
     }
 
