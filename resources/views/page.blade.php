@@ -1,7 +1,7 @@
 <div @yield('controller')>
 
     <header class="page-header">
-        <nav class="navbar fixed-top navbar-light bg-light d-flex align-content-stretch flex-wrap flex-sm-row">
+        <nav class="navbar fixed-top navbar-light bg-light d-flex align-content-stretch flex-wrap flex-sm-row shd-bottom">
             @section('header')
                 <span class="navbar-brand">@yield('title')</span>
                 <span class="navbar-text text-muted mr-auto">@yield('sub-title')</span>

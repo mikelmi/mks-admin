@@ -32,5 +32,5 @@ return [
     ],
 
     'materialized' => false,
-    'sidebar-class' => 'sidebar-light', //or sidebar-inverse
+    'sidebar_inverse' => false,
 ];

@@ -6,7 +6,6 @@
     left: $left-width;
     border-bottom: 1px solid $card-border-color;
     @include trans-width();
-    @include bottom-shadow();
   }
 
   .left-closed & {

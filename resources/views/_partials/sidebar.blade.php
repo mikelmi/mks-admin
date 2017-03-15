@@ -1,4 +1,6 @@
-<aside id="sidebar" class="{{config('admin::sidebar_class', 'sidebar-light')}}">
+<aside id="sidebar" class="shd-right"
+       ng-init="sidebarInverse={{config('admin.sidebar_inverse') ? 1:0}}"
+       ng-class="{'sidebar-inverse': sidebarInverse}">
     <div class="sidebar-wrapper">
 
         <div class="caption">
@@ -59,6 +61,9 @@
                     <i class="fa fa-user-circle"></i>
                 </a>
             @endif
+            <a href="javascript:void(0)" class="lc-hide" title="" data-toggle="tooltip" ng-click="sidebarInverse=!sidebarInverse">
+                <i class="fa" ng-class="{'fa-toggle-on': !sidebarInverse, 'fa-toggle-off': sidebarInverse}"></i>
+            </a>
             <a class="pull-right" href="{{route('admin.logout')}}">
                 <i class="fa fa-power-off"></i>
                 <span class="lc-hide inline">{{trans('admin::auth.Logout')}}</span>

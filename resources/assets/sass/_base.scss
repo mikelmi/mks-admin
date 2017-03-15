@@ -42,6 +42,14 @@ $bg-light: $gray-lightest;
   }
 }
 
+.shd-right {
+  @include right-shadow();
+}
+
+.shd-bottom {
+  @include  bottom-shadow();
+}
+
 .alert {
   font-size: 0.8rem;
 }
