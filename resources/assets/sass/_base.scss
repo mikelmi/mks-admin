@@ -1,5 +1,9 @@
 @import "vars";
 
+body {
+  background-image: url(../img/bg2.jpg);
+}
+
 .font-sm {
   font-size: 14px;
 }
@@ -7,6 +11,8 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../../../node_modules/tether/src/css/tether";
 @import "../../../node_modules/font-awesome/scss/font-awesome";
+
+$bg-light: $gray-lightest;
 
 @import "mixins";
 
@@ -26,10 +32,6 @@
   .form-group & {
     width: auto !important;
   }
-}
-
-.bg-white {
-  background-color: #FFFFFF;
 }
 
 .shd {
@@ -75,7 +77,7 @@ label.required {
 }
 
 .bg-light {
-  background-color: #f7f7f7;
+  background-color: $bg-light;
 }
 
 .btn {

@@ -3,12 +3,7 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
 
 @mixin sidebar-link() {
   a {
-    color: $brand-light;
     text-decoration: none;
-
-    &:hover {
-      color: #FFFFFF;
-    }
 
     &:focus {
       outline: none;
@@ -16,19 +11,40 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
   }
 }
 
+@mixin sidebar-link-inverse($darken: false) {
+  a {
+    @if $darken {
+      color: darken($brand-light, $darken);
+    }
+    @else {
+      color: $brand-light;
+    }
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+}
+
+
 #sidebar {
   position: fixed;
   left: 0;
   top: 0;
   width: $left-width;
-  background: $brand-primary;
-  color: #FFFFFF;
   height: 100%;
   overflow-y: auto;
   @include trans-width();
 
   .left-closed & {
     width: $left-width-sm;
+  }
+
+  background: $gray-lightest;
+
+  &.sidebar-inverse {
+    background: $brand-primary;
+    color: #FFFFFF;
   }
 }
 
@@ -39,7 +55,7 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
   .caption {
     height: $sidebar-caption-height;
     line-height: $sidebar-caption-height;
-    background-color: $brand-primary-dark;
+    background-color: $gray-lighter;
     position: fixed;
     top: 0;
     left: 0;
@@ -62,7 +78,7 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
         padding: 0 15px;
 
         &:hover {
-          background-color: $brand-primary;
+          background-color: $gray-lightest;
         }
 
         .left-closed & {
@@ -86,20 +102,20 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
     bottom: 0;
     left: 0;
     width: $left-width;
-    background-color: $brand-primary-dark;
+    background-color: $gray-lighter;
     height: $sidebar-footer-height;
     line-height: $sidebar-footer-height;
     @include trans-width();
 
     > a, > .dropup > a {
       padding: 0 15px;
-      color: $brand-light;
+      //color: $brand-light;
       text-decoration: none;
       outline: none;
       display: inline-block;
 
       &:hover {
-        background-color: $brand-primary;
+        background-color: $gray-lighter;
       }
 
       .left-closed & {
@@ -118,6 +134,12 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
   .sidebar-menu {
     padding-top: $sidebar-caption-height;
     padding-bottom: $sidebar-footer-height;
+
+    .font-sm & {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+
     @include sidebar-link();
 
     >li {
@@ -126,11 +148,11 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
         padding: 12px 5px 12px 15px;
         display: block;
         border-top: 1px solid transparent;
-        border-bottom: 1px solid $brand-primary-light;
+        border-bottom: 1px solid $gray-lighter;
 
         &:hover {
           text-decoration: none;
-          background-color: $brand-primary-light;
+          background-color: $gray-lighter;
         }
 
         .expand {
@@ -138,7 +160,7 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
           cursor: pointer;
 
           &:hover {
-            background-color: $brand-primary-lighten;
+            background-color: darken($gray-lighter, 5%);
           }
 
           .left-closed & {
@@ -149,18 +171,32 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
 
       >ul {
         display: none;
-        background-color: $brand-primary-lighten;
+        padding: 0;
+        background-color: lighten($gray-lighter, 2%);
 
         a:hover, li.active > a {
           text-decoration: underline;
+          color: $link-hover-color;
+        }
+
+        > li {
+          list-style-type: none;
+          > a {
+            display: block;
+            padding: 10px 5px 10px 30px;
+            text-decoration: none !important;
+
+            &:hover {
+              background-color: $gray-lighter;
+            }
+          }
         }
       }
 
       &.active {
-
         >a {
           text-decoration: none;
-          background-color: $brand-primary-light;
+          background-color: $gray-lighter;
         }
       }
 
@@ -175,9 +211,86 @@ $sidebar-footer-height: $sidebar-caption-height - 10px;
         }
 
         > a {
-          background-color: $brand-primary-lighten;
+          background-color: lighten($gray-lighter, 1%);
           .expand::before {
             content: "\f107";
+          }
+        }
+      }
+    }
+  }
+
+  .sidebar-inverse & {
+    .caption {
+      background-color: darken($brand-primary, 7%);
+
+      @include sidebar-link-inverse(10%);
+
+      .tools > a {
+        &:hover {
+          background-color: $brand-primary;
+        }
+      }
+    }
+
+    .sidebar-footer {
+      background-color: darken($brand-primary, 7%);
+
+      > a, > .dropup > a {
+        color: darken($brand-light, 10%);
+
+        &:hover {
+          background-color: $brand-primary;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .sidebar-menu {
+      @include sidebar-link-inverse();
+
+      >li {
+
+        >a {
+          color: #ffffff;
+          border-bottom-color: darken($brand-primary, 4%);
+
+          &:hover {
+            background-color: darken($brand-primary, 3%);
+          }
+
+          .expand {
+            &:hover {
+              background-color: darken($brand-primary, 7%);
+            }
+          }
+        }
+
+        >ul {
+          background-color: darken($brand-primary, 2%);
+          a:hover, li.active > a {
+            text-decoration: underline;
+            color: #ffffff;
+          }
+          > li {
+            > a {
+              &:hover {
+                background-color: darken($brand-primary, 4%);
+              }
+            }
+          }
+        }
+
+        &.active {
+          >a {
+            background-color: darken($brand-primary, 4%);
+          }
+        }
+
+        &.expanded {
+
+          > a {
+            background-color: darken($brand-primary, 2%);
           }
         }
       }

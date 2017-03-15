@@ -1,4 +1,4 @@
-<aside id="sidebar">
+<aside id="sidebar" class="{{config('admin::sidebar_class', 'sidebar-light')}}">
     <div class="sidebar-wrapper">
 
         <div class="caption">
@@ -17,19 +17,19 @@
                     <a ng-if="item.url" href="{{ item.url }}">
                         <i ng-if="item.icon" class="fa fa-{{ item.icon }}" title="{{ item.title }}"></i>
                         <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{{ item.title }}">{{ item.firstChar }}</div>
-                        <span class="lc-hide">{{ item.title }}</span>
+                        <span class="lc-hide">&nbsp;{{ item.title }}</span>
                         <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide" ng-click="menu.toggle(item, $event)"></i>
                     </a>
                     <a ng-if="!item.url && item.children" href="{{ item.url }}" ng-click="menu.toggle(item, $event)">
                         <i ng-if="item.icon" class="fa fa-{{ item.icon }}" title="{{ item.title }}"></i>
                         <div ng-if="!item.icon && item.firstChar" class="menu-icon lc-show" title="{{ item.title }}">{{ item.firstChar }}</div>
-                        <span class="lc-hide">{{ item.title }}</span>
+                        <span class="lc-hide">&nbsp;{{ item.title }}</span>
                         <i ng-if="item.children" class="expand pull-right fa fa-angle-right lc-hide"></i>
                     </a>
                     <ul ng-if="item.children">
                         <li ng-repeat="subItem in item.children" ng-class="{'active': app.isCurrentPath(subItem.hash)}">
                             <a href="{{ subItem.url }}">
-                                <i ng-if="subItem.icon" class="fa fa-{{ subItem.icon }}"></i>
+                                <i class="fa fa-{{ subItem.icon || 'angle-right' }}"></i> &nbsp;
                                 <span>{{ subItem.title }}</span>
                             </a>
                         </li>
@@ -54,9 +54,11 @@
                     </div>
                 </span>
             @endif
-            <a href="{{$profileUrl}}" class="lc-hide" title="{{$username}}" data-toggle="tooltip">
-                <i class="fa fa-user"></i>
-            </a>
+            @if($profileUrl)
+                <a href="{{$profileUrl}}" class="lc-hide" title="{{$username}}" data-toggle="tooltip">
+                    <i class="fa fa-user-circle"></i>
+                </a>
+            @endif
             <a class="pull-right" href="{{route('admin.logout')}}">
                 <i class="fa fa-power-off"></i>
                 <span class="lc-hide inline">{{trans('admin::auth.Logout')}}</span>
