@@ -26,7 +26,7 @@
 @endsection
 
 @section('content')
-    <div class="card shd">
+    <div class="card shd" ng-init="grid.itemsPerPage='{{$grid->getPerPage()}}'">
         <div class="card-block-table">
 
             <table class="table table-sm table-grid table-hover" st-pipe="grid.pipeServer" st-table="grid.rows">
@@ -59,12 +59,23 @@
                     <tr>
                         <td colspan="{{$grid->getColumns()->count()}}" class="p-3">
                             <div class="pull-left text-muted">
-                                @verbatim
-                                    {{ grid.start }} - {{ grid.end }} / {{ grid.total }}<br />
-                                @endverbatim
-                                @lang('admin::messages.selected_count'): @{{ grid.hasSelected }}
+                                <div class="form-inline">
+                                    <select class="form-control form-control-sm" ng-model="grid.itemsPerPage">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                    <label class="ml-2">
+                                        @verbatim
+                                        {{ grid.start }} - {{ grid.end }} / {{ grid.total }}
+                                        @endverbatim
+                                        |
+                                    </label>
+                                    <label class="ml-2">@lang('admin::messages.selected_count'): @{{ grid.hasSelected }}</label>
+                                </div>
                             </div>
-                            <div class="pull-right" st-pagination="" st-items-by-page="{{$grid->getPerPage()}}"></div>
+                            <div class="pull-right" st-pagination="" st-items-by-page="grid.itemsPerPage"></div>
                             <div class="clearfix"></div>
                         </td>
                     </tr>
