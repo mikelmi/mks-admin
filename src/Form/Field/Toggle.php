@@ -135,7 +135,7 @@ class Toggle extends Field
     {
         return sprintf(
             '<div class="toggle-control">
-                <div class="btn-group" data-toggle="buttons">
+                <div class="btn-group btn-group-sm" data-toggle="buttons">
                     <label class="btn btn-outline-success%s">
                         <input type="radio" name="'.$this->name.'" autocomplete="off" value="%s"%s>
                         %s

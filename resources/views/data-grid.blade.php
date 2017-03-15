@@ -18,7 +18,7 @@
     @foreach($grid->getLinks() as $link)
         {!! $link->render() !!}
     @endforeach
-    <div class="btn btn-group">
+    <div class="btn btn-group btn-group-sm">
         @foreach($grid->getTools() as $button)
             {!! $button->render() !!}
         @endforeach

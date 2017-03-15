@@ -146,12 +146,13 @@ class ColumnStatus extends Column
      */
     public function cell(): string
     {
-        $icon = sprintf('<i class="fa" ng-class="{\'fa-check\':row.%s,\'fa-minus\':!row.%1$s}"></i>', $this->key);
+        $icon = sprintf('<i class="fa fa-lg" ng-class="{\'fa-toggle-on\':row.%s,\'fa-toggle-off\':!row.%1$s}"></i>', $this->key);
 
         if ($this->url) {
             $attr = array_merge([
-                'class' => 'btn btn-sm',
-                'ng-class' => sprintf('{\'btn-success\':row.%s,\'btn-warning\':!row.%1$s}', $this->key),
+                'class' => 'btn btn-sm btn-link no-b',
+                'type' => 'button',
+                'ng-class' => sprintf('{\'text-success\':row.%s,\'text-danger\':!row.%1$s}', $this->key),
                 'ng-click' => "grid.updateRow(row, '" . $this->url . "/'+row.id)",
                 'title' => $this->actionTitle ?: (__('admin::messages.Activate').'/'.__('admin::messages.Deactivate')),
             ], $this->buttonAttributes);

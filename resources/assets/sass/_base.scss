@@ -91,3 +91,17 @@ label.required {
 .btn {
   cursor: pointer;
 }
+
+.no-b {
+  border: none;
+
+  &:focus, &:active {
+    border: none !important;
+    outline: 0;
+    box-shadow: none;
+  }
+
+  &.btn-sm {
+    font-size: 1rem;
+  }
+}

@@ -12,7 +12,7 @@ class ActionEdit extends ActionLink
 {
     protected $icon = 'pencil';
 
-    protected $btnType = 'outline-primary';
+    protected $btnType = 'outline-primary no-b';
 
     /**
      * @return null|string

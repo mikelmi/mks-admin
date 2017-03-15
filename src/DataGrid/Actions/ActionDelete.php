@@ -12,7 +12,7 @@ class ActionDelete extends Action
 {
     protected $icon = 'remove';
 
-    protected $btnType = 'outline-danger';
+    protected $btnType = 'outline-danger no-b';
 
     /**
      * @var string
