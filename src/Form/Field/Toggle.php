@@ -168,8 +168,7 @@ class Toggle extends Field
     protected function renderDisabledInput(): string
     {
         return sprintf(
-            '<h5 class="%s"><span class="badge badge-%s">%s</span></h5>',
-            AdminForm::getLayout() == 'row' ? 'form-control-static': 'form-control-nob',
+            '<h5 class="pt-1"><span class="badge badge-%s">%s</span></h5>',
             $this->isOn() ? 'success' : 'danger',
             $this->isOn() ? $this->getOnTitle() : $this->getOffTitle()
         );
