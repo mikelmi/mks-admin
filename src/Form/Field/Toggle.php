@@ -8,6 +8,7 @@
 namespace Mikelmi\MksAdmin\Form\Field;
 
 
+use Mikelmi\MksAdmin\Form\AdminForm;
 use Mikelmi\MksAdmin\Form\Field;
 
 class Toggle extends Field
@@ -133,6 +134,10 @@ class Toggle extends Field
      */
     public function renderInput(): string
     {
+        if ($this->isDisabled()) {
+            return $this->renderDisabledInput();
+        }
+
         return sprintf(
             '<div class="toggle-control">
                 <div class="btn-group btn-group-sm" data-toggle="buttons">
@@ -154,6 +159,19 @@ class Toggle extends Field
             $this->offValue,
             $this->isOff() ? ' checked' : '',
             $this->getOffTitle()
+        );
+    }
+
+    /**
+     * @return string
+     */
+    protected function renderDisabledInput(): string
+    {
+        return sprintf(
+            '<h5 class="%s"><span class="badge badge-%s">%s</span></h5>',
+            AdminForm::getLayout() == 'row' ? 'form-control-static': 'form-control-nob',
+            $this->isOn() ? 'success' : 'danger',
+            $this->isOn() ? $this->getOnTitle() : $this->getOffTitle()
         );
     }
 }
