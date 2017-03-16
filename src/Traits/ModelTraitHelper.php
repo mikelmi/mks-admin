@@ -39,4 +39,26 @@ class ModelTraitHelper
 
         return $model;
     }
+
+    /**
+     * @param $class
+     * @return string
+     */
+    public static function getModelClass($class)
+    {
+        self::checkModelClass($class);
+
+        return $class->modelClass;
+    }
+
+    /**
+     * @param $class
+     * @return string
+     */
+    public static function getPrimaryKeyName($class)
+    {
+        $modelClass = static::getModelClass($class);
+
+        return (new $modelClass)->getKeyName();
+    }
 }

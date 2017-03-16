@@ -9,7 +9,6 @@ namespace Mikelmi\MksAdmin\Traits;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 trait ToggleRequests
