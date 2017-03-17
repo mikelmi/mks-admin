@@ -48,7 +48,7 @@ class Scope
      */
     public function getName(): string
     {
-        return $this->name;
+        return $this->name ?: '';
     }
 
     /**
@@ -71,7 +71,7 @@ class Scope
      */
     public function getTitle(): string
     {
-        return $this->title;
+        return $this->title ?: '';
     }
 
     /**
@@ -89,7 +89,7 @@ class Scope
      */
     public function getIcon(): string
     {
-        return $this->icon;
+        return $this->icon ?: '';
     }
 
     /**
@@ -107,7 +107,7 @@ class Scope
      */
     public function getBadge(): string
     {
-        return $this->badge;
+        return $this->badge ?: '';
     }
 
     /**
