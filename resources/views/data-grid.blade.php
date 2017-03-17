@@ -32,7 +32,7 @@
                 <ul class="nav nav-tabs card-header-tabs pull-xs-left">
                     @foreach($grid->getScopes() as $name => $scope)
                     <li class="nav-item">
-                        <a class="nav-link{{$name == $grid->getScope() ? ' active':''}}" href="{{$grid->getBaseUrl()}}/{{$name}}">
+                        <a class="nav-link{{$name == $grid->getScope() ? ' active':''}}" href="{{$grid->getBaseUrl()}}{{$name ? '/scope/'.$name:''}}">
                             @if ($scope->getIcon())
                                 <i class="fa fa-{{$scope->getIcon()}}"></i>
                             @endif

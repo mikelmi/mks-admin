@@ -26,6 +26,9 @@ class AdminRoute
             $router = self::router();
         }
 
+        $router->get('/', $controller . '@index')->name('index');
+        $router->get('/scope/{scope?}', $controller . '@index')->name('index');
+
         $router->get('/edit/{model?}', $controller . '@edit')->name('edit');
         $router->post('/save/{model?}', $controller . '@save')->name('save');
         $router->post('/delete/{id?}', $controller . '@delete')->name('delete');
@@ -47,8 +50,6 @@ class AdminRoute
         if ($routes instanceof \Closure) {
             $routes($router);
         }
-
-        $router->get('/{scope?}', $controller . '@index')->name('index');
     }
 
     /**
@@ -72,7 +73,7 @@ class AdminRoute
         ], $attributes);
 
         $router->group($attr, function($router) use ($controller, $toggle, $move, $trash, $routes) {
-            static::crud($controller, $router, $toggle, $move, $routes);
+            static::crud($controller, $router, $toggle, $move, $trash, $routes);
         });
     }
 
