@@ -8,13 +8,14 @@
 namespace Mikelmi\MksAdmin\Traits;
 
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
 
 trait DeleteRequests
 {
     protected function deletableQuery()
     {
-        return call_user_func([ModelTraitHelper::getModelClass($this), 'query']);
+        return ModelTraitHelper::query($this);
     }
 
     public function delete(Request $request, $id = null)
@@ -25,12 +26,23 @@ trait DeleteRequests
 
         $primaryKeyName = ModelTraitHelper::getPrimaryKeyName($this);
 
-        $res = $this->deletableQuery()->whereIn($primaryKeyName, (array)$id)->delete();
+        $deleteMethod = 'delete';
+
+        if (in_array(SoftDeletes::class, class_uses_recursive($this->modelClass))) {
+            $deleteMethod = 'forceDelete';
+        }
+
+        $res = $this->deletableQuery()->whereIn($primaryKeyName, (array)$id)->$deleteMethod();
 
         if (!$res) {
             app()->abort(422);
         }
 
-        return response()->json($res);
+        return $this->afterDelete(response()->json($res));
+    }
+
+    protected function afterDelete($response)
+    {
+        return ModelTraitHelper::applyCountItemsResponse($this, $response);
     }
 }

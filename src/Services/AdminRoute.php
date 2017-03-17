@@ -17,14 +17,15 @@ class AdminRoute
      * @param Router|null $router
      * @param bool $toggle
      * @param bool $move
+     * @param bool $trash
+     * @param \Closure|null $routes
      */
-    public static function crud(string $controller, Router $router = null, $toggle = false, $move = false)
+    public static function crud(string $controller, Router $router = null, $toggle = false, $move = false, $trash = false, $routes = null)
     {
         if (!$router) {
             $router = self::router();
         }
 
-        $router->get('/', $controller . '@index')->name('index');
         $router->get('/edit/{model?}', $controller . '@edit')->name('edit');
         $router->post('/save/{model?}', $controller . '@save')->name('save');
         $router->post('/delete/{id?}', $controller . '@delete')->name('delete');
@@ -37,6 +38,17 @@ class AdminRoute
         if ($move) {
             $router->post('move/{model?}/{down?}', $controller . 'UserController@move')->name('move');
         }
+
+        if ($trash) {
+            $router->post('/trash/{model?}', $controller . '@toTrash')->name('toTrash');
+            $router->post('/restore/{model?}', $controller . '@restore')->name('restore');
+        }
+
+        if ($routes instanceof \Closure) {
+            $routes($router);
+        }
+
+        $router->get('/{scope?}', $controller . '@index')->name('index');
     }
 
     /**
@@ -52,17 +64,15 @@ class AdminRoute
 
         $toggle = array_pull($attributes, 'toggle', false);
         $move = array_pull($attributes, 'move', false);
+        $trash = array_pull($attributes, 'trash', false);
 
         $attr = array_merge([
             'prefix' => $prefix,
             'as' => is_null($as) ? $prefix . '.' : $as
         ], $attributes);
 
-        $router->group($attr, function($router) use ($controller, $toggle, $move, $routes) {
-            static::crud($controller, $router, $toggle, $move);
-            if ($routes instanceof \Closure) {
-                $routes($router);
-            }
+        $router->group($attr, function($router) use ($controller, $toggle, $move, $trash, $routes) {
+            static::crud($controller, $router, $toggle, $move, $routes);
         });
     }
 

@@ -64,6 +64,21 @@ class DataGrid
     private $rowAttributes = [];
 
     /**
+     * @var array
+     */
+    private $scopes = [];
+
+    /**
+     * @var string|null
+     */
+    private $scope;
+
+    /**
+     * @var string
+     */
+    private $baseUrl = '';
+
+    /**
      * DataGrid constructor.
      * @param string $url
      * @param string|null $title
@@ -77,6 +92,24 @@ class DataGrid
         $this->tools = collect();
         $this->columns = collect();
         $this->setSelectable($selectable);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @param string $baseUrl
+     * @return DataGrid
+     */
+    public function setBaseUrl(string $baseUrl): DataGrid
+    {
+        $this->baseUrl = $baseUrl;
+        return $this;
     }
 
     /**
@@ -390,6 +423,82 @@ class DataGrid
         $this->links->push($button);
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getScopes(): array
+    {
+        return $this->scopes;
+    }
+
+    /**
+     * @param array $scopes
+     * @return DataGrid
+     */
+    public function setScopes(array $scopes): DataGrid
+    {
+        foreach ($scopes as $scope) {
+            $this->addScope($scope);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Scope|array $scope
+     * @param array|string|null $options
+     * @return DataGrid
+     */
+    public function addScope($scope, $options = null): DataGrid
+    {
+        if ($scope instanceof Scope) {
+            $instance = $scope;
+        } elseif (is_string($scope)) {
+            $instance = new Scope($scope);
+        } elseif(is_array($scope)) {
+            $instance = new Scope();
+            $instance->applySetters($scope);
+        } else {
+            throw new \InvalidArgumentException();
+        }
+
+        if (is_string($options)) {
+            $instance->setTitle($options);
+        } elseif (is_array($options)) {
+            $instance->applySetters($options);
+        }
+
+        $this->scopes[$instance->getName()] = $instance;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getScope()
+    {
+        return $this->scope;
+    }
+
+    /**
+     * @param null|string $scope
+     * @return DataGrid
+     */
+    public function setScope($scope)
+    {
+        $this->scope = $scope;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasScopes(): bool
+    {
+        return !empty($this->scopes);
     }
 
     /**

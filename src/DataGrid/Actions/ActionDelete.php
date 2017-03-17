@@ -14,14 +14,6 @@ class ActionDelete extends Action
 
     protected $btnType = 'outline-danger no-b';
 
-    /**
-     * @var string
-     */
-    protected $confirm;
-
-    /**
-     * @return string
-     */
     public function getConfirm(): string
     {
         if ($this->confirm === null) {
@@ -29,16 +21,6 @@ class ActionDelete extends Action
         }
 
         return $this->confirm;
-    }
-
-    /**
-     * @param string $confirm
-     * @return ActionDelete
-     */
-    public function setConfirm(string $confirm): ActionDelete
-    {
-        $this->confirm = $confirm;
-        return $this;
     }
 
     /**

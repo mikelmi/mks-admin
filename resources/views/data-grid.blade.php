@@ -27,6 +27,25 @@
 
 @section('content')
     <div class="card shd" ng-init="grid.itemsPerPage='{{$grid->getPerPage()}}'">
+        @if ($grid->hasScopes())
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs pull-xs-left">
+                    @foreach($grid->getScopes() as $name => $scope)
+                    <li class="nav-item">
+                        <a class="nav-link{{$name == $grid->getScope() ? ' active':''}}" href="{{$grid->getBaseUrl()}}/{{$name}}">
+                            @if ($scope->getIcon())
+                                <i class="fa fa-{{$scope->getIcon()}}"></i>
+                            @endif
+                            {{ $scope->getTitle() }}
+                            @if ($scope->getBadge())
+                                <span class="badge badge-pill badge-default">{{$scope->getBadge()}}</span>
+                            @endif
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card-block-table">
 
             <table class="table table-sm table-grid table-hover" st-pipe="grid.pipeServer" st-table="grid.rows">

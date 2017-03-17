@@ -8,6 +8,7 @@
 namespace Mikelmi\MksAdmin\Traits;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -60,5 +61,39 @@ class ModelTraitHelper
         $modelClass = static::getModelClass($class);
 
         return (new $modelClass)->getKeyName();
+    }
+
+    /**
+     * @param $class
+     * @return Builder
+     */
+    public static function query($class)
+    {
+        $modelClass = static::getModelClass($class);
+
+        return $modelClass::query();
+    }
+
+    /**
+     * @param $class
+     * @return bool
+     */
+    public static function isUsesCountItems($class): bool
+    {
+        return in_array(CountItemsResponse::class, class_uses($class));
+    }
+
+    /**
+     * @param $class
+     * @param $response
+     * @return mixed
+     */
+    public static function applyCountItemsResponse($class, $response)
+    {
+        if (static::isUsesCountItems($class)) {
+            return call_user_func([$class, 'setItemsCount'], $response);
+        }
+
+        return $response;
     }
 }
