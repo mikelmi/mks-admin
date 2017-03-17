@@ -235,7 +235,7 @@ class Button implements ButtonInterface
      */
     public function getOnClick(): string
     {
-        return $this->onClick;
+        return $this->onClick ?: '';
     }
 
     /**
