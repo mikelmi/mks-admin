@@ -275,9 +275,9 @@ class Column implements ColumnInterface
 
     /**
      * @param array $attributes
-     * @return ColumnLink
+     * @return Column
      */
-    public function setAttributes(array $attributes): ColumnLink
+    public function setAttributes(array $attributes): Column
     {
         $this->attributes = $attributes;
         return $this;
@@ -286,9 +286,9 @@ class Column implements ColumnInterface
     /**
      * @param string $name
      * @param $value
-     * @return ColumnLink
+     * @return Column
      */
-    public function setAttribute(string $name, $value): ColumnLink
+    public function setAttribute(string $name, $value): Column
     {
         $this->attributes[$name] = $value;
         return $this;
