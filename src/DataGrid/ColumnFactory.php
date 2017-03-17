@@ -19,6 +19,8 @@ use Mikelmi\MksAdmin\Services\ClassFactory;
  */
 class ColumnFactory extends ClassFactory
 {
+    protected static $configKey = 'admin.datagrid.columns';
+
     protected static function baseClass(): string
     {
         return Column::class;
