@@ -27,7 +27,7 @@ class Action extends Button implements ActionInterface
      */
     public function getConfirm(): string
     {
-        return $this->confirm;
+        return $this->confirm ?: '';
     }
 
     /**
