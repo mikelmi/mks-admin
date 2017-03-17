@@ -38,6 +38,10 @@ class ColumnLink extends Column
      */
     protected function cell(): string
     {
-        return sprintf('<a href="%s">{{row.%s}}</a>', $this->url, $this->key);
+        $attr = array_merge([
+            'href' => $this->getUrl()
+        ], $this->getAttributes());
+
+        return sprintf('<a %s>{{row.%s}}</a>', html_attr($attr), $this->key);
     }
 }

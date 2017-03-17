@@ -48,6 +48,11 @@ class Column implements ColumnInterface
     protected $headAttributes = [];
 
     /**
+     * @var array
+     */
+    protected $attributes = [];
+
+    /**
      * Column constructor.
      * @param string $key
      * @param string $title
@@ -258,5 +263,53 @@ class Column implements ColumnInterface
     public function renderCell(): string
     {
         return sprintf('<td%s>%s</td>', html_attr($this->cellAttributes), $this->cell());
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array $attributes
+     * @return ColumnLink
+     */
+    public function setAttributes(array $attributes): ColumnLink
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @param $value
+     * @return ColumnLink
+     */
+    public function setAttribute(string $name, $value): ColumnLink
+    {
+        $this->attributes[$name] = $value;
+        return $this;
+    }
+
+    function __set($name, $value)
+    {
+        $this->setAttribute($name, $value);
+    }
+
+    function __call($name, $arguments)
+    {
+        if (strpos($name, 'set') !== false) {
+            $prop = lcfirst(preg_replace('/^set/', '', $name));
+            if ($prop) {
+                $arg = $arguments;
+                array_unshift($arg, $prop);
+                return call_user_func_array([$this, 'setAttribute'], $arg);
+            }
+        }
+
+        throw new \LogicException("Method $name not found");
     }
 }
