@@ -105,3 +105,15 @@ label.required {
     font-size: 1rem;
   }
 }
+
+.modal-header {
+  background-color: $modal-header-bg;
+  color: $modal-header-text;
+
+  a, .close {
+    color: $modal-header-link;
+    &:hover {
+      color: $modal-header-link-hover;
+    }
+  }
+}
