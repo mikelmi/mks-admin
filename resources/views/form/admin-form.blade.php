@@ -51,6 +51,15 @@
 @endsection
 
 @section('content')
+
+    @if ($form->hasAlerts())
+        @foreach($form->getAlerts() as $alert)
+            @component('admin::components.alert', ['type' => $alert['type'], 'icon' => $alert['icon']])
+            {!! $alert['message'] !!}
+            @endcomponent
+        @endforeach
+    @endif
+
     <div class="card shd">
         {!! $form->open() !!}
         {{ csrf_field() }}

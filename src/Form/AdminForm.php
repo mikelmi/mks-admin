@@ -68,6 +68,8 @@ class AdminForm
      */
     protected $mainGroup;
 
+    protected $alerts = [];
+
     /**
      * AdminForm constructor.
      */
@@ -497,5 +499,68 @@ class AdminForm
     public function group($id): FormGroup
     {
         return $this->groups->get($id, $this->mainGroup);
+    }
+
+    /**
+     * @param string $message
+     * @param string $type
+     * @param string|null $icon
+     * @return AdminForm
+     */
+    public function alert(string $message, string $type = 'info', string $icon = null): AdminForm
+    {
+        $this->alerts[$type] = [
+            'type' => $type,
+            'message' => $message,
+            'icon' => $icon,
+        ];
+
+        return $this;
+    }
+
+    /**
+     * @param string $message
+     * @param string|null $icon
+     * @return AdminForm
+     */
+    public function alertSuccess(string $message, string $icon = null)
+    {
+        return $this->alert($message, 'success', $icon);
+    }
+
+    /**
+     * @param string $message
+     * @param string|null $icon
+     * @return AdminForm
+     */
+    public function alertWarning(string $message, string $icon = null)
+    {
+        return $this->alert($message, 'warning', $icon);
+    }
+
+    /**
+     * @param string $message
+     * @param string|null $icon
+     * @return AdminForm
+     */
+    public function alertError(string $message, string $icon = null)
+    {
+        return $this->alert($message, 'danger', $icon);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAlerts(): bool
+    {
+        return !empty($this->alerts);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAlerts(): array
+    {
+        return $this->alerts;
     }
 }

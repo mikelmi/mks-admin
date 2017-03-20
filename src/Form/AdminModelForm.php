@@ -9,6 +9,7 @@ namespace Mikelmi\MksAdmin\Form;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdminModelForm extends AdminForm
 {
@@ -63,6 +64,10 @@ class AdminModelForm extends AdminForm
 
         if ($this->model->getKey()) {
             $this->setMode(self::MODE_EDIT);
+        }
+
+        if (in_array(SoftDeletes::class, class_uses_recursive($model)) && $model->trashed()) {
+            $this->alertWarning(__('admin::messages.In Trash'), 'exclamation-triangle');
         }
 
         return $this;
