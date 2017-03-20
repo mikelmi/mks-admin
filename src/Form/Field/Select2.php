@@ -77,9 +77,4 @@ class Select2 extends Select
         $this->data = $data;
         return $this;
     }
-
-    protected function renderEmptyOption(): string
-    {
-        return '';
-    }
 }
