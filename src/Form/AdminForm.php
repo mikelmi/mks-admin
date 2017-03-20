@@ -468,9 +468,7 @@ class AdminForm
      */
     protected function setGroupFields(FormGroup $group, array $fields = [])
     {
-        foreach ($fields as $field) {
-            $this->addField($field);
-        }
+        $group->setFields($fields);
 
         return $this;
     }
