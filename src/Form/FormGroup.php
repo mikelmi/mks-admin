@@ -172,7 +172,8 @@ class FormGroup
                 throw new \InvalidArgumentException("$field should be an array or instance of Field");
             }
 
-            $type = array_pull($field, 'type');
+            $type = array_pull($field, 'type', 'text');
+            $options = array_merge($field, $options);
             $this->fields->push(FieldFactory::make($type, $options));
         } else {
             if ($options) {
