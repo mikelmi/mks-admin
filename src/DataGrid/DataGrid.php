@@ -209,6 +209,10 @@ class DataGrid
      */
     public function setCreateLink($url, string $title = null)
     {
+        if ($url === false || $url === null) {
+            return $this;
+        }
+
         if (is_array($url) && count($url) > 0) {
             $title = $url[1];
             $url = $url[0];
@@ -225,6 +229,10 @@ class DataGrid
      */
     public function setDeleteButton($url, string $title = null, string $confirm = null)
     {
+        if ($url === false || $url === null) {
+            return $this;
+        }
+
         if (is_array($url) && count($url) > 0) {
             $title = $url[1];
             $url = $url[0];
@@ -246,6 +254,10 @@ class DataGrid
      */
     public function setToggleButton($activateUrl, $deactivateUrl = null)
     {
+        if ($activateUrl === false || $activateUrl === null) {
+            return $this;
+        }
+
         if (is_array($activateUrl) && count($activateUrl) > 0) {
             $deactivateUrl = $activateUrl[1];
             $activateUrl = $activateUrl[0];
