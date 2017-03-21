@@ -205,4 +205,12 @@ class AdminModelForm extends AdminForm
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasModel(): bool
+    {
+        return !empty($this->model);
+    }
 }

@@ -687,4 +687,12 @@ class AdminForm
         $this->previewUrl = $previewUrl;
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasModel(): bool
+    {
+        return false;
+    }
 }
