@@ -17,6 +17,20 @@ abstract class AdminController extends Controller
     {
         $this->middleware('admin.locale');
         $this->middleware('admin');
+
+        $this->setupMiddlewares();
+
+        $this->init();
+    }
+
+    protected function init()
+    {
+
+    }
+
+    protected function setupMiddlewares()
+    {
+
     }
     
     protected function redirect($to = null, $status = 302, $headers = [], $secure = null)

@@ -27,17 +27,18 @@ class AdminRoute
         }
 
         $router->get('/', $controller . '@index')->name('index');
-        $router->get('/scope/{scope?}', $controller . '@index')->name('index');
+        $router->get('scope/{scope?}', $controller . '@index')->name('index');
 
-        $router->get('/create', $controller . '@create')->name('create');
-        $router->get('/show/{model}', $controller . '@show')->name('show');
-        $router->get('/edit/{model}', $controller . '@edit')->name('edit');
-        $router->post('/save/{model?}', $controller . '@save')->name('save');
-        $router->post('/delete/{id?}', $controller . '@delete')->name('delete');
+        $router->get('show/{model}', $controller . '@show')->name('show');
+        $router->get('create', $controller . '@create')->name('create');
+        $router->post('store', $controller . '@store')->name('store');
+        $router->get('edit/{model}', $controller . '@edit')->name('edit');
+        $router->post('update/{model}', $controller . '@update')->name('update');
+        $router->post('delete/{id?}', $controller . '@delete')->name('delete');
 
         if ($toggle) {
-            $router->post('/toggle/{model?}', $controller . '@toggle')->name('toggle');
-            $router->post('/toggle-batch/{status}', $controller . '@toggleBatch')->name('toggle.batch');
+            $router->post('toggle/{model?}', $controller . '@toggle')->name('toggle');
+            $router->post('toggle-batch/{status}', $controller . '@toggleBatch')->name('toggle.batch');
         }
 
         if ($move) {
@@ -45,8 +46,8 @@ class AdminRoute
         }
 
         if ($trash) {
-            $router->post('/trash/{model?}', $controller . '@toTrash')->name('toTrash');
-            $router->post('/restore/{model?}', $controller . '@restore')->name('restore');
+            $router->post('trash/{model?}', $controller . '@toTrash')->name('toTrash');
+            $router->post('restore/{model?}', $controller . '@restore')->name('restore');
         }
 
         if ($routes instanceof \Closure) {

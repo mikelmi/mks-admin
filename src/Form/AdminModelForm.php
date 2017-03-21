@@ -66,11 +66,19 @@ class AdminModelForm extends AdminForm
             $this->setMode(self::MODE_EDIT);
         }
 
-        if (in_array(SoftDeletes::class, class_uses_recursive($model)) && $model->trashed()) {
+        if ($this->isSoftDeletableModel()) {
             $this->alertWarning(__('admin::messages.In Trash'), 'exclamation-triangle');
         }
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSoftDeletableModel(): bool
+    {
+        return in_array(SoftDeletes::class, class_uses_recursive($this->model)) && $this->model->trashed();
     }
 
     /**
@@ -212,5 +220,14 @@ class AdminModelForm extends AdminForm
     public function hasModel(): bool
     {
         return !empty($this->model);
+    }
+
+    public function isInTrash(): bool
+    {
+        if ($this->model && $this->isSoftDeletableModel()) {
+            return $this->model->trashed();
+        }
+
+        return false;
     }
 }

@@ -695,4 +695,9 @@ class AdminForm
     {
         return false;
     }
+
+    public function isInTrash(): bool
+    {
+        return false;
+    }
 }

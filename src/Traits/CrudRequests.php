@@ -99,7 +99,8 @@ trait CrudRequests
      * @param $model
      * @return bool
      */
-    abstract public function save(Request $request, $model);
+    public function save(Request $request, $model)
+    {}
 
     public function show($model)
     {

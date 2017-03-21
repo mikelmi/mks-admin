@@ -27,12 +27,12 @@
     @if (!$form->isViewMode())
         <div class="btn-group">
             <button type="button" class="btn btn-primary" mks-submit>@lang('admin::messages.Save')</button>
-            @if ($form->getNewUrl() || ($form->hasModel() && $form->getModel()->trashed()))
+            @if ($form->getNewUrl() || $form->isInTrash())
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="caret"></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    @if ($form->hasModel() && $form->getModel()->trashed())
+                    @if ($form->isInTrash())
                         <a class="dropdown-item" href="#" mks-submit data-flag="2">@lang('admin::messages.Save and Restore')</a>
                     @endif
                     @if ($form->getNewUrl())

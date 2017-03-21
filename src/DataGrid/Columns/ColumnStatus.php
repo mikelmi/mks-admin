@@ -167,4 +167,24 @@ class ColumnStatus extends Column
 
         return sprintf('<badge %s>%s</badge>', html_attr($attr), $icon);
     }
+
+    /**
+     * @param bool $disabled
+     * @return ColumnStatus
+     */
+    public function setDisabled(bool $disabled): ColumnStatus
+    {
+        $this->buttonAttributes['disabled'] = $disabled;
+        return $this;
+    }
+
+    /**
+     * @param string $disabled
+     * @return ColumnStatus
+     */
+    public function setNgDisabled(string $disabled): ColumnStatus
+    {
+        $this->buttonAttributes['ng-disabled'] = $disabled;
+        return $this;
+    }
 }
