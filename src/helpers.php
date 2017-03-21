@@ -28,3 +28,35 @@ if (!function_exists('html_attr')) {
         );
     }
 }
+
+if (!function_exists('hash_url')) {
+    /**
+     * @param $url
+     * @param array ...$params
+     * @return string
+     */
+    function hash_url($url, ...$params) {
+        $result = '#/' . trim($url, '/');
+
+        $parts = [];
+
+        foreach ($params as $param) {
+            if (is_array($param)) {
+                foreach($param as $key => $value) {
+                    if (is_string($key)) {
+                        $parts[] = $key;
+                    }
+                    $parts[] = $value;
+                }
+            } else {
+                $parts[] = $param;
+            }
+        }
+
+        if ($parts) {
+            $result .= '/' . implode('/', $parts);
+        }
+
+        return $result;
+    }
+}

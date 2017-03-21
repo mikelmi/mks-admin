@@ -15,6 +15,7 @@ class AdminForm
 {
     const MODE_CREATE = 'create';
     const MODE_EDIT = 'edit';
+    const MODE_VIEW = 'view';
 
     private static $layout;
 
@@ -68,7 +69,25 @@ class AdminForm
      */
     protected $mainGroup;
 
+    /**
+     * @var array
+     */
     protected $alerts = [];
+
+    /**
+     * @var string
+     */
+    protected $editUrl = '';
+
+    /**
+     * @var string
+     */
+    protected $infoUrl = '';
+
+    /**
+     * @var string
+     */
+    protected $previewUrl = '';
 
     /**
      * AdminForm constructor.
@@ -242,6 +261,38 @@ class AdminForm
     }
 
     /**
+     * @return bool
+     */
+    public function isViewMode(): bool
+    {
+        return $this->mode === self::MODE_VIEW;
+    }
+
+    /**
+     * @return AdminForm
+     */
+    public function setupCreateMode()
+    {
+        return $this->setMode(static::MODE_CREATE);
+    }
+
+    /**
+     * @return AdminForm
+     */
+    public function setupEditMode()
+    {
+        return $this->setMode(static::MODE_EDIT);
+    }
+
+    /**
+     * @return AdminForm
+     */
+    public function setupViewMode()
+    {
+        return $this->setMode(static::MODE_VIEW);
+    }
+
+    /**
      * @return Collection
      */
     public function getFields(): Collection
@@ -284,6 +335,23 @@ class AdminForm
      */
     public function open(array $options = []): string
     {
+        if ($this->isViewMode()) {
+            /** @var FieldInterface $field */
+            foreach ($this->getFields() as $field) {
+                $field->setStatic(true);
+            }
+
+            /** @var FormGroup $group */
+            foreach ($this->getGroups() as $group) {
+                /** @var FieldInterface $field */
+                foreach ($group->getFields() as $field) {
+                    $field->setStatic(true);
+                }
+            }
+
+            return '<div '.html_attr($options).'>';
+        }
+
         $attr = array_merge($this->options, $options);
 
         $attr['method'] = array_get($attr, 'method', 'post');
@@ -298,6 +366,10 @@ class AdminForm
      */
     public function close(): string
     {
+        if ($this->isViewMode()) {
+            return '</div>';
+        }
+
         return '</form>';
     }
 
@@ -560,5 +632,59 @@ class AdminForm
     public function getAlerts(): array
     {
         return $this->alerts;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEditUrl(): string
+    {
+        return $this->editUrl;
+    }
+
+    /**
+     * @param string $editUrl
+     * @return AdminForm
+     */
+    public function setEditUrl(string $editUrl): AdminForm
+    {
+        $this->editUrl = $editUrl;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInfoUrl(): string
+    {
+        return $this->infoUrl;
+    }
+
+    /**
+     * @param string $infoUrl
+     * @return AdminForm
+     */
+    public function setInfoUrl(string $infoUrl): AdminForm
+    {
+        $this->infoUrl = $infoUrl;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPreviewUrl(): string
+    {
+        return $this->previewUrl;
+    }
+
+    /**
+     * @param string $previewUrl
+     * @return AdminForm
+     */
+    public function setPreviewUrl(string $previewUrl): AdminForm
+    {
+        $this->previewUrl = $previewUrl;
+        return $this;
     }
 }

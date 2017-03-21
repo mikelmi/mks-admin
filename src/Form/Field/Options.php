@@ -70,7 +70,7 @@ class Options extends Select
             $attr['selected'] = true;
         }
 
-        if (in_array($value, $this->getDisabledValues())) {
+        if ($this->isStatic() || in_array($value, $this->getDisabledValues())) {
             $attr['disabled'] = true;
         }
 
@@ -100,5 +100,10 @@ class Options extends Select
         }
 
         return $result;
+    }
+
+    public function renderStaticInput(): string
+    {
+        return $this->renderInput();
     }
 }

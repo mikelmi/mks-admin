@@ -64,4 +64,11 @@ class Checkbox extends Text
 
         return view($template, ['field' => $this]);
     }
+
+    public function renderStaticInput(): string
+    {
+        $this->setDisabled(true);
+
+        return parent::renderInput();
+    }
 }

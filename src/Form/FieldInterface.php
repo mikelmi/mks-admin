@@ -151,6 +151,11 @@ interface FieldInterface
     /**
      * @return string
      */
+    public function renderStaticInput(): string;
+
+    /**
+     * @return string
+     */
     public function getNameSce(): string;
 
     /**
@@ -158,4 +163,14 @@ interface FieldInterface
      * @return FieldInterface
      */
     public function setNameSce(string $nameSce): FieldInterface;
+
+    public function isStatic(): bool;
+
+    /**
+     * @param bool $static
+     * @return FieldInterface
+     */
+    public function setStatic(bool $static): FieldInterface;
+
+    public function renderField(): string;
 }

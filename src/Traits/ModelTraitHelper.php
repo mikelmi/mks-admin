@@ -96,4 +96,15 @@ class ModelTraitHelper
 
         return $response;
     }
+
+    /**
+     * @param $class
+     * @return Model
+     */
+    public static function modelInstance($class)
+    {
+        $modelClass = static::getModelClass($class);
+
+        return new $modelClass;
+    }
 }

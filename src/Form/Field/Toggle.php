@@ -162,6 +162,11 @@ class Toggle extends Field
         );
     }
 
+    public function renderStaticInput(): string
+    {
+        return $this->renderDisabledInput();
+    }
+
     /**
      * @return string
      */

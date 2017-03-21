@@ -37,4 +37,7 @@ return [
     'Saved' => 'Saved',
     'confirm_delete' => 'Are you sure you want to delete this item?',
     'confirm_delete_selected' => 'Are you sure you want to delete selected item(s)?',
+    'Preview' => 'Preview',
+    'Info' => 'Info',
+    'Back' => 'Back',
 ];

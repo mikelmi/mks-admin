@@ -29,7 +29,9 @@ class AdminRoute
         $router->get('/', $controller . '@index')->name('index');
         $router->get('/scope/{scope?}', $controller . '@index')->name('index');
 
-        $router->get('/edit/{model?}', $controller . '@edit')->name('edit');
+        $router->get('/create', $controller . '@create')->name('create');
+        $router->get('/show/{model}', $controller . '@show')->name('show');
+        $router->get('/edit/{model}', $controller . '@edit')->name('edit');
         $router->post('/save/{model?}', $controller . '@save')->name('save');
         $router->post('/delete/{id?}', $controller . '@delete')->name('delete');
 

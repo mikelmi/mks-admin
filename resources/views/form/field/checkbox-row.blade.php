@@ -3,7 +3,7 @@
     <div class="col-md-10">
         <div class="mt-md-1">
             <label class="form-check-label">
-                {!! $field->renderInput() !!}
+                {!! $field->renderField() !!}
             </label>
         </div>
     </div>

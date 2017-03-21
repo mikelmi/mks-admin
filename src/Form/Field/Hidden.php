@@ -14,6 +14,10 @@ class Hidden extends Text
 
     public function render(): string
     {
+        if ($this->isStatic()) {
+            return '';
+        }
+
         return $this->renderInput();
     }
 }

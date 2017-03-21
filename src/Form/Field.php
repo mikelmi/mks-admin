@@ -76,6 +76,11 @@ abstract class Field implements FieldInterface
     protected $nameSce;
 
     /**
+     * @var bool
+     */
+    protected $static = false;
+
+    /**
      * Field constructor.
      * @param string|null $name
      * @param mixed|null $value
@@ -397,6 +402,49 @@ abstract class Field implements FieldInterface
     {
         $this->nameSce = $nameSce;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStatic(): bool
+    {
+        return $this->static;
+    }
+
+    /**
+     * @param bool $static
+     * @return FieldInterface
+     */
+    public function setStatic(bool $static): FieldInterface
+    {
+        $this->static = $static;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function renderStaticInput(): string
+    {
+        $value = $this->getValue();
+
+        if (is_array($value)) {
+            $value = implode(', ', $value);
+        } else {
+            $value = e($value);
+        }
+
+        return '<p class="form-control-static">'.$value.'</p>';
+    }
+
+    public function renderField(): string
+    {
+        if ($this->isStatic()) {
+            return $this->renderStaticInput();
+        }
+
+        return $this->renderInput();
     }
 
     /**

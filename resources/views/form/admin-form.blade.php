@@ -24,17 +24,35 @@
 @endif
 
 @section('tools')
-    <div class="btn-group">
-        <button type="button" class="btn btn-primary" mks-submit>@lang('admin::messages.Save')</button>
-        @if ($form->getNewUrl())
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" mks-submit data-flag="1">@lang('admin::messages.Save and New')</a>
-            </div>
+    @if (!$form->isViewMode())
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" mks-submit>@lang('admin::messages.Save')</button>
+            @if ($form->getNewUrl())
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#" mks-submit data-flag="1">@lang('admin::messages.Save and New')</a>
+                </div>
+            @endif
+        </div>
+        @if($form->getInfoUrl())
+            <a class="btn btn-info" href="{{$form->getInfoUrl()}}" title="@lang('admin::messages.Info')">
+                <i class="fa fa-info"></i>
+            </a>
         @endif
-    </div>
+    @else
+        @if($form->getEditUrl())
+            <a class="btn btn-primary" href="{{$form->getEditUrl()}}" title="@lang('admin::messages.Edit')">
+                <i class="fa fa-pencil"></i>
+            </a>
+        @endif
+    @endif
+    @if($form->getPreviewUrl())
+        <a class="btn btn-success" target="_blank" href="{{$form->getPreviewUrl()}}" title="{{$form->isViewMode() ? __('admin::messages.Back') : __('admin::messages.Cancel')}}">
+            <i class="fa fa-external-link"></i>
+        </a>
+    @endif
     @if($form->getDeleteUrl())
         <button type="button" class="btn btn-danger" mks-action
                 data-url="{{$form->getDeleteUrl()}}"
