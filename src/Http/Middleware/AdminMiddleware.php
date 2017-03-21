@@ -28,9 +28,12 @@ class AdminMiddleware
 
         if ($request->ajax() || $request->wantsJson()) {
             if (!$response->headers->has('X-Flash-Message') && ($message = $request->session()->get('flash-message'))) {
-                $response->headers->set('X-Flash-Message', urlencode($message['message']));
+                $response->headers->set('X-Flash-Message', rawurlencode($message['message']));
                 $response->headers->set('X-Flash-Message-Type', $message['type']);
                 $request->session()->forget('flash-message');
+            } elseif ($response->getStatusCode() == 403) {
+                $response->headers->set('X-Flash-Message', rawurlencode(__('admin::auth.Access Denied')));
+                $response->headers->set('X-Flash-Message-Type', 'danger');
             }
         }
 
