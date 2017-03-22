@@ -20,15 +20,22 @@ trait CrudRequests
 
     /**
      * @param null $model
+     * @parem null $mode
      * @return AdminForm
      */
-    protected function form($model = null): AdminForm
+    protected function form($model = null, $mode = null): AdminForm
     {
         if ($modelInstance = $this->formModel($model)) {
-            return new AdminModelForm($modelInstance);
+            $form = AdminModelForm($modelInstance);
+        } else {
+            $form = new AdminForm();
         }
 
-        return new AdminForm();
+        if ($mode) {
+            $form->setMode($mode);
+        }
+
+        return $form;
     }
 
     /**
@@ -55,7 +62,7 @@ trait CrudRequests
      */
     public function create()
     {
-        $form = $this->form($this->formModel());
+        $form = $this->form($this->formModel(), AdminForm::MODE_CREATE);
 
         $form->setupCreateMode();
 
@@ -68,7 +75,7 @@ trait CrudRequests
      */
     public function edit($model)
     {
-        $form = $this->form($this->formModel($model));
+        $form = $this->form($this->formModel($model), AdminForm::MODE_EDIT);
 
         $form->setupEditMode();
 
@@ -104,7 +111,7 @@ trait CrudRequests
 
     public function show($model)
     {
-        $form = $this->form($this->formModel($model));
+        $form = $this->form($this->formModel($model), AdminForm::MODE_VIEW);
 
         $form->setupViewMode();
 

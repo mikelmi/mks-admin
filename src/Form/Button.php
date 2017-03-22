@@ -292,5 +292,21 @@ class Button implements ButtonInterface
     public function setAttribute(string $key, $value): ButtonInterface
     {
         $this->attributes[$key] = $value;
+
+        return $this;
+    }
+
+    function __call($name, $arguments)
+    {
+        if (strpos($name, 'set') !== false) {
+            $prop = lcfirst(preg_replace('/^set/', '', $name));
+            if ($prop) {
+                $arg = $arguments;
+                array_unshift($arg, $prop);
+                return call_user_func_array([$this, 'setAttribute'], $arg);
+            }
+        }
+
+        throw new \LogicException("Method $name not found");
     }
 }

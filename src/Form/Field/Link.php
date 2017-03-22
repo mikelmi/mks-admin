@@ -41,6 +41,10 @@ class Link extends Field
     {
         $this->element->setUrl($url);
 
+        if ($this->value) {
+            $this->element->setTitle($this->value);
+        }
+
         return $this;
     }
 
@@ -51,4 +55,11 @@ class Link extends Field
     {
         return $this->element->render();
     }
+
+    public function renderStaticInput(): string
+    {
+        return $this->renderInput();
+    }
+
+
 }
