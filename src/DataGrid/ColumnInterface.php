@@ -101,4 +101,14 @@ interface ColumnInterface
      * @return string
      */
     public function renderCell(): string;
+
+    /**
+     * @return ColumnInterface
+     */
+    public function setDisplayKey(string $key): self;
+
+    /**
+     * @return string|null
+     */
+    public function getDisplayKey();
 }

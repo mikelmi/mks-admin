@@ -8,12 +8,8 @@
 namespace Mikelmi\MksAdmin\DataGrid\Columns;
 
 
-class ColumnStatus extends Column
+class ColumnStatus extends ColumnList
 {
-    /**
-     * @var array
-     */
-    protected $options = [];
 
     /** @var string */
     protected $url;
@@ -31,17 +27,6 @@ class ColumnStatus extends Column
      * @var array
      */
     protected $buttonAttributes = [];
-
-    /**
-     * @param array $options
-     * @return ColumnStatus
-     */
-    public function setOptions(array $options): ColumnStatus
-    {
-        $this->options = $options;
-
-        return $this;
-    }
 
     /**
      * @return array
@@ -112,33 +97,6 @@ class ColumnStatus extends Column
     {
         $this->buttonAttributes = $buttonAttributes;
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function renderSearch(): string
-    {
-        $input = '';
-
-        if ($this->searchable) {
-            $attr = [
-                'st-search' => $this->key,
-                'class' => 'form-control form-control-sm form-block',
-                'placeholder' => $this->title,
-            ];
-
-            $input = '<select ' . html_attr($attr) . '>';
-            $input .= '<option value=""></option>';
-
-            foreach($this->getOptions() as $key => $label) {
-                $input .= '<option value="' . e($key) . '">' . e($label) . '</option>';
-            }
-
-            $input .= '</select>';
-        }
-
-        return sprintf('<th>%s</th>', $input);
     }
 
     /**

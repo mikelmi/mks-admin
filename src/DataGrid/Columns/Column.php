@@ -53,6 +53,11 @@ class Column implements ColumnInterface
     protected $attributes = [];
 
     /**
+     * @var string|null
+     */
+    protected $displayKey;
+
+    /**
      * Column constructor.
      * @param string $key
      * @param string $title
@@ -254,7 +259,7 @@ class Column implements ColumnInterface
      */
     protected function cell(): string
     {
-        return '{{row.'. $this->key .'}}';
+        return '{{row.'. ($this->getDisplayKey() ?: $this->key) .'}}';
     }
 
     /**
@@ -292,6 +297,24 @@ class Column implements ColumnInterface
     {
         $this->attributes[$name] = $value;
         return $this;
+    }
+
+    /**
+     * @param string $key
+     * @return ColumnInterface
+     */
+    public function setDisplayKey(string $key): ColumnInterface
+    {
+        $this->displayKey = $key;
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getDisplayKey()
+    {
+        return $this->displayKey;
     }
 
     function __set($name, $value)
