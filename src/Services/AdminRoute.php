@@ -42,7 +42,7 @@ class AdminRoute
         }
 
         if ($move) {
-            $router->post('move/{model?}/{down?}', $controller . 'UserController@move')->name('move');
+            $router->post('move/{model?}/{down?}', $controller . '@move')->name('move');
         }
 
         if ($trash) {
