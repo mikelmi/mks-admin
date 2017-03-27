@@ -14,6 +14,8 @@ class Options extends Select
 
     protected $inline = true;
 
+    protected $selectedAttribute = 'checked';
+
     /**
      * @return bool
      */
@@ -67,7 +69,7 @@ class Options extends Select
         ];
 
         if ($this->isSelectedValue($value)) {
-            $attr['selected'] = true;
+            $attr[$this->selectedAttribute] = true;
         }
 
         if ($this->isStatic() || in_array($value, $this->getDisabledValues())) {
