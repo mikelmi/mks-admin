@@ -81,6 +81,11 @@ abstract class Field implements FieldInterface
     protected $static = false;
 
     /**
+     * @var array
+     */
+    protected $rowAttributes = [];
+
+    /**
      * Field constructor.
      * @param string|null $name
      * @param mixed|null $value
@@ -438,6 +443,9 @@ abstract class Field implements FieldInterface
         return '<p class="form-control-static">'.$value.'</p>';
     }
 
+    /**
+     * @return string
+     */
     public function renderField(): string
     {
         if ($this->isStatic()) {
@@ -445,6 +453,30 @@ abstract class Field implements FieldInterface
         }
 
         return $this->renderInput();
+    }
+
+    /**
+     * @return array
+     */
+    public function getRowAttributes(): array
+    {
+        $attr = $this->rowAttributes;
+
+        if ($nameSce = $this->getNameSce()) {
+            $attr['ng-class'] = "{'has-danger':page.errors['$nameSce']}";
+        }
+        
+        return $attr;
+    }
+
+    /**
+     * @param array $rowAttributes
+     * @return FieldInterface
+     */
+    public function setRowAttributes(array $rowAttributes): FieldInterface
+    {
+        $this->rowAttributes = $rowAttributes;
+        return $this;
     }
 
     /**
