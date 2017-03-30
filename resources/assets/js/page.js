@@ -177,6 +177,13 @@
 
                         Page.setLoading(true, true);
 
+                        if (ctrl.errors) {
+                            ctrl.errors = {};
+                            if (!scope.$$phase) {
+                                scope.$apply();
+                            }
+                        }
+
                         xhr.setRequestHeader('X-Submit-Flag', scope.submitFlag);
                     },
                     error: function(xhr, status) {
