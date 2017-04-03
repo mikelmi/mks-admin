@@ -60,4 +60,9 @@ class AuthController extends Controller
         
         return $response;
     }
+
+    public function redirectTo()
+    {
+        return route('admin');
+    }
 }
