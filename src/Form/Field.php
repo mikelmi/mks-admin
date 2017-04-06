@@ -86,6 +86,11 @@ abstract class Field implements FieldInterface
     protected $rowAttributes = [];
 
     /**
+     * @var string
+     */
+    protected $helpText = '';
+
+    /**
      * Field constructor.
      * @param string|null $name
      * @param mixed|null $value
@@ -452,7 +457,19 @@ abstract class Field implements FieldInterface
             return $this->renderStaticInput();
         }
 
-        return $this->renderInput();
+        return $this->renderInput() . $this->renderHelpText();
+    }
+
+    /**
+     * @return string
+     */
+    public function renderHelpText(): string
+    {
+        if ($this->helpText) {
+            return '<small class="form-text text-muted">' . $this->helpText . '</small>';
+        }
+
+        return '';
     }
 
     /**
@@ -476,6 +493,24 @@ abstract class Field implements FieldInterface
     public function setRowAttributes(array $rowAttributes): FieldInterface
     {
         $this->rowAttributes = $rowAttributes;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHelpText(): string
+    {
+        return $this->helpText;
+    }
+
+    /**
+     * @param string $helpText
+     * @return Field
+     */
+    public function setHelpText(string $helpText): FieldInterface
+    {
+        $this->helpText = $helpText;
         return $this;
     }
 

@@ -209,4 +209,47 @@ class Select extends Field
         $this->emptyTitle = $emptyTitle;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function renderStaticInput(): string
+    {
+        return '<p class="form-control-static">' . $this->getValueLabel() . '</p>';
+    }
+
+    /**
+     * @param array $options
+     * @return array
+     */
+    protected function flattenOptions(array $options = []): array
+    {
+        $result = [];
+
+        foreach($options as $key => $option) {
+            if (is_array($option)) {
+                $result = array_merge($result, flatten($option));
+                continue;
+            }
+
+            $result[$key] = $option;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getValueLabel(): string
+    {
+        $options = $this->flattenOptions($this->getOptions());
+        $value = $this->getValue();
+
+        if (is_array($value)) {
+            return implode(', ', array_map('e', array_only($options, $value)));
+        }
+
+        return e(array_get($options, $value, ''));
+    }
 }

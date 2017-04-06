@@ -190,4 +190,20 @@ interface FieldInterface
      * @return array
      */
     public function getRowAttributes(): array;
+
+    /**
+     * @return string
+     */
+    public function getHelpText(): string;
+
+    /**
+     * @param string $text
+     * @return FieldInterface
+     */
+    public function setHelpText(string $text): FieldInterface;
+
+    /**
+     * @return string
+     */
+    public function renderHelpText(): string;
 }
