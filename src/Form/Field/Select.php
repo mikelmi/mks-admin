@@ -250,6 +250,6 @@ class Select extends Field
             return implode(', ', array_map('e', array_only($options, $value)));
         }
 
-        return e(array_get($options, $value, ''));
+        return e(array_get($options, (string) $value, ''));
     }
 }

@@ -64,9 +64,9 @@
             <a href="javascript:void(0)" class="lc-hide" title="" data-toggle="tooltip" ng-click="sidebarInverse=!sidebarInverse">
                 <i class="fa" ng-class="{'fa-toggle-on': !sidebarInverse, 'fa-toggle-off': sidebarInverse}"></i>
             </a>
-            <a class="pull-right" href="{{route('admin.logout')}}">
+            <a class="pull-right" href="{{route('admin.logout')}}" title="{{trans('admin::auth.Logout')}}">
                 <i class="fa fa-power-off"></i>
-                <span class="lc-hide inline">{{trans('admin::auth.Logout')}}</span>
+                &nbsp;
             </a>
             <div class="clearfix"></div>
         </div>

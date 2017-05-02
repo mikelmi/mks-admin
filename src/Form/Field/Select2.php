@@ -77,4 +77,12 @@ class Select2 extends Select
         $this->data = $data;
         return $this;
     }
+
+    public function renderStaticInput(): string
+    {
+        $this->setDisabled(true);
+        return $this->renderInput();
+    }
+
+
 }
