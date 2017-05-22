@@ -26,7 +26,7 @@ trait CrudRequests
     protected function form($model = null, $mode = null): AdminForm
     {
         if ($modelInstance = $this->formModel($model)) {
-            $form = AdminModelForm($modelInstance);
+            $form = new AdminModelForm($modelInstance);
         } else {
             $form = new AdminForm();
         }
